@@ -1,24 +1,29 @@
-import React from 'react';
-import logo from './logo.svg';
+import React,{useState,useEffect} from 'react';
 import './App.css';
+import axios from 'axios';
 
 function App() {
+  const [stocks,setStocks]=useState([]);
+  const [listening, setListening]= useState(false);
+  // axios.get('http://localhost:8000/api/stocks').then((res)=>{
+  //   console.log(res)
+  // })
+  useEffect(()=>{
+    if(!listening)
+    {
+      const stocksData= new EventSource('http://localhost:8000/events');
+      // console.log(stocksData)
+      stocksData.onmessage=(newStocks)=>{
+        const data= JSON.parse(newStocks.data);
+        console.log(data)
+        setStocks(data);
+      };
+      setListening(true);
+    }
+  },[listening,stocks]);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      
     </div>
   );
 }
