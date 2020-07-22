@@ -1,5 +1,6 @@
 var axios= require('axios');
 require('dotenv').config()
+var index=require('../index')
 var stock_prices=[];
 
 const get_stock_prices=(Stocks)=>{
@@ -37,6 +38,7 @@ const update_stock_prices=(Stocks)=>{
                 Stocks.findOneAndUpdate({code:code},{price:latestPrice.toString(),diff:change.toString()})
                 .then((updatedStock)=>{
                     console.log("updated")
+                    index.sendEventsToAll(updatedStock);
                 })
                 .catch((err)=>{
                     console.log(err);
