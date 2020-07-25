@@ -3,7 +3,10 @@ const morgan= require('morgan');
 const mongoose = require('mongoose');
 const cors= require('cors');
 const errorHandler = require('./errorHandles/errorHandlers');
+
 const stockRouter= require('./routes/stockRoutes')
+const marketRouter= require('./routes/marketRoutes');
+
 let clients=[]
 require('dotenv').config();
 const Stocks= require('./models/stocks')
@@ -83,6 +86,8 @@ app.get('/',(req,res)=>{
 });
 
 app.use('/api/stocks',stockRouter );
+app.use('/market',marketRouter );
+
 app.get('/events',eventsHandler);
 app.get('/status', (req, res) => res.json({clients:clients.length}));
 
