@@ -1,13 +1,19 @@
-// console.log("hi")
 function updateStockPrices() {
     $.ajax({
         url: "api/stocks/",
         dataType: 'json',
         success: function(data) {
+            // console.log(data);
+            let index = 0;
             $('.stock-card').each(function() {
-                var stock = $(this).attr('data-name');
-                var price = data[stock]['price'];
-                var diff = data[stock]['diff'];
+                // console.log($(this).attr("data-name"));
+                // var stock = $(this).attr('data-name');
+                var price = data[index]['price'];
+                var diff = data[index]['diff'];
+                diff = (diff * 1)/100;
+                price = (price * 1)/100;
+                console.log(price);
+                console.log(diff);
                 var elem = $(this).find('#diff');
                 if (diff >= 0) {
                     var diff_html = diff + " <i class=\"fa fa-arrow-up\" aria-hidden=\"true\">";
@@ -24,7 +30,8 @@ function updateStockPrices() {
                         elem.addClass('down');
                     }
                 }
-                $(this).find('#price').html(price);
+                $(this).find('#price').html("<strong>$</strong> " + price);
+                index++;
             });
             var last_updated = new Date(data['last_updated']);
             var now_time = new Date(Date.now());
@@ -43,8 +50,7 @@ $(document).ready(function() {
     var source = new EventSource('/events');
     source.onmessage = function(event) {
         const stocks=JSON.parse(event.data)
-        console.log(stocks)
+        // console.log(stocks)
         updateStockPrices();
-        // dataName=document.getElementsByClassName('stock-card').getAttribute('data-name')
     };
 })
