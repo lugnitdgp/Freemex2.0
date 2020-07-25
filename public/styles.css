@@ -1,0 +1,461 @@
+html {
+    min-height: 100vh;
+    max-width: 100%;
+}
+
+body {
+    position: relative;
+    min-height: 100vh;
+    font-size: 14px;
+    overflow-x: hidden;
+}
+
+.container-fluid {
+    padding: 0;
+}
+
+
+/* ------------------------------- Loader ------------------------------- */
+
+
+#loader {
+    font-size: 10em;
+
+    position: fixed;
+    z-index: 99999;
+    top: 0;
+    left: 0;
+
+    display: none;
+
+    width: 100%;
+    height: 100vh;
+    padding: 20%;
+
+    opacity: .6;
+    color: white;
+    background: #000;
+}
+
+#loader-icon {
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+}
+
+
+/* ------------------------------- Landing page ------------------------------- */
+
+
+.landing-page header.landing {
+    height: 100vh;
+}
+
+.landing-page header.landing .landing-bg {
+    position: absolute;
+    z-index: -999999;
+
+    width: 100%;
+    height: 100vh;
+
+    background-image: url('../img/bg.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+
+    filter: blur(5px);
+}
+
+.landing-page header.landing .glug-logo {
+    position: absolute;
+    left: 11em;
+    top: 1em;
+    z-index: 999;
+}
+
+.landing-page header.landing .glug-logo img {
+    width: 7em;
+    max-width: 30vw;
+    -webkit-filter: drop-shadow(1px 1px 2px #000);
+            filter: drop-shadow(1px 1px 2px #000);
+}
+
+.landing-page header.landing .fest-logo {
+    position: absolute;
+    left: 1em;
+    top: 0.2em;
+    z-index: 999;
+}
+
+.landing-page header.landing .fest-logo img {
+    width: 9.25em;
+    max-width: 30vw;
+    -webkit-filter: drop-shadow(1px 1px 2px #000);
+            filter: drop-shadow(1px 1px 2px #000);
+}
+
+@media only screen and (max-width: 768px) {
+  .landing-page header.landing .glug-logo {
+    left: auto;
+    right: 2em;
+  }
+}
+
+.landing-page header.landing .sponsor-logo {
+    position: absolute;
+    top: 0;
+    right: 0;
+    max-width: 40vw;
+    width: 250px;
+    padding: 1%;
+}
+
+.landing-page header.landing .content {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    margin-top: 50vh;
+    transform: translateY(-50%);
+}
+
+.landing-page header.landing .content img.freemex-logo {
+    z-index: 999;
+
+    width: 100%;
+    max-width: 1000px;
+    height: auto;
+    padding-right: 15%;
+    padding-left: 15%;
+
+    -webkit-filter: drop-shadow(5px 5px 5px #222);
+            filter: drop-shadow(5px 5px 5px #222);
+}
+
+.landing-page header.landing .content .nasdaq-intro {
+    padding-top: 25px;
+    padding-bottom: 30px;
+    color: #f0f0f0;
+    font-size: 1.4em;
+    margin-bottom: 0;
+}
+
+.landing-page header.landing .content .login-buttons a.btn {
+    padding: 12px 16px;
+}
+
+.landing-page header.landing .content .login-buttons a.btn .fa {
+    padding-right: 4px;
+}
+
+.landing-page header.landing .content .login-buttons a.btn-fb {
+    background-color: #4C69BA;
+    background-image: linear-gradient(#4C69BA, #3B55A0);
+    text-shadow: 0 -1px 0 #354C8C;
+}
+
+.landing-page header.landing .content .login-buttons a.btn-fb:hover,
+.landing-page header.landing .content .login-buttons a.btn-fb:focus {
+    background-color: #5B7BD5;
+    background-image: linear-gradient(#5B7BD5, #4864B1);
+}
+
+.landing-page header.landing .content .login-buttons a.btn-gplus {
+    background: #DD4B39;
+}
+
+.landing-page header.landing .content .login-buttons a.btn-gplus:hover,
+.landing-page header.landing .content .login-buttons a.btn-gplus:focus {
+    background: #E74B37;
+}
+
+.landing-page .rules {
+    padding-top: 5%;
+}
+
+.landing-page .modal .nav-tabs {
+    border: 0;
+    padding: .7rem;
+    z-index: 2;
+    border-radius: 2px;
+}
+
+.landing-page .modal .nav-tabs .nav-link {
+    border: 0;
+    color: #fff;
+}
+
+.landing-page .modal .nav-tabs .nav-link.active {
+    background-color: rgba(255,255,255,.2);
+    color: #fff;
+    -webkit-transition: all 1s;
+    transition: all 1s;
+    border-radius: 2px;
+}
+
+.landing-page .modal .md-form.form-sm label.active {
+    font-size:.8rem;
+}
+
+.landing-page .registration-form .input-requirements {
+    list-style: none;
+}
+
+.landing-page .registration-form .input-requirements li {
+    color: #4285F4;
+    font-size: 0.85rem;
+    line-height: 1.2rem;
+}
+
+.landing-page .registration-form .input-requirements li > .fa {
+    display: none;
+}
+
+.landing-page .registration-form .input-requirements li.valid {
+    color: #00C851;
+}
+
+.landing-page .registration-form .input-requirements li.valid .fa-check {
+    display: inline;
+}
+
+.landing-page .registration-form .input-requirements li.invalid {
+    color: #FF4444;
+}
+
+.landing-page .registration-form .input-requirements li.invalid .fa-exclamation {
+    display: inline;
+}
+
+
+.landing-page .registration-form input:not([type="submit"]) ~ .input-requirements {
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.5s linear;
+}
+
+.landing-page .registration-form input:not([type="submit"]):focus ~ .input-requirements,
+.landing-page .registration-form input:not([type="submit"]):active ~ .input-requirements {
+    max-height: 100px; /* any large number (bigger then the .input-requirements list) */
+    transition: max-height 1s ease-in;
+}
+
+
+/* ------------------------------- Navbar -------------------------------------- */
+
+
+.navbar .navbar-brand img {
+    height: 60px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.navbar ul li a {
+    font-size: 1.25em;
+}
+
+
+/* ----------------------------- Portfolio and Market ----------------------------- */
+
+
+.portfolio .card {
+    margin-bottom: 2rem;
+}
+
+.portfolio .change-username {
+    margin-right: 0;
+}
+
+.portfolio .modal .form-error {
+    color: #ff4444;
+}
+
+.portfolio .change-username-form .input-requirements {
+    list-style: none;
+}
+
+.portfolio .change-username-form .input-requirements li {
+    color: #4285F4;
+    font-size: 0.85rem;
+    line-height: 1.2rem;
+}
+
+.portfolio .change-username-form .input-requirements li > .fa {
+    display: none;
+}
+
+.portfolio .change-username-form .input-requirements li.valid {
+    color: #00C851;
+}
+
+.portfolio .change-username-form .input-requirements li.valid .fa-check {
+    display: inline;
+}
+
+.portfolio .change-username-form .input-requirements li.invalid {
+    color: #FF4444;
+}
+
+.portfolio .change-username-form .input-requirements li.invalid .fa-exclamation {
+    display: inline;
+}
+
+.portfolio .change-username-form input:not([type="submit"]) ~ .input-requirements {
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.5s linear;
+}
+
+.portfolio .change-username-form input:not([type="submit"]):focus ~ .input-requirements,
+.portfolio .change-username-form input:not([type="submit"]):active ~ .input-requirements {
+    max-height: 100px; /* any large number (bigger then the .input-requirements list) */
+    transition: max-height 1s ease-in;
+}
+
+.market .card {
+    margin-top: 2rem;
+}
+
+.portfolio .card .card-title,
+.market .card .card-title {
+    font-weight: 300;
+}
+
+.portfolio .card .market-info .card-text,
+.market .card .market-info .card-text {
+    font-weight: 400;
+}
+
+.portfolio .card .market-info .stock-info,
+.market .card .market-info .stock-info
+{
+	display: block;
+    float: right;
+    padding: 0 1em;
+    text-align: right;
+}
+
+.portfolio .card .market-info .market-buttons,
+.market .card .market-info .market-buttons {
+    margin-top: 2em;
+}
+
+.portfolio .card .market-info .up,
+.market .card .market-info .up {
+    color: green;
+}
+
+.portfolio .card .market-info .down,
+.market .card .market-info .down {
+    color: red;
+}
+
+.portfolio .modal .close:hover,
+.market .modal .close:hover {
+    cursor: pointer;
+}
+
+
+/* ------------------------------- Footer ------------------------------- */
+
+
+.sharethis-inline-share-buttons {
+    margin-top: 50px;
+}
+
+.footer {
+    text-align: center;
+    font-size: 1.5em;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.footer img {
+    margin-left: 0.5em;
+    max-height: 5em;
+    max-width: 80%;
+}
+
+
+/* ----------------------------- Leaderboard ------------------------------------ */
+
+
+.leaderboard .table {
+    margin-top: 2rem;
+}
+
+
+/* ------------------------------- Rules ------------------------------- */
+
+
+.rules #intro-logo {
+    height: 2em;
+    margin-bottom: 0.5em;
+}
+
+.rules h1 {
+    font-size: 3em;
+}
+
+.rules h5 {
+    font-size: 1.4em;
+    line-height: 1.75em;
+}
+
+.rules ol {
+    font-size: 1.2em;
+    padding-left: 2em;
+}
+
+.rules ol li {
+    padding-top: 0.4em;
+}
+
+
+/* ------------------------------- Media Queries ------------------------------- */
+
+
+@media only screen and (max-width: 768px) {
+
+  .btn {
+    padding: 0.85rem 1.5rem;
+  }
+
+    .landing-page header.landing .content img.freemex-logo {
+        padding-right: 10%;
+        padding-left: 10%;
+    }
+
+    .landing-page .registration-form input:not([type="submit"]):focus ~ .input-requirements,
+    .landing-page .registration-form input:not([type="submit"]):active ~ .input-requirements {
+        max-height: 150px;
+    }
+
+    .portfolio .card .card-title, .portfolio .card .market-info .market-buttons,
+    .market .card .card-title, .market .card .market-info .market-buttons {
+        text-align: center;
+    }
+
+    .portfolio .card .market-info,
+    .market .card .market-info {
+        padding: 1em 0;
+    }
+
+    .market .card .market-info .stock-info:nth-child(2),
+    .market .card .market-info .stock-info:nth-child(3) {
+        float: left;
+    }
+
+    .portfolio .card .market-info .stock-info,
+    .market .card .market-info .stock-info {
+        font-size: 0.85rem;
+        text-align: center;
+        padding: 0 0.35em;
+    }
+
+    .footer img {
+        display: block;
+        margin: 0 auto;
+        margin-top: 0.5em;
+    }
+}

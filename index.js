@@ -18,8 +18,9 @@ mongoose.connect(process.env.DATABASE_URL, {useNewUrlParser:true, useUnifiedTopo
 })
 
 const app=express();
-
 app.use(morgan('common'));
+app.set('view engine','ejs');
+app.use(express.static(__dirname + "/public"));
 
 app.use(cors({
     origin: process.env.CORS_ORIGIN,
