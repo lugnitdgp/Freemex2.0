@@ -7,9 +7,9 @@ stockRouter.route('/')
     Stocks.find({})
     .then((stocks)=>{
         res.statusCode=200;
-        // res.setHeader('Content-Type','application/json');
-        // res.json(stocks);
-        res.render("market",{stocks:stocks});
+        res.setHeader('Content-Type','application/json');
+        res.json(stocks);
+        // res.render("market",{stocks:stocks});
     })
     .catch((err)=>{
         next(err);
