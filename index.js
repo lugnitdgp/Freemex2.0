@@ -80,9 +80,7 @@ module.exports.sendEventsToAll = function sendEventsToAll(updateStocks){
 
 
 app.get('/',(req,res)=>{
-    res.json({
-        message:'Freemex'
-    });
+    res.render("landing",{event_started:false})
 });
 
 app.use('/api/stocks',stockRouter );
