@@ -30,6 +30,7 @@ const update_stock_prices=(Stocks)=>{
     {
         Stocks.find({})
         .then((stocks)=>{
+            var count=0;
             stocks.map((stock)=>{
                 var code=stock.code;
                 var latestPrice=stock_prices[`${code}`].quote.latestPrice;
@@ -37,13 +38,24 @@ const update_stock_prices=(Stocks)=>{
                 var change=stock_prices[`${code}`].quote.change;
                 Stocks.findOneAndUpdate({code:code},{price:latestPrice.toString(),diff:change.toString()})
                 .then((updatedStock)=>{
-                    console.log("updated")
-                    index.sendEventsToAll(updatedStock);
+                    ++count;
+                    console.log("updated",count)
+                    if(count===20)
+                    {
+                        Stocks.find({})
+                        .then((stocks)=>{
+                            index.sendEventsToAll(stocks);
+                        })
+                        .catch((err)=>{
+                            console.log(err);
+                        })
+                    }
                 })
                 .catch((err)=>{
                     console.log(err);
                 })
             })
+
         })
         .catch((err)=>{
             console.log(err);
