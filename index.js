@@ -2,10 +2,16 @@ const express = require('express');
 const morgan= require('morgan');
 const mongoose = require('mongoose');
 const cors= require('cors');
-const errorHandler = require('./errorHandles/errorHandlers');
+const cookieSession= require('cookie-session');
 
 const stockRouter= require('./routes/stockRoutes')
 const marketRouter= require('./routes/marketRoutes');
+const userRouter=require('./routes/users')
+
+const errorHandler = require('./errorHandles/errorHandlers');
+
+const passportSetup=require('./authenticate');
+const passport=require('passport')
 
 let clients=[]
 require('dotenv').config();
@@ -24,6 +30,13 @@ const app=express();
 app.use(morgan('common'));
 app.set('view engine','ejs');
 app.use(express.static(__dirname + "/public"));
+
+app.use(cookieSession({
+    maxAge:5*24*60*60*1000,
+    keys:[process.env.cookieKey]
+}))
+app.use(passport.initialize())
+app.use(passport.session())
 
 app.use(cors({
     origin: process.env.CORS_ORIGIN,
@@ -72,6 +85,7 @@ const eventsHandler=(req,res,next)=>{
 }
 
 module.exports.sendEventsToAll = function sendEventsToAll(updateStocks){
+    console.log("updated:",updateStocks)
     clients.forEach(c=>{
         console.log("updating frontend client ",c.id);
         return c.res.write(`data: ${JSON.stringify(updateStocks)}\n\n`)
@@ -80,11 +94,19 @@ module.exports.sendEventsToAll = function sendEventsToAll(updateStocks){
 
 
 app.get('/',(req,res)=>{
-    res.render("landing",{event_started:false})
+    if(!req.user)
+    {
+        res.render("landing",{event_started:true})
+    }
+    else
+    {
+        res.render("portfolio")
+    }
 });
 
 app.use('/api/stocks',stockRouter );
 app.use('/market',marketRouter );
+app.use('/auth',userRouter);
 
 app.get('/events',eventsHandler);
 app.get('/status', (req, res) => res.json({clients:clients.length}));
