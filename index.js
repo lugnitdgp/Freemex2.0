@@ -3,19 +3,22 @@ const morgan= require('morgan');
 const mongoose = require('mongoose');
 const cors= require('cors');
 const cookieSession= require('cookie-session');
+var bodyParser=require('body-parser');
 
 const stockRouter= require('./routes/stockRoutes')
 const marketRouter= require('./routes/marketRoutes');
 const userRouter=require('./routes/users')
+const playerStocksRouter=require('./routes/playerStocksRouter')
+const homeRouter=require('./routes/homeRoutes')
 
 const errorHandler = require('./errorHandles/errorHandlers');
 
 const passportSetup=require('./authenticate');
-const passport=require('passport')
+const passport=require('passport');
 
 let clients=[]
 require('dotenv').config();
-const Stocks= require('./models/stocks')
+
 const port = process.env.PORT || 8000;
 
 mongoose.connect(process.env.DATABASE_URL, {useNewUrlParser:true, useUnifiedTopology:true, useFindAndModify:false})
@@ -42,7 +45,9 @@ app.use(cors({
     origin: process.env.CORS_ORIGIN,
 }));
 
-app.use(express.json());
+// app.use(express.json());
+// app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: false }))
 let id=0;
 const eventsHandler=(req,res,next)=>{
     id+=1;
@@ -93,20 +98,11 @@ module.exports.sendEventsToAll = function sendEventsToAll(updateStocks){
 }
 
 
-app.get('/',(req,res)=>{
-    if(!req.user)
-    {
-        res.render("landing",{event_started:true})
-    }
-    else
-    {
-        res.render("portfolio")
-    }
-});
-
 app.use('/api/stocks',stockRouter );
 app.use('/market',marketRouter );
 app.use('/auth',userRouter);
+app.use('/playerStocks',playerStocksRouter)
+app.use('/',homeRouter)
 
 app.get('/events',eventsHandler);
 app.get('/status', (req, res) => res.json({clients:clients.length}));
