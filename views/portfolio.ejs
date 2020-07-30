@@ -2,7 +2,7 @@
 <%- include("partials/navbar") %>
 
 <div class="container portfolio">
-    <p class="text-right">Logged in as <strong><%= player.user %></strong></p>
+    <p class="text-right">Logged in as <strong><%= player.username %></strong></p>
     <p class="text-right">
         <a href="#" class="btn success-color change-username" data-toggle="modal" data-target="#changeUsernameModal" role="button">Change username</a>
     </p>
@@ -17,11 +17,11 @@
                     </button>
                 </div>
                 <form class="change-username-form" action="/change_username/" method="Post">
-                    <input type="hidden" name="current_username" value="<%= player.user %>">
+                    <input type="hidden" name="current_username" value="<%= player.username %>">
                     <div class="modal-body">
                         <div class="md-form">
                             <input type="text" class="form-control" name="username" maxlength="50" required autofocus>
-                            <label for="username-input">Current username: <%= player.user %></label>
+                            <label for="username-input">Current username: <%= player.username %></label>
                             <ul class="input-requirements">
                                 <li>Username must have at least 5 characters <i class="fa fa-check"></i><i class="fa fa-exclamation"></i></li>
                                 <li>Username must not be registered with someone else <i class="fa fa-check"></i><i class="fa fa-exclamation"></i></li>
@@ -38,10 +38,10 @@
     </div>
     <h1>Portfolio</h1>
     <hr>
-    <h5>Cash: $<span id="playercash"><%= player.cash %></span></h5>
-    <h5>Value in Stock: $<%= player.value_in_stocks %></h5>
+    <h5>Cash: $<span id="playercash"><%= player.cash /100 %></span></h5>
+    <h5>Value in Stock: $<%= player.value_in_stocks /100 %></h5>
     <hr>
-    <h4>Total: <%= player.total_value %></h4>
+    <h4>Total: <%= (player.cash + player.value_in_stocks) / 100 %></h4>
     <br>
     <br>
     <p class="text-right">Page last updated on: <strong id="last-updated"></strong></p>
@@ -138,7 +138,7 @@
 </div>
 
 <!-- <script type="text/javascript" src="{% static "js/validation.js" %}"></script> -->
-<script type="text/javascript" src="/script.js"></script>
+<script src="/portfolio.js"></script>
 <!-- <script type="text/javascript" src="{% static "js/timer.js" %}"></script> -->
 
 <%- include("partials/footer") %>
