@@ -63,4 +63,32 @@ const update_stock_prices=(Stocks)=>{
     }    
 }
 
-module.exports=update_stock_prices
+const update_player_assets=(Player,PlayerStock)=>{
+    Player.find({})
+    .then((all_players)=>{
+        all_players.map((player)=>{
+            Player.findById(player._id)
+            .then((playerObj)=>{
+                playerObj.value_in_stocks=0
+                PlayerStock.find({player:playerObj._id})
+                .populate('player')
+                .populate('stock')
+                .then((playerstocks)=>{
+                    playerstocks.map((playerstock)=>{
+                        playerObj.value_in_stocks += playerstock.stock.price * playerstock.quantity
+                        playerObj.save()
+                        .then((resp)=>{
+                            console.log("updated player stocks", resp)
+                            return 
+                        })
+                    })
+                })
+                .catch((err)=>console.log(err))
+            })
+            .catch(err=>console.log(err))
+        })
+    })
+    .catch(err=>console.log(err))
+}
+
+module.exports={update_stock_prices, update_player_assets}
