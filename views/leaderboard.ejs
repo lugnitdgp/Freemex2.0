@@ -1,0 +1,64 @@
+<%- include("partials/header") %>
+
+
+<% if (!(message)) {%>
+    <%- include("partials/navbar") %>
+<% } %>
+
+<!--Main layout-->
+<div class="container leaderboard">
+    <br>
+    <% if (message){ %>
+    <div id="event-ended">
+      <input id="startTime" type="hidden" value={{startTime}}>
+      <input id="endTime" type="hidden" value={{endTime}}>
+      <h2 class="text-center">{{message.first}}</h2>
+        <h3 class="text-center">{{message.second}}</h3>
+          <div class="black-text text-center">
+            <span>Event ended </span>
+            <span id="days">Days</span>
+            <span id="hours">Hours</span>
+            <span id="minutes">Minutes</span>
+            <span id="seconds">Seconds</span>
+            <span> ago</span>
+          </div>
+    </div>
+    <br>
+    <hr>
+    <h1 class="text-center">Leaderboard</h1>
+
+    <% }else{ %>
+      <h1>Leaderboard</h1>
+    <% } %>
+    <hr>
+    <br>
+
+    <input type="text" id="leaderboard-search" onkeyup="leaderboardSearch()" placeholder="Search for names..">
+
+    <table class="table table-striped leaderboard-table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Username</th>
+                <th>Total Asset</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% players.forEach((player,i) => { %>
+            <tr>
+                <td><%= i %></td>
+                <td><%= player.username %></td>
+                <td><%= player.username %></td>
+                <td><%= player.cash+player.value_in_stocks %></td>
+            </tr>
+            <% }); %>
+        </tbody>
+    </table>
+
+</div>
+<!--/Main layout-->
+
+<script type="text/javascript" src="/leaderboard.js"></script>
+<!-- <script type="text/javascript" src="/timer.js"></script> -->
+<%- include("partials/footer") %>
