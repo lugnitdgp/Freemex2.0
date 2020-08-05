@@ -38,6 +38,8 @@ function updateStockPrices(data) {
     current_time = current_time.slice(0,3) + "." + current_time.slice(3);
     current_time = current_time.replace("PM", "p.m.");
     current_time = current_time.replace("AM", "a.m.");
+    // moment().format("llll");
+    // var current_time = moment().toString();
     $('#last-updated').html(current_time);
 }
 
