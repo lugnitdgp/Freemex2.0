@@ -19,7 +19,7 @@ A stock market simulation using Node, Express in the backend and VanillaJs in fr
 * start server
 `npm start`
 
-* Go to localhost:{your PORT} and start investing!
+* Go to http://localhost:{your PORT} and start investing!
 
 ### Requirements
 
