@@ -38,10 +38,10 @@
     </div>
     <h1>Portfolio</h1>
     <hr>
-    <h5>Cash: $<span id="playercash"><%= player.cash /100 %></span></h5>
-    <h5>Value in Stock: $<%= player.value_in_stocks /100 %></h5>
+    <h5>Cash: $<span id="playercash"><%= (player.cash/100).toFixed(2) %></span></h5>
+    <h5>Value in Stock: $<%= (player.value_in_stocks/100).toFixed(2) %></h5>
     <hr>
-    <h4>Total: <%= (player.cash + player.value_in_stocks) / 100 %></h4>
+    <h4>Total: <%= ((player.cash + player.value_in_stocks)/100).toFixed(2) %></h4>
     <br>
     <br>
     <p class="text-right">Page last updated on: <strong id="last-updated"></strong></p>
@@ -72,7 +72,7 @@
                     <!--<p class="card-text stock-info">Invested : $<%= player_stock.invested %></p>-->
                     <div class="market-buttons">
                     <a href="#" class="btn btn-success market-buy-button" data-toggle="modal" data-target="#buyModal<%= player_stock.stock.code %>" data-price="<%= player_stock.stock.price %>">Buy More</a>
-                    <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#sellModal<%= player_stock.stock.code %>">sell</a>
+                    <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#sellModal<%= player_stock.stock.code %>">Sell</a>
                     </div>
                 </div>
             </div>

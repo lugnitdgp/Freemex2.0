@@ -14,7 +14,7 @@ homeRouter.get('/',(req,res)=>{
     }
     else
     {
-        // setInterval(()=>{updatePlayer(Player,playerStocks)}, 1000)
+        // setInterval(()=>{updatePlayer(Player,playerStocks)}, 1000) 
         playerStocks.find({player:req.user.id})
         .populate('player')
         .populate('stock')
@@ -291,24 +291,29 @@ homeRouter.post('/sellstock/', (req,res,next)=>{
 })
 
 homeRouter.get('/transactions', (req,res,next)=>{
-    context=[]
-    Player.findById(req.user.id)
-    .then((resp)=>{
-        playerObj=resp
-        Log.find({player:playerObj._id})
-        .populate('player')
-        .populate('stock')
+    if(!req.user){
+        res.render("landing",{event_started: true});
+    }
+    else{
+        context=[]
+        Player.findById(req.user.id)
         .then((resp)=>{
-            //sort resp acc to createdAt
-            context.player=playerObj
-            context.logs=resp
-            console.log("context",context)
-            res.render("transactions",context)
+            playerObj=resp
+            Log.find({player:playerObj._id})
+            .populate('player')
+            .populate('stock')
+            .then((resp)=>{
+                //sort resp acc to createdAt
+                context.player=playerObj
+                context.logs=resp
+                console.log("context",context)
+                res.render("transactions",context)
+            })
         })
-    })
-    .catch((err)=>{
-        next(err)
-    })
+        .catch((err)=>{
+            next(err)
+        })
+    }
 })
 
 homeRouter.get('/leaderboard',(req,res,next)=>{

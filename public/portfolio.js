@@ -13,21 +13,21 @@ function updateStockPrices(data) {
         console.log(diff);
         var elem = $(this).find('#diff');
         if (diff >= 0) {
-            var diff_html = diff + " <i class=\"fa fa-arrow-up\" aria-hidden=\"true\">";
+            var diff_html = diff.toFixed(2) + " <i class=\"fa fa-arrow-up\" aria-hidden=\"true\">";
             elem.html(diff_html);
             if (elem.hasClass('down')) {
                 elem.removeClass('down');
                 elem.addClass('up');
             }
         } else {
-            var diff_html = diff + " <i class=\"fa fa-arrow-down\" aria-hidden=\"true\">";
+            var diff_html = diff.toFixed(2) + " <i class=\"fa fa-arrow-down\" aria-hidden=\"true\">";
             elem.html(diff_html);
             if (elem.hasClass('up')) {
                 elem.removeClass('up');
                 elem.addClass('down');
             }
         }
-        $(this).find('#price').html("<strong>$</strong> " + price);
+        $(this).find('#price').html("<strong>$</strong> " + price.toFixed(2));
         index++;
     });
     var last_updated = new Date(data['last_updated']);
@@ -123,6 +123,6 @@ $(document).ready(function() {
     $('.market-buy-button').click(function(){
         var pcash = $('#playercash').html();
         var stockprice = $(this).attr("data-price");
-        $('.maxqty').text(parseInt(pcash/stockprice));
+        $('.maxqty').text(Math.floor(pcash/stockprice * 100));
     });    
 })

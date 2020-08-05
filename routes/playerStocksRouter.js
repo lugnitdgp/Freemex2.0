@@ -4,16 +4,23 @@ const playerStockRouter= express.Router();
 
 playerStockRouter.route('/')
 .get((req,res,next)=>{
-    playerStocks.find({})
-    .then((stocks)=>{
-        res.statusCode=200;
-        res.setHeader('Content-Type','application/json');
-        res.json(stocks);
-        // res.render("market",{stocks:stocks});
-    })
-    .catch((err)=>{
-        next(err);
-    })
+
+    if(!req.user)
+    {
+        res.render("landing",{event_started:true})
+    }
+    else{
+        playerStocks.find({})
+        .then((stocks)=>{
+            res.statusCode=200;
+            res.setHeader('Content-Type','application/json');
+            res.json(stocks);
+            // res.render("market",{stocks:stocks});
+        })
+        .catch((err)=>{
+            next(err);
+        })
+    }
 })
 .delete((req,res,next)=>{
     playerStocks.remove({})

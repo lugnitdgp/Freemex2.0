@@ -3,7 +3,7 @@ const Users= require('../models/users');
 const userRouter= express.Router();
 const passport= require('passport')
 
-userRouter.get('/google',passport.authenticate('google',{scope:['profile']
+userRouter.get('/google',passport.authenticate('google',{scope:['profile','email']
 }));
 
 userRouter.get('/facebook',passport.authenticate('facebook'))
