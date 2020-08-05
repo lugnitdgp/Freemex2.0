@@ -9,7 +9,7 @@ A stock market simulation using Node, Express in the backend and VanillaJs in fr
 * install dependencies
 `npm install`
 
-* create .env file an fill it up with required values from .env.example
+* create .env file and fill it up with required values from .env.example
 
 * get google client id and client secret from https://console.developers.google.com/
 * get facebook client id and client secret from https://developers.facebook.com/
