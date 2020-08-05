@@ -38,10 +38,10 @@
     </div>
     <h1>Portfolio</h1>
     <hr>
-    <h5>Cash: $<span id="playercash"><%= player.cash /100 %></span></h5>
-    <h5>Value in Stock: $<%= player.value_in_stocks /100 %></h5>
+    <h5>Cash: $<span id="playercash"><%= (player.cash/100).toFixed(2) %></span></h5>
+    <h5>Value in Stock: $<%= (player.value_in_stocks/100).toFixed(2) %></h5>
     <hr>
-    <h4>Total: <%= (player.cash + player.value_in_stocks) / 100 %></h4>
+    <h4>Total: <%= ((player.cash + player.value_in_stocks)/100).toFixed(2) %></h4>
     <br>
     <br>
     <p class="text-right">Page last updated on: <strong id="last-updated"></strong></p>

@@ -31,13 +31,33 @@
                   </a>
               </div>
             <%} else {%>
-              <h1 class="white-text">Freemex has not started yet. Stay tuned!</h1>
               <div class="white-text">
-                <span id="days">Days</span>
+                <h1>Freemex has not started yet. Stay tuned!</h1>
+                <table>
+                    <tr>
+                        <td><h5>DAYS</h5></td>
+                        <td><h5>:</h5></td>
+                        <td><h5>HOURS</h5></td>
+                        <td><h5>:</h5></td>
+                        <td><h5>MINS</h5></td>
+                        <td><h5>:</h5></td>
+                        <td><h5>SECS</h5></td>
+                    </tr>
+                    <tr>
+                        <td id="days" class="huge-text">00</td>
+                        <td class="huge-text">:</td>
+                        <td id="hours" class="huge-text">00</td>
+                        <td class="huge-text">:</td>
+                        <td id="minutes" class="huge-text">00</td>
+                        <td class="huge-text">:</td>
+                        <td id="seconds" class="huge-text">00</td>
+                    </tr>
+                </table>
+                <!-- <span id="days">Days</span>
                 <span id="hours">Hours</span>
                 <span id="minutes">Minutes</span>
                 <span id="seconds">Seconds</span>
-                <span> left</span>
+                <span> left</span> -->
               </div>
             <% } %>
         </div>
@@ -46,6 +66,7 @@
 
 </div>
 
+<script type="text/javascript" src="/timer.js"></script>
 
 <!-- <script type="text/javascript" src="{% static "js/validation.js" %}"></script>
 <script type="text/javascript" src="{% static "js/landing.js" %}"></script>

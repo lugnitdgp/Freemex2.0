@@ -5,7 +5,7 @@
         <br>
         <h1>Market</h1>
         <hr>
-        <h5>Cash in your hand: $<span id="playercash"><%= player.cash/100 %></span></h5>
+        <h5>Cash in your hand: $<span id="playercash"><%= (player.cash/100).toFixed(2) %></span></h5>
         <br>
         <input type="text" id="market-search" onkeyup="marketSearch()" placeholder="Search for stock names..">
         <br><br>
@@ -25,21 +25,21 @@
                         <% if(diff >= 0){ %>
                             
                             <p class="card-text stock-info up" id="diff">
-                                <%= diff %> <i class="fa fa-arrow-up" aria-hidden="true"></i>
+                                <%= diff.toFixed(2) %> <i class="fa fa-arrow-up" aria-hidden="true"></i>
                             </p>
 
                         <% }else{ %>
 
                             <p class="card-text stock-info down" id="diff">
-                                <%= diff %> <i class="fa fa-arrow-down" aria-hidden="true"></i>
+                                <%= diff.toFixed(2) %> <i class="fa fa-arrow-down" aria-hidden="true"></i>
                             </p>
 
                         <% } %>
 
-                        <p class="card-text stock-info" id="price"><strong>$</strong> <%= price %></p>
+                        <p class="card-text stock-info" id="price"><strong>$</strong> <%= price.toFixed(2) %></p>
                         <p class="card-text stock-info"><%= stock.code %></p>
                         <div class="market-buttons">
-                            <a href="#" class="btn btn-primary btn-success market-buy-button" data-toggle="modal" data-target="#buyModal<%= stock.code %>" data-price="<%= price %>">Buy</a>
+                            <a href="#" class="btn btn-primary btn-success market-buy-button" data-toggle="modal" data-target="#buyModal<%= stock.code %>" data-price="<%= stock.price %>">Buy</a>
                         </div>
                     </div>
                 </div>

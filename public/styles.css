@@ -132,6 +132,26 @@ body {
             filter: drop-shadow(5px 5px 5px #222);
 }
 
+.landing-page header.landing .content table{
+
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%,20%);
+
+}
+
+.landing-page header.landing .content table td{
+
+    padding-right: 15px;
+
+}
+
+.huge-text{
+
+    font-size: 50px;
+
+}
+
 .landing-page header.landing .content .nasdaq-intro {
     padding-top: 25px;
     padding-bottom: 30px;
@@ -142,6 +162,7 @@ body {
 
 .landing-page header.landing .content .login-buttons a.btn {
     padding: 12px 16px;
+    margin-right: 10px;
 }
 
 .landing-page header.landing .content .login-buttons a.btn .fa {
@@ -353,6 +374,10 @@ body {
 .portfolio .modal .close:hover,
 .market .modal .close:hover {
     cursor: pointer;
+}
+
+.white-text{
+    color: white
 }
 
 
