@@ -183,7 +183,7 @@ if (count===0){
 else
 {
     console.log(count," fixtures loaded already");
-    // setInterval(()=>{updateStock(Stocks)},10000);
+    // setInterval(()=>{updateStock.update_stock_prices(Stocks)},10000);
 }
 })
 .catch((err)=>{
