@@ -3,6 +3,7 @@ const Stocks= require('../models/stocks');
 const playerStocks=require('../models/playerStock')
 const Player=require('../models/users')
 const Log= require('../models/logs')
+const updatePlayer=require('../utilities/utilities').update_player_assets
 
 const homeRouter= express.Router();
 
@@ -13,6 +14,7 @@ homeRouter.get('/',(req,res)=>{
     }
     else
     {
+        // setInterval(()=>{updatePlayer(Player,playerStocks)}, 1000)
         playerStocks.find({player:req.user.id})
         .populate('player')
         .populate('stock')
@@ -316,6 +318,14 @@ homeRouter.get('/leaderboard',(req,res,next)=>{
         players.sort((a,b)=>((a.cash+a.value_in_stocks)<(b.cash+b.value_in_stocks))? 1 : -1)
         res.render("leaderboard",{players:players, message:''})
     })
+})
+
+homeRouter.get('/engage',(req,res,next)=>{
+    res.render("engage")
+})
+
+homeRouter.get('/rules',(req,res,next)=>{
+    res.render("rules")
 })
 
 module.exports=homeRouter

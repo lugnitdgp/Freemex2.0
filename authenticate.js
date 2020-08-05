@@ -21,7 +21,7 @@ passport.use(
         clientID:process.env.google_client_id,
         clientSecret:process.env.google_client_secret
 },(accessToken,refreshToken,profile,done)=>{
-    // console.log(profile)
+    console.log("profile:",profile)
     User.findOne({googleId:profile.id})
     .then((user)=>{
         if(user===null)
