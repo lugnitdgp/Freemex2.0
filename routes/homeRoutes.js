@@ -305,7 +305,16 @@ homeRouter.get('/transactions', (req,res,next)=>{
         })
     })
     .catch((err)=>{
-        console.log(err)
+        next(err)
+    })
+})
+
+homeRouter.get('/leaderboard',(req,res,next)=>{
+    response_data=[]
+    Player.find({})
+    .then((players)=>{
+        players.sort((a,b)=>((a.cash+a.value_in_stocks)<(b.cash+b.value_in_stocks))? 1 : -1)
+        res.render("leaderboard",{players:players, message:''})
     })
 })
 
