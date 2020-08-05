@@ -76,12 +76,12 @@ const update_player_assets=(Player,PlayerStock)=>{
                 .then((playerstocks)=>{
                     playerstocks.map((playerstock)=>{
                         playerObj.value_in_stocks += playerstock.stock.price * playerstock.quantity
-                        playerObj.save()
-                        .then((resp)=>{
-                            console.log("updated player stocks", resp)
-                            return 
-                        })
                     })
+                    playerObj.save()
+                    .then((resp)=>{
+                        console.log("updated player stocks")
+                    })
+                    .catch(err=>console.log(err))
                 })
                 .catch((err)=>console.log(err))
             })
