@@ -6,6 +6,8 @@ const passport= require('passport')
 userRouter.get('/google',passport.authenticate('google',{scope:['profile']
 }));
 
+userRouter.get('/facebook',passport.authenticate('facebook'))
+
 userRouter.route('/logout')
 .get((req,res,next)=>{
     if(req.user)
@@ -14,6 +16,10 @@ userRouter.route('/logout')
 });
 
 userRouter.get('/google/redirect',passport.authenticate('google'),(req,res)=>{
+    res.redirect('/')
+});
+
+userRouter.get('/facebook/redirect',passport.authenticate('facebook'),(req,res)=>{
     res.redirect('/')
 });
 
