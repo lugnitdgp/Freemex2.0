@@ -10,10 +10,10 @@
     <br>
     <% if (message){ %>
     <div id="event-ended">
-      <input id="startTime" type="hidden" value={{startTime}}>
-      <input id="endTime" type="hidden" value={{endTime}}>
-      <h2 class="text-center">{{message.first}}</h2>
-        <h3 class="text-center">{{message.second}}</h3>
+      <input id="startTime" type="hidden" value=<%=startTime%>>
+      <input id="endTime" type="hidden" value=<%=endTime%>>
+      <h2 class="text-center"><%=message.first%></h2>
+        <h3 class="text-center"><%=message.second%></h3>
           <div class="black-text text-center">
             <span>Event ended </span>
             <span id="days">Days</span>
@@ -60,5 +60,5 @@
 <!--/Main layout-->
 
 <script type="text/javascript" src="/leaderboard.js"></script>
-<!-- <script type="text/javascript" src="/timer.js"></script> -->
+<script type="text/javascript" src="/timer.js"></script>
 <%- include("partials/footer") %>

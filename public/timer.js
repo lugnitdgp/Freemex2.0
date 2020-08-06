@@ -2,16 +2,13 @@ $(document).ready(function(){
 
     var timer=()=>{
         
-        // set the count end timer: new Date(year,month,day,hr,min,sec,millisec)
-        // var endTime= new Date(0,0,0,0,0,0,0);
-        // endTime=$("#endTime").val();
-        let endTime = new Date(2020,7,10,2,30,0,0); // A random time. Needs to be assigned from backend.
+        endTime=$("#endTime").val();
         endTime= Date.parse(endTime)/1000;
-        // startTime=$('#startTime').val();
-        let startTime = new Date(2020,7,7,2,30,0,0); // A random time. Needs to be assigned from backend.
+        startTime=$('#startTime').val();
         startTime=Date.parse(startTime)/1000;
+        // console.log(endTime,startTime)
         // getting the system date and calc the difference
-        var now= new Date();
+        var now= new Date().toISOString();
         now= Date.parse(now)/1000
 
         //if event ended
@@ -27,6 +24,10 @@ $(document).ready(function(){
             var timeLeft= endTime-now;
         }
 
+        timeLeft=parseInt(timeLeft)
+
+        // console.log(timeLeft)
+
         if (timeLeft<0){
             days=0;
             hours=0;
@@ -41,6 +42,14 @@ $(document).ready(function(){
             var minutes = Math.floor((timeLeft-(days*86400)-(hours*3600))/60);
 
             var seconds= Math.floor(timeLeft-(days*86400)-(hours*3600)-(minutes*60));
+        }
+
+        console.log(days,hours,minutes,seconds)
+
+        //timer ended and page reload
+        if(days=="0" && hours=="0" && minutes=="0" && seconds=="0"){
+            console.log("here")
+            location.reload()
         }
 
         if(days < 10)
@@ -59,11 +68,6 @@ $(document).ready(function(){
         $("#hours").text(hours);
         $("#minutes").text(minutes);
         $("#seconds").text(seconds)
-
-        //timer ended and page reload
-        if(days=="0" && hours=="0" && minutes=="0" && seconds=="0"){
-            location.reload()
-        }
     }
 
     var setTimer=setInterval(timer,1000);

@@ -2,6 +2,9 @@
 <%- include("partials/navbar") %>
 
 <div class="container portfolio">
+    <input id="startTime" type="hidden" value=<%=startTime%>>
+    <input id="endTime" type="hidden" value=<%=endTime%>>
+    <br>
     <p class="text-right">Logged in as <strong><%= player.username %></strong></p>
     <p class="text-right">
         <a href="#" class="btn success-color change-username" data-toggle="modal" data-target="#changeUsernameModal" role="button">Change username</a>
@@ -139,6 +142,6 @@
 
 <!-- <script type="text/javascript" src="{% static "js/validation.js" %}"></script> -->
 <script src="/portfolio.js"></script>
-<!-- <script type="text/javascript" src="{% static "js/timer.js" %}"></script> -->
+<script src="/timer.js"></script>
 
 <%- include("partials/footer") %>

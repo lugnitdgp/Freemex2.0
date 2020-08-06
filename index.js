@@ -10,6 +10,7 @@ const marketRouter= require('./routes/marketRoutes');
 const userRouter=require('./routes/users')
 const playerStocksRouter=require('./routes/playerStocksRouter')
 const homeRouter=require('./routes/homeRoutes')
+const timerRouter= require('./routes/timerRoutes')
 
 const errorHandler = require('./errorHandles/errorHandlers');
 
@@ -103,6 +104,7 @@ app.use('/market',marketRouter );
 app.use('/auth',userRouter);
 app.use('/playerStocks',playerStocksRouter)
 app.use('/',homeRouter)
+app.use('/timer',timerRouter)
 
 app.get('/events',eventsHandler);
 app.get('/status', (req, res) => res.json({clients:clients.length}));

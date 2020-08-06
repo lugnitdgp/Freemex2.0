@@ -3,26 +3,62 @@ const Stocks= require('../models/stocks');
 const playerStocks=require('../models/playerStock')
 const Player=require('../models/users')
 const Log= require('../models/logs')
+const Timer=require('../models/timer')
 const updatePlayer=require('../utilities/utilities').update_player_assets
 
 const homeRouter= express.Router();
 
-homeRouter.get('/',(req,res)=>{
-    if(!req.user)
-    {
-        res.render("landing",{event_started:true})
-    }
-    else
-    {
-        // setInterval(()=>{updatePlayer(Player,playerStocks)}, 1000) 
-        playerStocks.find({player:req.user.id})
-        .populate('player')
-        .populate('stock')
-        .then((playerstocks)=>{
-            res.render("portfolio",{player:req.user,player_stocks:playerstocks})
-        })
-        .catch(err=>console.log(err))
-    }
+homeRouter.get('/',(req,res,next)=>{
+    Timer.find({})
+    .then((resp)=>{
+        // console.log(resp[resp.length-1])
+        resp=resp[resp.length-1]
+        var endTime= resp.endTime.toISOString()
+        var startTime= resp.startTime.toISOString()
+        // console.log(endTime,startTime)
+        var now=new Date().toISOString()
+        var EVENT_ENDED= parseInt(Date.parse(now)/1000)>=parseInt(Date.parse(endTime)/1000)
+        var EVENT_STARTED= parseInt(Date.parse(now)/1000)>=parseInt(Date.parse(startTime)/1000)
+        var context={}
+        console.log(EVENT_ENDED,parseInt(Date.parse(now)/1000),parseInt(Date.parse(endTime)/1000))
+        context.startTime=startTime
+        context.endTime=endTime
+
+        if(EVENT_ENDED)
+        {
+            Player.find({})
+            .then((players)=>{
+                players.sort((a,b)=>((a.cash+a.value_in_stocks)<(b.cash+b.value_in_stocks))? 1 : -1)
+                context.message={
+                    'first': "The event has ended. Thanks for participating",
+                    'second':"Congratulations to the winners and here is the leaderboard..."
+                }
+                context.players=players
+                console.log("context",context)
+                res.render("leaderboard",context)
+            }) 
+            .catch(err=>next(err))
+        }
+
+        else if(EVENT_STARTED && req.user)
+        {
+            // setInterval(()=>{updatePlayer(Player,playerStocks)}, 1000) 
+            playerStocks.find({player:req.user.id})
+            .populate('player')
+            .populate('stock')
+            .then((playerstocks)=>{
+                context.player=req.user
+                context.player_stocks=playerstocks
+                res.render("portfolio",context)
+            })
+            .catch(err=>console.log(err))
+        }
+        else{
+            context.event_started=EVENT_STARTED
+            res.render("landing",context)
+        }
+    })
+    .catch(err=>console.log(err))
 });
 
 homeRouter.post('/buystock/',(req,res,next)=>{
@@ -292,7 +328,7 @@ homeRouter.post('/sellstock/', (req,res,next)=>{
 
 homeRouter.get('/transactions', (req,res,next)=>{
     if(!req.user){
-        res.render("landing",{event_started: true});
+        res.redirect("/");
     }
     else{
         context=[]
@@ -317,19 +353,32 @@ homeRouter.get('/transactions', (req,res,next)=>{
 })
 
 homeRouter.get('/leaderboard',(req,res,next)=>{
-    response_data=[]
-    Player.find({})
-    .then((players)=>{
-        players.sort((a,b)=>((a.cash+a.value_in_stocks)<(b.cash+b.value_in_stocks))? 1 : -1)
-        res.render("leaderboard",{players:players, message:''})
-    })
+    if(!req.user){
+        res.redirect("/");
+    }
+    else{
+        response_data=[]
+        Player.find({})
+        .then((players)=>{
+            players.sort((a,b)=>((a.cash+a.value_in_stocks)<(b.cash+b.value_in_stocks))? 1 : -1)
+            res.render("leaderboard",{players:players, message:''})
+        })
+    }
 })
 
 homeRouter.get('/engage',(req,res,next)=>{
+    if(!req.user){
+        res.redirect("/");
+    }
+    else
     res.render("engage")
 })
 
 homeRouter.get('/rules',(req,res,next)=>{
+    if(!req.user){
+        res.redirect("/");
+    }
+    else
     res.render("rules")
 })
 
