@@ -382,4 +382,61 @@ homeRouter.get('/rules',(req,res,next)=>{
     res.render("rules")
 })
 
-module.exports=homeRouter
+homeRouter.get('/get_users', (req,res,next)=>{
+    Player.find({})
+    .then((users)=>{
+        players=[]
+        response_data={}
+        users.map((user)=>{
+            players.push(user.username)
+        })
+        response_data.users=players
+        res.statusCode=200
+        res.setHeader('Content-Type','application/json')
+        res.json(response_data);
+    })
+    .catch((err)=>next(err))
+})
+
+homeRouter.post('/change_username/',(req,res,next)=>{
+    response_data={}
+    response_data.code=0
+    response_data.message='Some error occurred'
+
+    try {
+        var old_username= req.body.current_username
+        var new_username= req.body.username
+    } catch (error) {
+        response_data.message='Error in form data'
+        res.setHeader('Content-Type','application/json')
+        res.json(response_data)
+    }
+    console.log("usernames",old_username,new_username)
+    Player.findOne({username:old_username})
+    .then((user)=>{
+        if(user!=null)
+        {
+            var user_instance= user
+            user_instance.username= new_username
+            user_instance.save()
+            .then((new_user)=>{
+                response_data.code=0
+                response_data.message='Username changed successfully'
+                res.statusCode=200
+                res.setHeader('Content-Type','application/json')
+                res.json(response_data)
+            })
+        }
+        else{
+            response_data.message='User does not exist'
+            res.json(response_data)
+        }
+    })
+    .catch(err=>
+        {
+            console.log(err)
+            res.json(response_data)
+        })
+})
+
+module.exports=homeRouter 
