@@ -1,14 +1,15 @@
-const express= require('express')
+const express= require('express');
 const Stocks= require('../models/stocks');
-const playerStocks=require('../models/playerStock')
-const Player=require('../models/users')
-const Log= require('../models/logs')
-const Timer=require('../models/timer')
-const updatePlayer=require('../utilities/utilities').update_player_assets
+const playerStocks=require('../models/playerStock');
+const Player=require('../models/users');
+const Log= require('../models/logs');
+const Timer=require('../models/timer');
+const updatePlayer=require('../utilities/utilities').update_player_assets;
 
 const homeRouter= express.Router();
 
 homeRouter.get('/',(req,res,next)=>{
+
     Timer.find({})
     .then((resp)=>{
         // console.log(resp[resp.length-1])
