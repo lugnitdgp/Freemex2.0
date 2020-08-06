@@ -340,6 +340,7 @@ homeRouter.get('/transactions', (req,res,next)=>{
             .populate('stock')
             .then((resp)=>{
                 //sort resp acc to createdAt
+                resp.sort((a,b)=>(a.createdAt<b.createdAt)? 1:-1)
                 context.player=playerObj
                 context.logs=resp
                 console.log("context",context)
