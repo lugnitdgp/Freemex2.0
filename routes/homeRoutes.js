@@ -15,12 +15,19 @@ homeRouter.get('/',(req,res,next)=>{
         resp=resp[resp.length-1]
         var endTime= resp.endTime.toISOString()
         var startTime= resp.startTime.toISOString()
-        // console.log(endTime,startTime)
-        var now=new Date().toISOString()
-        var EVENT_ENDED=now>=endTime
-        var EVENT_STARTED= now>=startTime
+
+        var now=new Date()
+        now.setMinutes(now.getMinutes() + 330)
+        now = now.toISOString()
+
+        // console.log(endTime,startTime,now)
+        
+        var EVENT_ENDED= Math.ceil(Date.parse(now)/1000) >= Date.parse(endTime)/1000
+        var EVENT_STARTED= Math.ceil(Date.parse(now)/1000) >= Date.parse(startTime)/1000
         var context={}
-        // console.log(EVENT_ENDED,parseInt(Date.parse(now)/1000),parseInt(Date.parse(endTime)/1000))
+
+        console.log(EVENT_ENDED,Math.ceil(Date.parse(now)/1000),Date.parse(endTime)/1000)
+        
         context.startTime=startTime
         context.endTime=endTime
 
@@ -339,7 +346,6 @@ homeRouter.get('/transactions', (req,res,next)=>{
             .populate('player')
             .populate('stock')
             .then((resp)=>{
-                //sort resp acc to createdAt
                 resp.sort((a,b)=>(a.createdAt<b.createdAt)? 1:-1)
                 context.player=playerObj
                 context.logs=resp

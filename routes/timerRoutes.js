@@ -14,7 +14,14 @@ timerRouter.route('/')
     .catch(err=>console.log(err))
 })
 .post((req,res,next)=>{
-    Timer.create(req.body)
+    var start_date=req.body.start_date
+    var start_time=req.body.start_time
+    var end_date=req.body.end_date
+    var end_time=req.body.end_time
+    console.log(end_time)
+    var startTime=Date.parse(start_date+'T'+start_time)+ 330 * 60000
+    var endTime=Date.parse(end_date+'T'+end_time)+ 330 * 60000
+    Timer.create({startTime,endTime})
     .then((resp)=>{
         console.log(resp," added");
         res.statusCode=200;
@@ -22,6 +29,10 @@ timerRouter.route('/')
         res.json(resp);
     })
     .catch(err=>next(err))
+})
+
+timerRouter.get('/entry',(req,res,next)=>{
+    res.render("timer")
 })
 
 module.exports=timerRouter

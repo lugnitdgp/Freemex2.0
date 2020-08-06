@@ -4,11 +4,11 @@ const {Schema}= mongoose;
 const TimerSchema=new Schema({
     startTime:{
         type:Date,
-        default: new Date()
+        required:true
     },
     endTime:{
         type:Date,
-        default: new Date().setMinutes(1000000)
+        required:true
     }
 })
 

@@ -3,13 +3,19 @@ $(document).ready(function(){
     var timer=()=>{
         
         endTime=$("#endTime").val();
+        // console.log(endTime)
         endTime= Date.parse(endTime)/1000;
+        
+
         startTime=$('#startTime').val();
+        // console.log(startTime)
         startTime=Date.parse(startTime)/1000;
-        // console.log(endTime,startTime)
+        
         // getting the system date and calc the difference
-        var now= new Date().toISOString();
-        now= Date.parse(now)/1000
+        var now=new Date()
+        now.setMinutes(now.getMinutes() + 330)
+        now = now.toISOString()
+        now= Math.ceil(Date.parse(now)/1000)
 
         //if event ended
         if(now>=endTime){
@@ -24,8 +30,8 @@ $(document).ready(function(){
             var timeLeft= endTime-now;
         }
 
-        timeLeft=parseInt(timeLeft)
-
+        // timeLeft=parseInt(timeLeft)
+        console.log(now,endTime)
         // console.log(timeLeft)
 
         if (timeLeft<0){
@@ -71,5 +77,23 @@ $(document).ready(function(){
     }
 
     var setTimer=setInterval(timer,1000);
+
+    // Handles the entry of timer
+    $('.timer_form').on('submit', function(event){
+        event.preventDefault();
+        console.log("data:",$(this).serialize())
+        $('#loader').fadeIn();
+        $.ajax({
+            type: $(this).attr('method'),
+            url: this.action,
+            data: $(this).serialize(),
+            context: this,
+            success: function() {
+                alert("timer added successfully");
+                location.reload();
+            }
+        });
+        return false;
+    });
 
 });
