@@ -17,10 +17,10 @@ homeRouter.get('/',(req,res,next)=>{
         var startTime= resp.startTime.toISOString()
         // console.log(endTime,startTime)
         var now=new Date().toISOString()
-        var EVENT_ENDED= parseInt(Date.parse(now)/1000)>=parseInt(Date.parse(endTime)/1000)
-        var EVENT_STARTED= parseInt(Date.parse(now)/1000)>=parseInt(Date.parse(startTime)/1000)
+        var EVENT_ENDED=now>=endTime
+        var EVENT_STARTED= now>=startTime
         var context={}
-        console.log(EVENT_ENDED,parseInt(Date.parse(now)/1000),parseInt(Date.parse(endTime)/1000))
+        // console.log(EVENT_ENDED,parseInt(Date.parse(now)/1000),parseInt(Date.parse(endTime)/1000))
         context.startTime=startTime
         context.endTime=endTime
 
