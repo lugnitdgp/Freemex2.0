@@ -7,7 +7,7 @@
     <hr>
     <h5>Cash in your hand: $<span id="playercash"><%= (player.cash/100).toFixed(2) %></span></h5>
     <br>
-    <input type="text" id="market-search" onkeyup="marketSearch()" placeholder="Search for stock names..">
+    <input type="search" id="market-search" class="form-control" aria-label="Search" onkeyup="marketSearch()" placeholder="Search for stock names..">
     <br><br>
     
     <table class="table transactions-sheet" >

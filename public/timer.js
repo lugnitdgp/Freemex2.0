@@ -53,7 +53,7 @@ $(document).ready(function(){
         // console.log(days,hours,minutes,seconds)
 
         //timer ended and page reload
-        if(days=="0" && hours=="0" && minutes=="0" && seconds=="0"){
+        if(days==0 && hours==0 && minutes==0 && seconds==0){
             console.log("here")
             location.reload()
         }
