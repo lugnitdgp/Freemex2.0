@@ -8,7 +8,7 @@ const TimerSchema=new Schema({
     },
     endTime:{
         type:Date,
-        default: new Date().setMinutes(100)
+        default: new Date().setMinutes(1000000)
     }
 })
 

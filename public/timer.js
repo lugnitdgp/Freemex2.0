@@ -44,7 +44,7 @@ $(document).ready(function(){
             var seconds= Math.floor(timeLeft-(days*86400)-(hours*3600)-(minutes*60));
         }
 
-        console.log(days,hours,minutes,seconds)
+        // console.log(days,hours,minutes,seconds)
 
         //timer ended and page reload
         if(days=="0" && hours=="0" && minutes=="0" && seconds=="0"){
