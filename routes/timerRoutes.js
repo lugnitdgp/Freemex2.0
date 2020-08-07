@@ -31,7 +31,33 @@ timerRouter.route('/')
     .catch(err=>next(err))
 })
 
-timerRouter.get('/entry',(req,res,next)=>{
+const verifyUser=(req,res,next)=>{
+    console.log(req.headers);
+    var authHeader= req.headers.authorization;
+
+    if(!authHeader)
+    {
+        var err = new Error('You are not authenticated')
+        res.setHeader('WWW-Authenticate', 'Basic');
+        res.statusCode=401
+        return next(err);
+    }
+    var auth= new Buffer.from(authHeader.split(' ')[1],'base64').toString().split(':')
+
+    var username= auth[0]
+    var password= auth[1]
+
+    if(username===process.env.username && password===process.env.password)
+    next();
+    else{
+        var err = new Error('You are not authenticated')
+        res.setHeader('WWW-Authenticate', 'Basic');
+        res.statusCode=401
+        return next(err);
+    }
+}
+
+timerRouter.get('/entry', verifyUser,(req,res,next)=>{
     res.render("timer")
 })
 
