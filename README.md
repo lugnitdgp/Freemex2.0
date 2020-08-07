@@ -19,6 +19,10 @@ A stock market simulation using Node, Express in the backend and VanillaJs in fr
 * start server
 `npm start`
 
+* Go to http://localhost:{your PORT}/timer/entry and enter the username and password from your .env file when prompted
+
+* Add the timer values
+
 * Go to http://localhost:{your PORT} and start investing!
 
 ### Requirements
