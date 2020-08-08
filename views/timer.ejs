@@ -1,16 +1,24 @@
 <%- include("partials/header") %>
 <%- include("partials/navbar") %>
 
-    <form class="timer_form" action="/timer/" method="POST">
-        <label for="start_date">startDate</label>
-        <input name="start_date" type="date">
-        <label for="start_time">startTime</label>
-        <input name="start_time" type="time">
-        <label for="end_date">endDate</label>
-        <input name="end_date" type="date">
-        <label for="end_time">endTime</label>
-        <input name="end_time" type="time">
-        <button type="submit">Submit</button>
+    <form class="timer-form form-inline" action="/timer/" method="POST">
+        <div class="form-group mx-sm-3 mb-2 mt-2">
+            <label for="start_date"><h6 class="mr-2">Start Date</h6></label>
+            <input class="form-control" name="start_date" type="date">
+        </div>
+        <div class="form-group mx-sm-3 mb-2 mt-2">
+            <label for="start_time"><h6 class="mr-2">Start Time</h6></label>
+            <input class="form-control" name="start_time" type="time">
+        </div>
+        <div class="form-group mx-sm-3 mb-2 mt-2">
+            <label for="end_date"><h6 class="mr-2">End Date</h6></label>
+            <input class="form-control" name="end_date" type="date">
+        </div>
+        <div class="form-group mx-sm-3 mb-2 mt-2">
+            <label for="end_time"><h6 class="mr-2">End Time</h6></label>
+            <input class="form-control" name="end_time" type="time">
+        </div>
+        <button class="btn btn-primary" type="submit">Submit</button>
     </form>
 
 <script src="/timer.js"></script>
