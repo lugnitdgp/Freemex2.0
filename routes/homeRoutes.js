@@ -11,7 +11,6 @@ const homeRouter= express.Router();
 const checkTime= async ()=>{
     context={}
     resp= await Timer.find({})
-    // .then((resp)=>{
         resp=resp[resp.length-1];
 
         var endTime= resp.endTime.toISOString()
@@ -28,39 +27,11 @@ const checkTime= async ()=>{
         context.startTime=startTime
         context.EVENT_ENDED=EVENT_ENDED
         context.EVENT_STARTED=EVENT_STARTED
-
-        // console.log(context)
         return context
-    // })
-    // .catch(err=>console.log(err))
 }
 
 homeRouter.get('/',async (req,res,next)=>{
-
-    // Timer.find({})
-    // .then((resp)=>{
-    //     // console.log(resp[resp.length-1])
-    //     resp=resp[resp.length-1]
-    //     var endTime= resp.endTime.toISOString()
-    //     var startTime= resp.startTime.toISOString()
-
-    //     var now=new Date()
-    //     now.setMinutes(now.getMinutes() + 330)
-    //     now = now.toISOString()
-
-    //     // console.log(endTime,startTime,now)
-        
-    //     var EVENT_ENDED= Math.ceil(Date.parse(now)/1000) >= Date.parse(endTime)/1000
-    //     var EVENT_STARTED= Math.ceil(Date.parse(now)/1000) >= Date.parse(startTime)/1000
-    //     var context={}
-
-    //     console.log(EVENT_ENDED,Math.ceil(Date.parse(now)/1000),Date.parse(endTime)/1000)
-        
-    //     context.startTime=startTime
-    //     context.endTime=endTime
-
     getTime= await checkTime()
-        // console.log(getTime)
         context={}
         context.startTime=getTime.startTime
         context.endTime=getTime.endTime
@@ -97,9 +68,6 @@ homeRouter.get('/',async (req,res,next)=>{
             context.event_started=getTime.EVENT_STARTED
             res.render("landing",context)
         }
-    // })
-    // })
-    // .catch(err=>console.log(err))
 });
 
 homeRouter.get('/market', async (req,res,next)=>{
@@ -112,8 +80,6 @@ homeRouter.get('/market', async (req,res,next)=>{
         Stocks.find({})
         .then((stocks)=>{
             res.statusCode=200;
-            // res.setHeader('Content-Type','application/json');
-            // res.json(stocks);
             res.render("market",{stocks:stocks,player:req.user,startTime:getTime.startTime,endTime:getTime.endTime});
         })
         .catch((err)=>{
@@ -129,11 +95,10 @@ homeRouter.post('/buystock/',async (req,res,next)=>{
         response_data={}
         response_data.code=1;
         response_data.message='Some Error Occured'
-        // console.log(response_data)
+       
         try {
             var requestedStockCode=req.body.code;
             var requestedStockCount=parseInt(req.body.quantity);
-            // console.log(requestedStockCode,requestedStockCount)
         } catch (error) {
             res.json(response_data)
         }
@@ -141,10 +106,9 @@ homeRouter.post('/buystock/',async (req,res,next)=>{
         .then((stockObj)=>{
             Player.findById(req.user.id)
             .then((playerObj)=>{
-                // console.log("player:",playerObj.cash)
+               
                 var availableMoney=playerObj.cash
                 var stockPrice= stockObj.price
-                // console.log("available ",availableMoney," stockprice",stockPrice)
                 if(availableMoney>(stockPrice * requestedStockCount) && requestedStockCount>0)
                 {
                     try {
@@ -152,7 +116,6 @@ homeRouter.post('/buystock/',async (req,res,next)=>{
                         .populate('player')
                         .populate('stock')
                         .then((playerStockList)=>{
-                            // console.log("playerstock",playerStockList)
                             if(playerStockList.length)
                             {
                                 var playerStock = playerStockList[0]
@@ -160,7 +123,6 @@ homeRouter.post('/buystock/',async (req,res,next)=>{
                                 playerStock.invested+=stockPrice * requestedStockCount
                                 playerStock.save()
                                 .then((resp)=>{
-                                    // console.log(res)
                                     newAvailableMoney= availableMoney - (stockPrice * requestedStockCount)
                                     playerObj.cash= newAvailableMoney
                                     playerObj.value_in_stocks=0
@@ -169,7 +131,6 @@ homeRouter.post('/buystock/',async (req,res,next)=>{
                                     .populate('stock')
                                     .then((playerstocks)=>{
                                         playerstocks.map((playerstock)=>{
-                                            // console.log("this",playerObj.value_in_stocks+playerstock.stock.price)
                                             playerObj.value_in_stocks+=playerstock.stock.price * playerstock.quantity
                                         })
                                         playerObj.save()
@@ -191,7 +152,7 @@ homeRouter.post('/buystock/',async (req,res,next)=>{
                                                 console.log("saved player stocks after buying",resp)
                                                 response_data.code=0
                                                 response_data.message='Transaction Successful'
-                                                // console.log("cahnged:",response_data)
+                                               
                                                 res.json(response_data)
                                             })
                                             .catch((err)=>{
@@ -210,11 +171,11 @@ homeRouter.post('/buystock/',async (req,res,next)=>{
                                     stock:stockObj.id,
                                     quantity:requestedStockCount,
                                 })
-                                // console.log("creating playerStock: ",playerStock);
+                              
                                 var oldInvested=playerStock.invested
                                 var newInvested=oldInvested+stockPrice * requestedStockCount
                                 playerStock.invested=newInvested
-                                // console.log("creating playerStock after invest: ",playerStock);
+                             
                                 playerStock.save()
                                 .then(resp=>{
                                     console.log("saved",resp)
@@ -247,18 +208,11 @@ homeRouter.post('/buystock/',async (req,res,next)=>{
                                         console.log("saved player stocks after buying",resp)
                                         response_data.code=0
                                         response_data.message='Transaction Successful'
-                                        // console.log("cahnged:",response_data)
                                         res.json(response_data)
                                     })
                                     .catch((err)=>{
                                         console.log(err);
                                     })
-
-                                    // console.log("saved player stocks after buying",resp)
-                                    // response_data.code=0
-                                    // response_data.message='Transaction Successful'
-                                    // // console.log("cahnged:",response_data)
-                                    // res.json(response_data)
                                 }) 
                                 .catch((err)=>next(err))  
                             })
@@ -267,7 +221,6 @@ homeRouter.post('/buystock/',async (req,res,next)=>{
                             }
                         })
                     } catch (error) {
-                        // console("err here")
                         res.json(response_data)
                     }
                 }
