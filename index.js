@@ -6,7 +6,6 @@ const cookieSession= require('cookie-session');
 var bodyParser=require('body-parser');
 
 const stockRouter= require('./routes/stockRoutes')
-const marketRouter= require('./routes/marketRoutes');
 const userRouter=require('./routes/users')
 const playerStocksRouter=require('./routes/playerStocksRouter')
 const homeRouter=require('./routes/homeRoutes')
@@ -100,7 +99,6 @@ module.exports.sendEventsToAll = function sendEventsToAll(updateStocks){
 
 
 app.use('/api/stocks',stockRouter );
-app.use('/market',marketRouter );
 app.use('/auth',userRouter);
 app.use('/playerStocks',playerStocksRouter)
 app.use('/',homeRouter)

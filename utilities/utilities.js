@@ -39,7 +39,7 @@ const update_stock_prices=(Stocks)=>{
                 Stocks.findOneAndUpdate({code:code},{price:latestPrice.toString(),diff:change.toString()})
                 .then((updatedStock)=>{
                     ++count;
-                    console.log("updated",count)
+                    // console.log("updated",count)
                     if(count===20)
                     {
                         Stocks.find({})
