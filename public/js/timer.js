@@ -3,12 +3,10 @@ $(document).ready(function(){
     var timer=()=>{
         
         endTime=$("#endTime").val();
-        // console.log(endTime)
         endTime= Date.parse(endTime)/1000;
         
 
         startTime=$('#startTime').val();
-        // console.log(startTime)
         startTime=Date.parse(startTime)/1000;
         
         // getting the system date and calc the difference
@@ -30,10 +28,6 @@ $(document).ready(function(){
             var timeLeft= endTime-now;
         }
 
-        // timeLeft=parseInt(timeLeft)
-        console.log(now,endTime)
-        // console.log(timeLeft)
-
         if (timeLeft<0){
             days=0;
             hours=0;
@@ -49,8 +43,6 @@ $(document).ready(function(){
 
             var seconds= Math.floor(timeLeft-(days*86400)-(hours*3600)-(minutes*60));
         }
-
-        // console.log(days,hours,minutes,seconds)
 
         //timer ended and page reload
         if(days==0 && hours==0 && minutes==0 && seconds==0){
