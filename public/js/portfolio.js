@@ -1,5 +1,5 @@
 function updateStockPrices(data) {
-    console.log("updatedStockPrice:",data);
+    // console.log("updatedStockPrice:",data);
     let index = 0;
     $('.stock-card').each(function(i) {
         // console.log(i," code",$(this).attr("data-name"));
@@ -9,22 +9,36 @@ function updateStockPrices(data) {
         var diff = data[index]['diff'];
         diff = (diff * 1)/100;
         price = (price * 1)/100;
-        console.log(price);
-        console.log(diff);
+        // console.log(price);
+        // console.log(diff);
         var elem = $(this).find('#diff');
+        var border= $(this).find('#stock-card');
+        // console.log(border)
         if (diff >= 0) {
+            // console.log('diff greater')
             var diff_html = diff.toFixed(2) + " <i class=\"fa fa-arrow-up\" aria-hidden=\"true\">";
             elem.html(diff_html);
-            if (elem.hasClass('down')) {
-                elem.removeClass('down');
-                elem.addClass('up');
+            if (elem.prevObject.hasClass('down')) {
+                elem.prevObject.removeClass('down');
+                elem.prevObject.addClass('up');
+            }
+            if (border.prevObject.hasClass('red-card')){
+                // console.log('red')
+                border.prevObject.removeClass('red-card')
+                border.prevObject.addClass('green-card')
             }
         } else {
             var diff_html = diff.toFixed(2) + " <i class=\"fa fa-arrow-down\" aria-hidden=\"true\">";
             elem.html(diff_html);
-            if (elem.hasClass('up')) {
-                elem.removeClass('up');
-                elem.addClass('down');
+            if (elem.prevObject.hasClass('up')) {
+                // console.log("up")
+                elem.prevObject.removeClass('up');
+                elem.prevObject.addClass('down');
+            }
+            if (border.prevObject.hasClass('green-card')){
+                // console.log('green')
+                border.prevObject.removeClass('green-card')
+                border.prevObject.addClass('red-card')
             }
         }
         $(this).find('#price').html("<strong>$</strong> " + price.toFixed(2));
@@ -55,7 +69,7 @@ $(document).ready(function() {
     var source = new EventSource('/events');
     source.onmessage = function(event) {
         const stocks=JSON.parse(event.data)
-        console.log(stocks)
+        // console.log(stocks)
         updateStockPrices(stocks);
     };
 

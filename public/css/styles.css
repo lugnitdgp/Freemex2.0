@@ -264,7 +264,14 @@ body {
 
 /* ------------------------------- Navbar -------------------------------------- */
 
-
+.navbar{
+    background-color: #000;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1;
+    opacity: .9;
+}
 .navbar .navbar-brand img {
     height: 60px;
     padding-top: 10px;
@@ -273,8 +280,15 @@ body {
 
 .navbar ul li a {
     font-size: 1.25em;
+    font-weight: 600;
+}
+.navbar-dark .navbar-nav .nav-link{
+    color: white;
 }
 
+.navbar-dark .navbar-toggler{
+    border-color: white;
+}
 
 /* ----------------------------- Portfolio and Market ----------------------------- */
 
@@ -332,19 +346,137 @@ body {
     max-height: 100px; /* any large number (bigger then the .input-requirements list) */
     transition: max-height 1s ease-in;
 }
+.market,.portfolio{
+    margin-top: 100px;
+}
+.market h1,.portfolio h1{
+    color: #01021E;
+    background:dullred;
+    text-align:center;
+    font-size:50px
+/*  box-shadow:2px 2px 6px 10px white; */
+}
 
-.market .card {
-    margin-top: 2rem;
+.market h5{
+    /* background:; */
+    color: black;
+    box-shadow:2px 2px 16px 4px gray;
+    font-size:30px;
+    text-align:center;
+    font-weight: 600;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+.portfolio h5{
+    /* background:; */
+    color: black;
+    /* box-shadow:2px 2px 16px 4px gray; */
+    font-size:30px;
+    text-align:left;
+    font-weight: 600;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.portfolio h4{
+    /* background:; */
+    color: black;
+    /* box-shadow:2px 2px 16px 4px gray; */
+    font-size:35px;
+    text-align:left;
+    font-weight: 600;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.portfolio .player-cash-container{
+    justify-content: center;
+    display: flex;
+}
+
+.market .cash-container{
+    display: flex;
+    justify-content: center;
+}
+
+.market .cash-in-hand,
+.portfolio .cash-in-hand,
+.portfolio .value-in-stocks,
+.portfolio .total-cash{
+    color:#1b6214;
+}
+
+.portfolio .player-cash{
+ box-shadow: 2px 2px 16px 4px gray;   
+ display: flex;
+ flex-direction: row;
+}
+
+.portfolio hr{
+    height: 2px;
+    background-color: gray;
+}
+.market .text-right{
+    color: #01021E;
+}
+
+.market .stock-cards, .portfolio .stock-cards{
+    display:flex;
+    flex-direction:row;
+    flex-wrap:wrap;
+    justify-content:center;
+}
+
+.market .card-body, .portfolio .card-body{
+    padding: 0;
+}
+
+.market .card, .portfolio .card {
+    background:#d8e1d6;
+    width:400px;
+    border-top-right-radius:20px;
+    border-bottom-right-radius:20px;
+    box-shadow:2px 2px 4px 2px ;
+    margin:30px;
+    justify-content: center;
+    text-align: center;
+    /* backdrop-filter: blur(10px); */
+}
+
+.market .green-card,.portfolio .green-card{
+    border-left:#1b6214 solid 10px;
+}
+
+.market .red-card, .portfolio .red-card{
+    border-left:red solid 10px;
 }
 
 .portfolio .card .card-title,
 .market .card .card-title {
-    font-weight: 300;
+    font-weight: 600;
+    background: #01021E;
+    font-size:30px;
+    border-top-right-radius:20px;
+    margin-top:0;
+    color:white;
+    height: 75px;
+    justify-content: center;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.market .card .market-info .code, 
+.portfolio .card .market-info .code{
+    color: #01021E;
+    font-size:25px;
+    text-align:center;
+    font-weight:600;
 }
 
 .portfolio .card .market-info .card-text,
 .market .card .market-info .card-text {
-    font-weight: 400;
+    /* font-weight: 400; */
 }
 
 .portfolio .card .market-info .stock-info,
@@ -352,23 +484,96 @@ body {
 {
 	display: block;
     float: right;
-    padding: 0 1em;
-    text-align: right;
 }
 
-.portfolio .card .market-info .market-buttons,
-.market .card .market-info .market-buttons {
-    margin-top: 2em;
+.market-buttons{
+    justify-content: center;
+    text-align: center;
+    display: grid;
+}
+
+.market .card .market-info .market-buttons .market-buy-button,
+.portfolio .card .market-info .market-buttons .market-buy-button
+{
+    text-decoration:none;
+    font-size:20px;
+    font-weight:bold;
+    background: #1b6214;
+    height:50px;
+    color: white;
+    border-top-right-radius:10px;
+    border-bottom-right-radius:10px;
+    width: 100px;
+    justify-content: center;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    line-height: 20px;
+}
+
+.portfolio .card .market-info .market-buttons .market-sell-button
+{
+    text-decoration:none;
+    font-size:20px;
+    font-weight:bold;
+    background:red;
+    height:50px;
+    color:white;
+    border-top-right-radius:10px;
+    border-bottom-right-radius:10px;
+    width: 100px;
+    justify-content: center;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.flex-row{
+    display:flex;
+    flex-direction:row;
+    justify-content:space-between;
+    text-align:left;
+}
+
+.flex-column{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    text-align: left;
+    padding-left:20px;
+    padding-right:20px;
+    padding-bottom:15px
+}
+
+.details, .quantity{
+    color: #01021E;
+    text-decoration:none;
+    font-size:20px;
+    font-weight: 600;
+}
+
+.price{
+    color: #01021E;
+    font-size:20px;
+    font-weight:bold;
+}
+
+.portfolio .card .market-info .market-buttons{
+    /* margin-top: 2em; */
 }
 
 .portfolio .card .market-info .up,
 .market .card .market-info .up {
-    color: green;
+    color:#1b6214;
+    font-size:20px;
+    font-weight:bold;
 }
 
 .portfolio .card .market-info .down,
 .market .card .market-info .down {
     color: red;
+    font-size:20px;
+    font-weight:bold;
 }
 
 .portfolio .modal .close:hover,
@@ -456,26 +661,49 @@ body {
         max-height: 150px;
     }
 
+    .portfolio h5{
+        font-size:20px;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    
+    .portfolio h4{
+        font-size:25px;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
     .portfolio .card .card-title, .portfolio .card .market-info .market-buttons,
     .market .card .card-title, .market .card .market-info .market-buttons {
         text-align: center;
     }
-
+    .market .card, .portfolio .card{
+        margin-left: 0;
+        margin-right: 0;
+    }
+    .market h5{
+        padding-left:10px ;
+        padding-right: 10px;
+    }
     .portfolio .card .market-info,
     .market .card .market-info {
-        padding: 1em 0;
+        /* padding: 1em 0; */
+    }
+
+    .market .card .card-title{
+        font-size: 25px;
     }
 
     .market .card .market-info .stock-info:nth-child(2),
     .market .card .market-info .stock-info:nth-child(3) {
-        float: left;
+        /* float: left; */
     }
 
     .portfolio .card .market-info .stock-info,
     .market .card .market-info .stock-info {
-        font-size: 0.85rem;
+        /* font-size: 0.85rem;
         text-align: center;
-        padding: 0 0.35em;
+        padding: 0 0.35em; */
     }
 
     .footer img {

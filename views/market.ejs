@@ -5,80 +5,86 @@
         <br>
         <h1>Market</h1>
         <hr>
-        <h5>Cash in your hand: $<span id="playercash"><%= (player.cash/100).toFixed(2) %></span></h5>
+        <div class="cash-container">
+            <h5>Cash in your hand: $<span class="cash-in-hand" id="playercash"><%= (player.cash/100).toFixed(2) %></span></h5>
+        </div>
         <br>
         <input type="search" id="market-search" class="form-control" aria-label="Search" onkeyup="marketSearch()" placeholder="Search for stock names..">
         <br><br>
         <p class="text-right">Page last updated on: <strong id="last-updated"><%= player.updatedAt %></strong></p>
-        
-        <% stocks.forEach((stock) => { %> 
+        <div class="stock-cards">
+            <% stocks.forEach((stock) => { %> 
 
-            <% let diff = (stock.diff * 1)/100; %>
-            <% let price = (stock.price * 1)/100 %>
-
-            <div class="card stock-card" data-name="<%= stock.name %>">
-                <div class="card-body">
-                    <h4 class="card-title"><%= stock.name %></h4>
-                    <div class="market-info">
-                        <p class="card-text stock-info"><a target="_blank" href="https://www.google.com/finance?q=NASDAQ:<%= stock.code %>">Details</a></p>
-
-                        <% if(diff >= 0){ %>
-                            
-                            <p class="card-text stock-info up" id="diff">
-                                <%= diff.toFixed(2) %> <i class="fa fa-arrow-up" aria-hidden="true"></i>
-                            </p>
-
-                        <% }else{ %>
-
-                            <p class="card-text stock-info down" id="diff">
-                                <%= diff.toFixed(2) %> <i class="fa fa-arrow-down" aria-hidden="true"></i>
-                            </p>
-
-                        <% } %>
-
-                        <p class="card-text stock-info" id="price"><strong>$</strong> <%= price.toFixed(2) %></p>
-                        <p class="card-text stock-info"><%= stock.code %></p>
-                        <div class="market-buttons">
-                            <a href="#" class="btn btn-primary btn-success market-buy-button" data-toggle="modal" data-target="#buyModal<%= stock.code %>" data-price="<%= stock.price %>">Buy</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Modal -->
-
-            <div class="modal fade" id="buyModal<%= stock.code %>" tabindex="-1" role="dialog" aria-labelledby="buyModalLabel" aria-hidden="true">
-                <div class="modal-dialog cascading-modal" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header blue darken-3">
-                            <h4 class="modal-title" id="buyModalLabel"><%= stock.name %></h4>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <form  class="buy-form" action="/buystock/" method="Post">
-                            <input type="hidden" name="code" value="<%= stock.code %>">
-                            <div class="modal-body">
-                                <h6>Max you can buy: <span class="maxqty">Unknown</span></h6>
-                                <div class="md-form">
-                                    <input type="number" min="1" id="form1" class="form-control" placeholder="Quantity" name="quantity">
+                <% let diff = (stock.diff * 1)/100; %>
+                <% let price = (stock.price * 1)/100 %>
+                <div class="card stock-card red-card" id="stock-card" data-name="<%= stock.name %>">
+                    <div class="card-body">
+                        <h4 class="card-title"><div><%= stock.name %></div></h4>
+                        <div class="market-info flex-column">
+                            <div class="flex-row">
+                                <div class="flex-column">
+                                    <div class="card-text stock-info code"><%= stock.code %></div>
+                                    <div class="card-text stock-info"><a class="details" target="_blank" href="https://www.google.com/finance?q=NASDAQ:<%= stock.code %>">Details<i class="fa fa-caret-down"></i></a></div>
+                                </div>
+                                <div class="flex-column">
+                                    <div class="card-text stock-info price" id="price"><strong>$</strong> <%= price.toFixed(2) %></div>
+                                    <% if(diff >= 0){ %>
+                                
+                                        <div class="card-text stock-info up" id="diff">
+                                            <%= diff.toFixed(2) %> <i class="fa fa-arrow-up" aria-hidden="true"></i>
+                                        </div>
+            
+                                    <% }else{ %>
+            
+                                        <div class="card-text stock-info down" id="diff">
+                                            <%= diff.toFixed(2) %> <i class="fa fa-arrow-down" aria-hidden="true"></i>
+                                        </div>
+            
+                                    <% } %>
                                 </div>
                             </div>
-                            <!--Footer-->
-                            <div class="modal-footer">
-                                <button type="submit" id="buyButton" class="btn btn-success">Confirm</button>
-                                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                            <div class="market-buttons">
+                                    <a href="#" class="market-buy-button" data-toggle="modal" data-target="#buyModal<%= stock.code %>" data-price="<%= stock.price %>">Buy</a>
                             </div>
-                        </form>
+                        </div>
                     </div>
                 </div>
-            </div>
-            
-        <% }); %>    
+
+                <!-- Modal -->
+
+                <div class="modal fade" id="buyModal<%= stock.code %>" tabindex="-1" role="dialog" aria-labelledby="buyModalLabel" aria-hidden="true">
+                    <div class="modal-dialog cascading-modal" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header blue darken-3">
+                                <h4 class="modal-title" id="buyModalLabel"><%= stock.name %></h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <form  class="buy-form" action="/buystock/" method="Post">
+                                <input type="hidden" name="code" value="<%= stock.code %>">
+                                <div class="modal-body">
+                                    <h6>Max you can buy: <span class="maxqty">Unknown</span></h6>
+                                    <div class="md-form">
+                                        <input type="number" min="1" id="form1" class="form-control" placeholder="Quantity" name="quantity">
+                                    </div>
+                                </div>
+                                <!--Footer-->
+                                <div class="modal-footer">
+                                    <button type="submit" id="buyButton" class="btn btn-success">Confirm</button>
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                
+            <% }); %>    
+        </div>
 
     </div>
 
-    <script src="/portfolio.js"></script>
-    <script src="/market.js"></script>
+    <script src="/js/portfolio.js"></script>
+    <script src="/js/market.js"></script>
 
 <%- include("partials/footer") %>

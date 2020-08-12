@@ -40,108 +40,129 @@
         </div>
     </div>
     <h1>Portfolio</h1>
-    <hr>
-    <h5>Cash: $<span id="playercash"><%= (player.cash/100).toFixed(2) %></span></h5>
-    <h5>Value in Stock: $<%= (player.value_in_stocks/100).toFixed(2) %></h5>
-    <hr>
-    <h4>Total: <%= ((player.cash + player.value_in_stocks)/100).toFixed(2) %></h4>
+    <div class="player-cash-container">
+        <div class="player-cash">
+            <div class="cash-titles">
+                <div><h5>Cash: </h5></div>
+                <div><h5>Value in Stock: </h5></div>
+                <hr>
+                <div><h4>Total: </h4></div>
+            </div>
+            <div class="cash-values">
+                <div><h5>$<span id="playercash" class="cash-in-hand"><%= (player.cash/100).toFixed(2) %></span></h5></div>
+                <div><h5>$<span class="value-in-stocks"><%= (player.value_in_stocks/100).toFixed(2) %></span></h5></div>
+                <hr>
+                <div><h4>$<span class="total-cash"><%= ((player.cash + player.value_in_stocks)/100).toFixed(2) %></span></h4></div>
+            </div>
+        </div>
+    </div>
     <br>
     <br>
     <p class="text-right">Page last updated on: <strong id="last-updated"></strong></p>
-    <h1>Your stocks</h1>
     <hr>
+    <h1>Your stocks</h1>
     <br>
+    <div class="stock-cards">
+        <% player_stocks.forEach((player_stock) => { %>
 
-    <% player_stocks.forEach((player_stock) => { %>
-
-        <!--Card-->
-        <% if (player_stock.quantity) {%>
-        <div class="card stock-card " data-name="<%= player_stock.stock.name %>">
-            <div class="card-body">
-                <h4 class="card-title"><%= player_stock.stock.name %></h4>
-                <div class="market-info">
-                    <% if (player_stock.stock.diff >= 0) {%>
-                    <p class="card-text stock-info up" id="diff">
-                        <i class="fa fa-arrow-up" aria-hidden="true"></i>
-                    </p>
-                    <%} else {%>
-                    <p class="card-text stock-info down" id="diff">
-                        <i class="fa fa-arrow-down" aria-hidden="true"></i>
-                    </p>
-                    <% } %>
-                    <p class="card-text stock-info">Price: <span id="price"></span></p>
-                    <p class="card-text stock-info"><%= player_stock.stock.code %></p>
-                    <p class="card-text stock-info">x<%= player_stock.quantity %></p>
-                    <!--<p class="card-text stock-info">Invested : $<%= player_stock.invested %></p>-->
-                    <div class="market-buttons">
-                    <a href="#" class="btn btn-success market-buy-button" data-toggle="modal" data-target="#buyModal<%= player_stock.stock.code %>" data-price="<%= player_stock.stock.price %>">Buy More</a>
-                    <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#sellModal<%= player_stock.stock.code %>">Sell</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Buy Modal -->
-        <div class="modal fade" id="buyModal<%= player_stock.stock.code %>" tabindex="-1" role="dialog" aria-labelledby="buyModalTitle" aria-hidden="true">
-            <div class="modal-dialog cascading-modal" role="document">
-                <div class="modal-content">
-                    <div class="modal-header default-color">
-                        <h4 class="modal-title" id="buyModalTitle">Buy: <%= player_stock.stock.name %></h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <form class="buy-form" action="/buystock/" method="Post">
-                        <input type="hidden" name="code" value="<%= player_stock.stock.code %>">
-                        <div class="modal-body">
-                            <h6>Max you can buy: <span class="maxqty">Unknown</span></h6>
-                            <div class="md-form">
-                                <input type="number" min="1" placeholder="Quantity" id="form2" name="quantity">
+            <!--Card-->
+            <% if (player_stock.quantity) {%>
+            <div class="card stock-card red-card" id="stock-card" data-name="<%= player_stock.stock.name %>">
+                <div class="card-body">
+                    <h4 class="card-title"><%= player_stock.stock.name %></h4>
+                    <div class="market-info flex-column">
+                        <div class="flex-row">
+                            <div class="flex-column">
+                                <div class="card-text stock-info code"><%= player_stock.stock.code %></div>
+                                <div class="card-text stock-info quantity">x<%= player_stock.quantity %></div>
+                            </div>
+                            <div class="flex-column">
+                                <div class="card-text stock-info price"><span id="price"></span></div>
+                                <div><% if (player_stock.stock.diff >= 0) {%>
+                                    <p class="card-text stock-info up" id="diff">
+                                        <i class="fa fa-arrow-up" aria-hidden="true"></i>
+                                    </p>
+                                    <%} else {%>
+                                    <p class="card-text stock-info down" id="diff">
+                                        <i class="fa fa-arrow-down" aria-hidden="true"></i>
+                                    </p>
+                                    <% } %></div>
                             </div>
                         </div>
-                        <div class="modal-footer">
-                            <button type="submit" id="buyButton" class="btn btn-success">Buy</button>
-                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-
-        <!-- Sell Modal -->
-        <div class="modal fade" id="sellModal<%= player_stock.stock.code %>" tabindex="-1" role="dialog" aria-labelledby="sellModalTitle" aria-hidden="true">
-            <div class="modal-dialog cascading-modal" role="document">
-                <div class="modal-content">
-                    <div class="modal-header red darken-1">
-                        <h4 class="modal-title" id="sellModalTitle">Sell: <%= player_stock.stock.name %></h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <form  class="sell-form" action="/sellstock/" method="Post">
-                        <input type="hidden" name="code" value="<%= player_stock.stock.code %>">
-                        <div class="modal-body">
-                            <div class="md-form">
-                                <input type="number" min="1" max="<%= player_stock.quantity %>" placeholder="Quantity" id="form3" class="form-control" name="quantity">
+                        <!--<p class="card-text stock-info">Invested : $<%= player_stock.invested %></p>-->
+                        <div class="market-buttons flex-row">
+                            <div>
+                                <a href="#" class="btn btn-success market-buy-button" data-toggle="modal" data-target="#buyModal<%= player_stock.stock.code %>" data-price="<%= player_stock.stock.price %>">Buy More</a>
+                            </div>
+                            <div>
+                                <a href="#" class="btn btn-danger market-sell-button" data-toggle="modal" data-target="#sellModal<%= player_stock.stock.code %>">Sell</a>
                             </div>
                         </div>
-                        <div class="modal-footer">
-                            <button type="submit" id="buyButton" class="btn btn-success">Sell</button>
-                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-                        </div>
-                    </form>
+                    </div>
                 </div>
             </div>
-        </div>
-        <% } %>
 
-    <% }); %>
+            <!-- Buy Modal -->
+            <div class="modal fade" id="buyModal<%= player_stock.stock.code %>" tabindex="-1" role="dialog" aria-labelledby="buyModalTitle" aria-hidden="true">
+                <div class="modal-dialog cascading-modal" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header default-color">
+                            <h4 class="modal-title" id="buyModalTitle">Buy: <%= player_stock.stock.name %></h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <form class="buy-form" action="/buystock/" method="Post">
+                            <input type="hidden" name="code" value="<%= player_stock.stock.code %>">
+                            <div class="modal-body">
+                                <h6>Max you can buy: <span class="maxqty">Unknown</span></h6>
+                                <div class="md-form">
+                                    <input type="number" min="1" placeholder="Quantity" id="form2" name="quantity">
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" id="buyButton" class="btn btn-success">Buy</button>
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
 
+            <!-- Sell Modal -->
+            <div class="modal fade" id="sellModal<%= player_stock.stock.code %>" tabindex="-1" role="dialog" aria-labelledby="sellModalTitle" aria-hidden="true">
+                <div class="modal-dialog cascading-modal" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header red darken-1">
+                            <h4 class="modal-title" id="sellModalTitle">Sell: <%= player_stock.stock.name %></h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <form  class="sell-form" action="/sellstock/" method="Post">
+                            <input type="hidden" name="code" value="<%= player_stock.stock.code %>">
+                            <div class="modal-body">
+                                <div class="md-form">
+                                    <input type="number" min="1" max="<%= player_stock.quantity %>" placeholder="Quantity" id="form3" class="form-control" name="quantity">
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" id="buyButton" class="btn btn-success">Sell</button>
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <% } %>
+
+        <% }); %>
+    </div>
     <a href="/market" class="btn btn-lg btn-info">Buy Stocks</a>
 </div>
 
-<script src="/validation.js"></script>
-<script src="/portfolio.js"></script>
-<script src="/timer.js"></script>
+<script src="/js/validation.js"></script>
+<script src="/js/portfolio.js"></script>
+<script src="/js/timer.js"></script>
 
 <%- include("partials/footer") %>
