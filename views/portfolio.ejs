@@ -2,8 +2,8 @@
 <%- include("partials/navbar") %>
 
 <div class="container portfolio">
-    <input id="startTime" type="hidden" value=<%=startTime%>>
-    <input id="endTime" type="hidden" value=<%=endTime%>>
+    <!-- <input id="startTime" type="hidden" value=<%=startTime%>>
+    <input id="endTime" type="hidden" value=<%=endTime%>> -->
     <br>
     <p class="text-right">Logged in as <strong><%= player.username %></strong></p>
     <p class="text-right">
@@ -158,7 +158,7 @@
 
         <% }); %>
     </div>
-    <a href="/market" class="btn btn-lg btn-info">Buy Stocks</a>
+    <a href="/market" class="buy-stocks-btn btn btn-lg btn-info">Buy Stocks</a>
 </div>
 
 <script src="/js/validation.js"></script>

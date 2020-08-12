@@ -4,6 +4,7 @@ html {
 }
 
 body {
+    font-family: 'Ubuntu', sans-serif;
     position: relative;
     min-height: 100vh;
     font-size: 14px;
@@ -137,12 +138,13 @@ body {
     position: absolute;
     left: 50%;
     transform: translate(-50%,20%);
+    /* box-shadow: 3px 5px 15px 2px white; */
 
 }
 
 .landing-page header.landing .content table td{
 
-    padding-right: 15px;
+    padding: 0px 8px;
 
 }
 
@@ -288,6 +290,12 @@ body {
 
 .navbar-dark .navbar-toggler{
     border-color: white;
+}
+
+.timer-form{
+
+    margin-top: 100px;
+
 }
 
 /* ----------------------------- Portfolio and Market ----------------------------- */
@@ -585,6 +593,22 @@ body {
     color: white
 }
 
+.buy-stocks-btn{
+
+    margin-top: 3%;
+
+}
+
+/* --------------------------------- Transactions ------------------------------- */
+
+.transactions{
+
+    margin-top: 100px;
+
+}
+
+
+
 
 /* ------------------------------- Footer ------------------------------- */
 
@@ -609,6 +633,11 @@ body {
 
 /* ----------------------------- Leaderboard ------------------------------------ */
 
+.leaderboard{
+
+    margin-top: 100px;
+
+}
 
 .leaderboard .table {
     margin-top: 2rem;
@@ -617,6 +646,11 @@ body {
 
 /* ------------------------------- Rules ------------------------------- */
 
+.rules{
+
+    margin-top: 100px;
+
+}
 
 .rules #intro-logo {
     height: 2em;
@@ -641,6 +675,14 @@ body {
     padding-top: 0.4em;
 }
 
+
+/* ------------------------------------- Engage -------------------------------- */
+
+.engage{
+
+    margin-top: 100px;
+
+}
 
 /* ------------------------------- Media Queries ------------------------------- */
 
