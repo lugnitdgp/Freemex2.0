@@ -365,6 +365,7 @@ body {
 /*  box-shadow:2px 2px 6px 10px white; */
 }
 
+.transactions .cash-container h5,
 .market h5{
     /* background:; */
     color: black;
@@ -375,6 +376,7 @@ body {
     padding-left: 30px;
     padding-right: 30px;
 }
+
 .portfolio h5{
     /* background:; */
     color: black;
@@ -402,11 +404,13 @@ body {
     display: flex;
 }
 
+.transactions .cash-container,
 .market .cash-container{
     display: flex;
     justify-content: center;
 }
 
+.transactions .cash-in-hand,
 .market .cash-in-hand,
 .portfolio .cash-in-hand,
 .portfolio .value-in-stocks,
@@ -602,11 +606,14 @@ body {
 /* --------------------------------- Transactions ------------------------------- */
 
 .transactions{
-
+    text-align: center;
     margin-top: 100px;
 
 }
 
+.transactions .transactions-sheet{
+    text-align: left;
+}
 
 
 
@@ -636,11 +643,13 @@ body {
 .leaderboard{
 
     margin-top: 100px;
+    text-align: center;
 
 }
 
 .leaderboard .table {
     margin-top: 2rem;
+    text-align: left;
 }
 
 
@@ -679,7 +688,7 @@ body {
 /* ------------------------------------- Engage -------------------------------- */
 
 .engage{
-
+    text-align: center;
     margin-top: 100px;
 
 }

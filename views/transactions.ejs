@@ -5,7 +5,9 @@
     <br>
     <h1>Transactions</h1>
     <hr>
-    <h5>Cash in your hand: $<span id="playercash"><%= (player.cash/100).toFixed(2) %></span></h5>
+	<div class="cash-container">
+		<h5>Cash in your hand: $<span class="cash-in-hand" id="playercash"><%= (player.cash/100).toFixed(2) %></span></h5>
+	</div>
     <br>
     <input type="search" id="market-search" class="form-control" aria-label="Search" onkeyup="marketSearch()" placeholder="Search for stock names..">
     <br><br>
