@@ -9,6 +9,10 @@ var UserSchema= new Schema({
         type:String,
         default:''
     },
+    name:{
+        type:String,
+        default:''
+    },
     facebookId: String,
     googleId:String,
     admin:{

@@ -1,6 +1,7 @@
 var passport= require('passport');
 var User= require('./models/users');
 var GoogleStrategy=require('passport-google-oauth20');
+const { findOneAndUpdate, update } = require('./models/users');
 var FacebookStrategy= require('passport-facebook').Strategy;
 
 require('dotenv').config();
@@ -21,13 +22,14 @@ passport.use(
         clientID:process.env.google_client_id,
         clientSecret:process.env.google_client_secret
 },(accessToken,refreshToken,profile,done)=>{
-    console.log("profile:",profile)
+    // console.log("profile:",profile)
     User.findOne({googleId:profile.id})
     .then((user)=>{
         if(user===null)
         {
             new User({
                 username:profile.displayName,
+                name:`${profile.name.givenName} ${profile.name.familyName}`,
                 googleId:profile.id
             }).save()
             .then((user)=>{
@@ -51,7 +53,8 @@ passport.use(
 passport.use(new FacebookStrategy({
     callbackURL:'/auth/facebook/redirect',
     clientID:process.env.facebook_client_id,
-    clientSecret:process.env.facebook_client_secret
+    clientSecret:process.env.facebook_client_secret,
+    profileFields: ['id', 'email', 'name','displayName'] 
 },(accessToken,refreshToken,profile,done)=>{
     console.log("facebook profile", profile);
     User.findOne({facebookId:profile.id})
@@ -60,7 +63,8 @@ passport.use(new FacebookStrategy({
         {
             new User({
                 username:profile.displayName,
-                facebookId:profile.id
+                facebookId:profile.id,
+                name:`${profile.name.givenName} ${profile.name.familyName}`,
             }).save()
             .then((user)=>{
                 console.log("new user created",user);
