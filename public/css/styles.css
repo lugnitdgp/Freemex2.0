@@ -613,6 +613,12 @@ body {
 
 .transactions .transactions-sheet{
     text-align: left;
+    overflow-x: visible;
+}
+
+.transactions .table td, .transactions .table th{
+    padding-left: 5px;
+    padding-right: 5px;
 }
 
 
@@ -651,7 +657,6 @@ body {
     margin-top: 2rem;
     text-align: left;
 }
-
 
 /* ------------------------------- Rules ------------------------------- */
 
