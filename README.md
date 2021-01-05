@@ -58,3 +58,12 @@ git push heroku master
 * To open the app on the browser, run `heroku open`.
 
 * If there are any errors, they can be inspected using `heroku logs --tail`.
+
+## Glimpses into the project
+
+![](./public/gif/Freemex.gif)
+![](./public/img/freemex2.jpg)
+![](./public/img/freemex3.jpg)
+![](./public/img/freemex5.png)
+![](./public/img/freemex4.png)
+![](./public/img/freemex1.png)
