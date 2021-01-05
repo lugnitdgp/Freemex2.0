@@ -62,7 +62,6 @@ git push heroku master
 ## Glimpses into the project
 
 ![](./public/gif/Freemex.gif)
-![](./public/img/freemex2.jpg)
 ![](./public/img/freemex3.jpg)
 ![](./public/img/freemex5.png)
 ![](./public/img/freemex4.png)
