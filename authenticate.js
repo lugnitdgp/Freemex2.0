@@ -1,8 +1,8 @@
 var passport= require('passport');
 var User= require('./models/users');
 var GoogleStrategy=require('passport-google-oauth20');
-const { findOneAndUpdate, update } = require('./models/users');
 var FacebookStrategy= require('passport-facebook').Strategy;
+var GitHubStrategy=require('passport-github2').Strategy;
 
 require('dotenv').config();
 
@@ -83,3 +83,37 @@ passport.use(new FacebookStrategy({
         console.log(err)
     })
 }))
+
+passport.use(new GitHubStrategy({
+    clientID: process.env.github_client_id,
+    clientSecret: process.env.github_client_secret,
+    callbackURL: "/auth/github/callback"
+  },
+  (accessToken,refreshToken,profile,done)=>{
+    console.log("github profile", profile);
+    User.findOne({githubId:profile.id})
+    .then((user)=>{
+        if(user===null)
+        {
+            new User({
+                username:profile.username,
+                githubId:profile.id,
+                name:`${profile.username}`,
+            }).save()
+            .then((user)=>{
+                console.log("new user created",user);
+                done(null,user);
+            })
+            .catch((err)=>{
+                console.log(err)
+            })
+        }
+        else{
+            console.log("already present");
+            done(null,user)
+        }
+    })
+    .catch((err)=>{
+        console.log(err)
+    })
+  }));

@@ -187,6 +187,10 @@ body {
     background: #DD4B39;
 }
 
+.landing-page header.landing .content .login-buttons a.btn-github {
+    background: #f0f0f0;;
+}
+
 .landing-page header.landing .content .login-buttons a.btn-gplus:hover,
 .landing-page header.landing .content .login-buttons a.btn-gplus:focus {
     background: #E74B37;

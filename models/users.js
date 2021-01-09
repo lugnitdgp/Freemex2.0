@@ -15,6 +15,7 @@ var UserSchema= new Schema({
     },
     facebookId: String,
     googleId:String,
+    githubId:String,
     admin:{
         type:Boolean,
         default:false
