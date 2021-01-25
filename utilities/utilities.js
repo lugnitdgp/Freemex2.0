@@ -32,11 +32,14 @@ const update_stock_prices=(Stocks)=>{
         .then((stocks)=>{
             var count=0;
             stocks.map((stock)=>{
+                // console.log(stock)
                 var code=stock.code;
                 var latestPrice=stock_prices[`${code}`].quote.latestPrice;
-                // console.log(latestPrice)
+                // console.log(code," ",stock_prices[`${code}`].quote.change)
                 var change=stock_prices[`${code}`].quote.change;
-                Stocks.findOneAndUpdate({code:code},{price:latestPrice.toString(),diff:change.toString()})
+                var changePerc=stock_prices[`${code}`].quote.changePercent;
+                var latestUpdate=stock_prices[`${code}`].quote.latestUpdate;
+                Stocks.findOneAndUpdate({code:code},{price:latestPrice.toString(),diff:change.toString(),diffPerc:changePerc,latestUpdate:new Date(latestUpdate)})
                 .then((updatedStock)=>{
                     ++count;
                     // console.log("updated",count)

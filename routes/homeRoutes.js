@@ -5,6 +5,7 @@ const Player=require('../models/users');
 const Log= require('../models/logs');
 const Timer=require('../models/timer');
 const updatePlayer=require('../utilities/utilities').update_player_assets;
+const moment=require('moment');
 
 const homeRouter= express.Router();
 
@@ -60,6 +61,7 @@ homeRouter.get('/',async (req,res,next)=>{
             .then((playerstocks)=>{
                 context.player=req.user
                 context.player_stocks=playerstocks
+                context.moment=moment
                 res.render("portfolio",context)
             })
             .catch(err=>console.log(err))
@@ -80,7 +82,7 @@ homeRouter.get('/market', async (req,res,next)=>{
         Stocks.find({})
         .then((stocks)=>{
             res.statusCode=200;
-            res.render("market",{stocks:stocks,player:req.user,startTime:getTime.startTime,endTime:getTime.endTime});
+            res.render("market",{stocks:stocks,player:req.user,startTime:getTime.startTime,endTime:getTime.endTime,moment});
         })
         .catch((err)=>{
             next(err);
@@ -92,6 +94,8 @@ homeRouter.post('/buystock/',async (req,res,next)=>{
     var getTime=await checkTime()
     if(req.user && getTime.EVENT_STARTED && !getTime.EVENT_ENDED)
     {
+        // console.log(req.user)
+        // console.log(req.body)
         response_data={}
         response_data.code=1;
         response_data.message='Some Error Occured'
@@ -116,7 +120,7 @@ homeRouter.post('/buystock/',async (req,res,next)=>{
                         .populate('player')
                         .populate('stock')
                         .then((playerStockList)=>{
-                            if(playerStockList.length)
+                            if(playerStockList.length) //if first stock of this company
                             {
                                 var playerStock = playerStockList[0]
                                 playerStock.quantity=playerStock.quantity + requestedStockCount
@@ -147,9 +151,8 @@ homeRouter.post('/buystock/',async (req,res,next)=>{
                                             })
                                             log.save()
                                             .then((resp)=>{
-                                                console.log("added to transactions", resp);
-
-                                                console.log("saved player stocks after buying",resp)
+                                                console.log("Stocks bought. Response: ")
+                                                console.log(resp);
                                                 response_data.code=0
                                                 response_data.message='Transaction Successful'
                                                
@@ -178,46 +181,47 @@ homeRouter.post('/buystock/',async (req,res,next)=>{
                              
                                 playerStock.save()
                                 .then(resp=>{
-                                    console.log("saved",resp)
-                                        newAvailableMoney= availableMoney - (stockPrice * requestedStockCount)
-                            playerObj.cash= newAvailableMoney
-                            playerObj.value_in_stocks=0
-                            playerStocks.find({player:playerObj.id})
-                            .populate('player')
-                            .populate('stock')
-                            .then((playerstocks)=>{
-                                playerstocks.map((playerstock)=>{
-                                    console.log("this",playerObj.value_in_stocks+playerstock.stock.price)
-                                    playerObj.value_in_stocks+=playerstock.stock.price * playerstock.quantity
-                                })
-                                playerObj.save()
-                                .then(resp=>{
+                                    // console.log("Bought more. Response: ")
+                                    // console.log(resp)
+                                    newAvailableMoney= availableMoney - (stockPrice * requestedStockCount)
+                                    playerObj.cash= newAvailableMoney
+                                    playerObj.value_in_stocks=0
+                                    playerStocks.find({player:playerObj.id})
+                                    .populate('player')
+                                    .populate('stock')
+                                    .then((playerstocks)=>{
+                                        playerstocks.map((playerstock)=>{
+                                            // console.log("this",playerObj.value_in_stocks+playerstock.stock.price)
+                                            playerObj.value_in_stocks+=playerstock.stock.price * playerstock.quantity
+                                        })
+                                        playerObj.save()
+                                        .then(resp=>{
 
-                                    log= new Log({
-                                        player:playerObj._id,
-                                        stock:stockObj._id,
-                                        quantity:requestedStockCount,
-                                        price:stockPrice,
-                                        isBought:true,
-                                        change:0
-                                    })
-                                    log.save()
-                                    .then((resp)=>{
-                                        console.log("added to transactions", resp);
+                                            log= new Log({
+                                                player:playerObj._id,
+                                                stock:stockObj._id,
+                                                quantity:requestedStockCount,
+                                                price:stockPrice,
+                                                isBought:true,
+                                                change:0
+                                            })
+                                            log.save()
+                                            .then((resp)=>{
+                                                console.log("Bought more. Response: ")
+                                                console.log(resp);
 
-                                        console.log("saved player stocks after buying",resp)
-                                        response_data.code=0
-                                        response_data.message='Transaction Successful'
-                                        res.json(response_data)
+                                                response_data.code=0
+                                                response_data.message='Transaction Successful'
+                                                res.json(response_data)
+                                            })
+                                            .catch((err)=>{
+                                                console.log(err);
+                                            })
+                                        }) 
+                                        .catch((err)=>next(err))  
                                     })
-                                    .catch((err)=>{
-                                        console.log(err);
-                                    })
-                                }) 
-                                .catch((err)=>next(err))  
-                            })
-                            .catch(err=>res.json(response_data))
-                                })
+                                    .catch(err=>res.json(response_data))
+                                        })
                             }
                         })
                     } catch (error) {
@@ -275,7 +279,8 @@ homeRouter.post('/sellstock/', async (req,res,next)=>{
                             playerStock.invested= stockPrice * playerStock.quantity
                             playerStock.save()
                             .then((resp)=>{
-                                console.log("saved",resp)
+                                // console.log("Sold. Response:")
+                                // console.log(resp)
                                 newAvailableMoney= availableMoney + (stockPrice * requestedStockCount)
                                 playerObj.cash = newAvailableMoney
 
@@ -285,7 +290,7 @@ homeRouter.post('/sellstock/', async (req,res,next)=>{
                                 .populate('player')
                                 .populate('stock')
                                 .then((playerstocks)=>{
-                                    console.log("here",playerstocks)
+                                    // console.log("here",playerstocks)
                                     playerstocks.map((playerstock)=>{
                                         console.log("price:",playerstock.stock.price ,"qty:",playerstock.quantity)
                                         playerObj.value_in_stocks += playerstock.stock.price * playerstock.quantity
@@ -305,10 +310,9 @@ homeRouter.post('/sellstock/', async (req,res,next)=>{
 
                                         log.save()
                                         .then((resp)=>{
-                                            console.log("log updated",resp)
+                                            console.log("Sold. Response:")
+                                            console.log(resp)
 
-
-                                            console.log("changing player stocks", resp);
                                             response_data.code=0
                                             response_data.message="Transaction Successful"
                                             res.json(response_data)

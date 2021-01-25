@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Concert+One&family=Karla:wght@800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Coda&family=Raleway:wght@900&family=Staatliches&display=swap');
+
 html {
     min-height: 100vh;
     max-width: 100%;
@@ -9,6 +12,12 @@ body {
     min-height: 100vh;
     font-size: 14px;
     overflow-x: hidden;
+    background-color: #0b112b;
+}
+
+.container{
+    z-index: 0;
+    max-width: 1500px;
 }
 
 .container-fluid {
@@ -212,6 +221,22 @@ body {
     color: #fff;
 }
 
+.nav-link{
+    color: white;
+}
+
+.nav-link:hover{
+    color: #5966e3;
+}
+
+.nav-link.active {
+    background-color: green;
+    color: #fff;
+    -webkit-transition: all 1s;
+    transition: all 1s;
+    border-radius: 2px;
+}
+
 .landing-page .modal .nav-tabs .nav-link.active {
     background-color: rgba(255,255,255,.2);
     color: #fff;
@@ -270,13 +295,21 @@ body {
 
 /* ------------------------------- Navbar -------------------------------------- */
 
+.nav-container{
+    padding-left: 10px;
+    padding-right: 10px;
+    justify-content: center;
+    text-align: center;
+    display: flex;
+}
+
 .navbar{
-    background-color: #000;
+    background-color: #0b112b;
     position: fixed;
     top: 0;
-    width: 100%;
+    width: 90%;
     z-index: 1;
-    opacity: .9;
+    opacity: 1;
 }
 .navbar .navbar-brand img {
     height: 60px;
@@ -288,12 +321,17 @@ body {
     font-size: 1.25em;
     font-weight: 600;
 }
-.navbar-dark .navbar-nav .nav-link{
+.navbar-light .navbar-nav .nav-link{
     color: white;
 }
 
-.navbar-dark .navbar-toggler{
-    border-color: white;
+.navbar-light .navbar-nav .nav-link:hover{
+    color: #4966e3;
+}
+
+.navbar-light .navbar-toggler{
+    color: white;
+    font-size: 50px;
 }
 
 .timer-form{
@@ -311,6 +349,9 @@ body {
 
 .portfolio .change-username {
     margin-right: 0;
+    background-color: #4966e3;
+    color: white;
+    font-weight: bold;
 }
 
 .portfolio .modal .form-error {
@@ -332,7 +373,7 @@ body {
 }
 
 .portfolio .change-username-form .input-requirements li.valid {
-    color: #00C851;
+    color: #00F69B;
 }
 
 .portfolio .change-username-form .input-requirements li.valid .fa-check {
@@ -358,43 +399,63 @@ body {
     max-height: 100px; /* any large number (bigger then the .input-requirements list) */
     transition: max-height 1s ease-in;
 }
+
 .market,.portfolio{
     margin-top: 100px;
 }
 .market h1,.portfolio h1{
-    color: #01021E;
-    background:dullred;
-    text-align:center;
-    font-size:50px
-/*  box-shadow:2px 2px 6px 10px white; */
+    color: white;
+    text-align: center;
+    font-size: 100px;
+    line-height: .8;
+    font-family: 'Raleway', sans-serif;
+    margin-bottom: 60px;
+    letter-spacing: 4px;
+}
+
+.portfolio h2{
+    color: white;
+    text-align: center;
+    font-size: 70px;
+    line-height: .8;
+    font-family: 'Raleway', sans-serif;
+    letter-spacing: 4px;
 }
 
 .transactions .cash-container h5,
-.market h5{
-    /* background:; */
-    color: black;
-    box-shadow:2px 2px 16px 4px gray;
-    font-size:30px;
-    text-align:center;
-    font-weight: 600;
+.market h5,
+.portfolio h5{
+    color: white;
+    font-size: 40px;
+    text-align: center;
+    font-family: 'Staatliches', cursive;
+    background-color: #111839;
+    margin-bottom: 0;
+    padding: 10px;
+    border-radius: 100px;
+    width: 530px;
     padding-left: 30px;
     padding-right: 30px;
 }
 
 .portfolio h5{
-    /* background:; */
+    border-radius: 0px;
+}
+
+/* .portfolio h5{
+    background:;
     color: black;
-    /* box-shadow:2px 2px 16px 4px gray; */
+    box-shadow:2px 2px 16px 4px gray;
     font-size:30px;
     text-align:left;
     font-weight: 600;
     padding-left: 30px;
     padding-right: 30px;
-}
+} */
 
 .portfolio h4{
     /* background:; */
-    color: black;
+    color: white;
     /* box-shadow:2px 2px 16px 4px gray; */
     font-size:35px;
     text-align:left;
@@ -409,9 +470,11 @@ body {
 }
 
 .transactions .cash-container,
-.market .cash-container{
+.market .cash-container,
+.portfolio .cash-container{
     display: flex;
     justify-content: center;
+    text-align: center;
 }
 
 .transactions .cash-in-hand,
@@ -419,21 +482,38 @@ body {
 .portfolio .cash-in-hand,
 .portfolio .value-in-stocks,
 .portfolio .total-cash{
-    color:#1b6214;
+    color:#00F69B;
 }
 
 .portfolio .player-cash{
- box-shadow: 2px 2px 16px 4px gray;   
+ /* box-shadow: 2px 2px 16px 4px gray;    */
  display: flex;
  flex-direction: row;
 }
 
-.portfolio hr{
+/* .portfolio hr{
     height: 2px;
     background-color: gray;
+} */
+.market .text-right,
+.portfolio .text-right{
+    color: white;
+    font-weight: 400;
+    font-size: large;
 }
-.market .text-right{
-    color: #01021E;
+
+.market .text-center,
+.portfolio .text-center{
+    color: white;
+    font-weight: 400;
+    font-size: x-large;
+    margin-top: 50px;
+    margin-bottom: -10px;
+}
+
+.portfolio .text-center{
+    margin-top: -30px;
+    margin-bottom: 0;
 }
 
 .market .stock-cards, .portfolio .stock-cards{
@@ -444,31 +524,32 @@ body {
 }
 
 .market .card-body, .portfolio .card-body{
-    padding: 0;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 0;
+    padding-right: 0;
 }
 
 .market .card, .portfolio .card {
-    background:#d8e1d6;
+    background:#111839;
     width:400px;
-    border-top-right-radius:20px;
-    border-bottom-right-radius:20px;
-    box-shadow:2px 2px 4px 2px ;
+    border-radius:20px;
     margin:30px;
-    justify-content: center;
-    text-align: center;
-    /* backdrop-filter: blur(10px); */
+    backdrop-filter: blur(5px);
 }
 
-.market .green-card,.portfolio .green-card{
-    border-left:#1b6214 solid 10px;
+/* .market .green-card,.portfolio .green-card{
+    background-color: #1b6214;
+    backdrop-filter: blur(10px);
 }
 
 .market .red-card, .portfolio .red-card{
-    border-left:red solid 10px;
-}
+    background-color: red;
+    backdrop-filter: blur(10px);
+} */
 
-.portfolio .card .card-title,
-.market .card .card-title {
+/* .portfolio .card .card-title
+{
     font-weight: 600;
     background: #01021E;
     font-size:30px;
@@ -480,19 +561,98 @@ body {
     text-align: center;
     display: flex;
     flex-direction: column;
-}
+} */
 
 .market .card .market-info .code, 
-.portfolio .card .market-info .code{
-    color: #01021E;
+.portfolio .card .market-info .code,
+.market .card .market-info .price, 
+.portfolio .card .market-info .price{
+    color: white;
     font-size:25px;
-    text-align:center;
+    text-align:left;
     font-weight:600;
+}
+
+.market .card .market-info .name, 
+.portfolio .card .market-info .name,
+.market .card .market-info .closing-time, 
+.portfolio .card .market-info .closing-time,
+.market .card .market-info .diff-percent, 
+.portfolio .card .market-info .diff-percent{
+    color: #9ea1ae;
+    font-size:15px;
+    text-align:left;
+    font-weight:400;
+}
+
+.market .card .market-info .graph,
+.portfolio .card .market-info .graph{
+    width: 150px;
+    height: 55px;
 }
 
 .portfolio .card .market-info .card-text,
 .market .card .market-info .card-text {
     /* font-weight: 400; */
+}
+
+.portfolio .player-cash-container .total-cash-container{
+    border-top: #4966e3 solid 5px;
+}
+
+.market .outer-search-container{
+    justify-content: center;
+    text-align: center;
+    display: flex;
+    margin-top: -30px;
+}
+
+.market .search-container{
+    justify-content: center;
+    display: flex;
+    color: white;
+    background-color: #262948;
+    padding: 10px;
+    width: 500px;
+    border-radius: 40px;
+}
+
+.market .stock-search{
+    background-color: #262948;
+    width: 450px;
+    height: 50px;
+    border-radius: 0px;
+    border: none;
+    color: white;
+    padding: 0px;
+    justify-content: center;
+    text-align: left;
+    border-bottom: #4966e3 solid 5px;
+    font-size: 2rem;
+}
+
+.market .stock-search::placeholder{
+    color: white;
+    font-family: 'Coda', cursive;
+    opacity: .2;
+}
+
+.market .stock-search:focus::placeholder{
+    color: transparent;
+}
+
+.market .stock-search:focus{
+    box-shadow: none;
+}
+
+.market .search-container .search-icon-container{
+    justify-content: center;
+    display: flex;
+}
+
+.market .search-container .search-icon{
+    font-size: 25px;
+    margin-top: 10px;
 }
 
 .portfolio .card .market-info .stock-info,
@@ -508,23 +668,38 @@ body {
     display: grid;
 }
 
-.market .card .market-info .market-buttons .market-buy-button,
-.portfolio .card .market-info .market-buttons .market-buy-button
+
+.market .card .market-info .market-buttons .market-buy-button
 {
-    text-decoration:none;
-    font-size:20px;
-    font-weight:bold;
-    background: #1b6214;
-    height:50px;
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: bold;
+    background: #4966e3;
+    height: 40px;
     color: white;
-    border-top-right-radius:10px;
-    border-bottom-right-radius:10px;
+    border-radius: 10px;
     width: 100px;
     justify-content: center;
     text-align: center;
     display: flex;
     flex-direction: column;
-    line-height: 20px;
+}
+
+.portfolio .card .market-info .market-buttons .market-buy-button
+{
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: bold;
+    background: #4966e3;
+    height: 50px;
+    color: white;
+    border-radius: 10px;
+    width: 120px;
+    justify-content: center;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
 }
 
 .portfolio .card .market-info .market-buttons .market-sell-button
@@ -532,16 +707,16 @@ body {
     text-decoration:none;
     font-size:20px;
     font-weight:bold;
-    background:red;
+    background:#ff4757;
     height:50px;
     color:white;
-    border-top-right-radius:10px;
-    border-bottom-right-radius:10px;
-    width: 100px;
+    border-radius:10px;
+    width: 120px;
     justify-content: center;
     text-align: center;
     display: flex;
     flex-direction: column;
+    margin-right: 10px;
 }
 
 .flex-row{
@@ -549,6 +724,7 @@ body {
     flex-direction:row;
     justify-content:space-between;
     text-align:left;
+    width: 100%;
 }
 
 .flex-column{
@@ -556,9 +732,7 @@ body {
     flex-direction:column;
     justify-content:center;
     text-align: left;
-    padding-left:20px;
-    padding-right:20px;
-    padding-bottom:15px
+    padding:10px;
 }
 
 .details, .quantity{
@@ -580,14 +754,14 @@ body {
 
 .portfolio .card .market-info .up,
 .market .card .market-info .up {
-    color:#1b6214;
+    color: #00F69B;
     font-size:20px;
     font-weight:bold;
 }
 
 .portfolio .card .market-info .down,
 .market .card .market-info .down {
-    color: red;
+    color: #ff4757;
     font-size:20px;
     font-weight:bold;
 }
@@ -602,9 +776,11 @@ body {
 }
 
 .buy-stocks-btn{
-
     margin-top: 3%;
-
+    height: 50px;
+    background-color: #4966e3;
+    font-weight: 600;
+    color: white;
 }
 
 /* --------------------------------- Transactions ------------------------------- */
@@ -639,6 +815,7 @@ body {
     font-size: 1.5em;
     margin-top: 30px;
     margin-bottom: 30px;
+    color: white;
 }
 
 .footer img {

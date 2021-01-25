@@ -7,7 +7,7 @@
     <br>
     <p class="text-right">Logged in as <strong><%= player.username %></strong></p>
     <p class="text-right">
-        <a href="#" class="btn btn-success change-username" data-toggle="modal" data-target="#changeUsernameModal" role="button">Change username</a>
+        <a href="#" class="btn change-username" data-toggle="modal" data-target="#changeUsernameModal" role="button">Change username</a>
     </p>
     <!-- Change username modal -->
     <div class="modal fade" id="changeUsernameModal" tabindex="-1" role="dialog" aria-labelledby="modalTitle" aria-hidden="true">
@@ -39,66 +39,88 @@
             </div>
         </div>
     </div>
-    <h1>Portfolio</h1>
+    <h1>PORTFOLIO</h1>
     <div class="player-cash-container">
-        <div class="player-cash">
-            <div class="cash-titles">
-                <div><h5>Cash: </h5></div>
-                <div><h5>Value in Stock: </h5></div>
-                <hr>
-                <div><h4>Total: </h4></div>
+        <div class="player-cash flex-column">
+            <div>
+                <h5>Cash: $<span id="playercash" class="cash-in-hand"><%= (player.cash/100).toFixed(2) %></span>
+                </h5>
             </div>
-            <div class="cash-values">
-                <div><h5>$<span id="playercash" class="cash-in-hand"><%= (player.cash/100).toFixed(2) %></span></h5></div>
-                <div><h5>$<span class="value-in-stocks"><%= (player.value_in_stocks/100).toFixed(2) %></span></h5></div>
-                <hr>
-                <div><h4>$<span class="total-cash"><%= ((player.cash + player.value_in_stocks)/100).toFixed(2) %></span></h4></div>
+            <div>
+                <h5>Value in Stock: $<span class="value-in-stocks"><%= (player.value_in_stocks/100).toFixed(2) %></span>
+                </h5>
+            </div>
+            <div>
+                <div class="total-cash-container">
+                    <h5>Total: $<span class="total-cash"><%= ((player.cash + player.value_in_stocks)/100).toFixed(2) %></span>
+                    </h5>
+                </div>
             </div>
         </div>
     </div>
     <br>
     <br>
-    <p class="text-right">Page last updated on: <strong id="last-updated"></strong></p>
+    <p class="text-center">Page last updated on: <strong id="last-updated"></strong></p>
     <hr>
-    <h1>Your stocks</h1>
+    <h2>YOUR STOCKS</h2>
     <br>
     <div class="stock-cards">
         <% player_stocks.forEach((player_stock) => { %>
 
             <!--Card-->
             <% if (player_stock.quantity) {%>
+                <% let diff = (player_stock.stock.diff * 1)/100; %>
+                <% let price = (player_stock.stock.price * 1)/100 %>
             <div class="card stock-card red-card" id="stock-card" data-name="<%= player_stock.stock.name %>">
                 <div class="card-body">
-                    <h4 class="card-title"><%= player_stock.stock.name %></h4>
+                    <!-- <h4 class="card-title"><%= player_stock.stock.name %></h4> -->
                     <div class="market-info flex-column">
                         <div class="flex-row">
                             <div class="flex-column">
                                 <div class="card-text stock-info code"><%= player_stock.stock.code %></div>
-                                <div class="card-text stock-info quantity">x<%= player_stock.quantity %></div>
+                                <div class=" card-text stock-info name"><%= player_stock.stock.name %></div>
+                                <!-- <div class="card-text stock-info quantity">x<%= player_stock.quantity %></div> -->
                             </div>
                             <div class="flex-column">
-                                <div class="card-text stock-info price"><span id="price"></span></div>
-                                <div><% if (player_stock.stock.diff >= 0) {%>
-                                    <p class="card-text stock-info up" id="diff">
-                                        <i class="fa fa-arrow-up" aria-hidden="true"></i>
-                                    </p>
-                                    <%} else {%>
-                                    <p class="card-text stock-info down" id="diff">
-                                        <i class="fa fa-arrow-down" aria-hidden="true"></i>
-                                    </p>
-                                    <% } %></div>
+                                <img class="graph" src="/img/graph.png" alt="graph">
                             </div>
                         </div>
-                        <!--<p class="card-text stock-info">Invested : $<%= player_stock.invested %></p>-->
+                        <div class="flex-row">
+                            <div class="flex-column">
+                                <div class="card-text stock-info price" id="price"><strong>$</strong> <%= price.toFixed(2) %></div>
+                                    <div class="card-text stock-info closing-time">Last Update: <%= moment(player_stock.stock.latestUpdate).format('MMM Do, h:mm:ss a') %></div>
+                            </div>
+                            <div class="flex-column">
+                                <div class="stock-info diff-amnt">
+                                    <% if(diff >= 0){ %>
+                                        <div class="card-text stock-info up" id="diff">
+                                            <i class="fa fa-arrow-up" aria-hidden="true"></i>
+                                            <%= player_stock.stock.diff.toFixed(2) %> 
+                                        </div>
+            
+                                    <% }else{ %>
+            
+                                        <div class="card-text stock-info down" id="diff">
+                                            <i class="fa fa-arrow-down" aria-hidden="true"></i>
+                                            <%= player_stock.stock.diff.toFixed(2) %> 
+                                        </div>
+                                    <% } %>
+                                </div>
+                                <div class="stock-info diff-percent">
+                                    <div class="card-text stock-info"><%= (player_stock.stock.diffPerc*100).toFixed(2) %>%</div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="market-buttons flex-row">
                             <div>
-                                <a href="#" class="btn btn-success market-buy-button" data-toggle="modal" data-target="#buyModal<%= player_stock.stock.code %>" data-price="<%= player_stock.stock.price %>">Buy More</a>
+                                <a href="#" class="btn market-buy-button" data-toggle="modal" data-target="#buyModal<%= player_stock.stock.code %>" data-price="<%= player_stock.stock.price %>">Buy More</a>
                             </div>
                             <div>
-                                <a href="#" class="btn btn-danger market-sell-button" data-toggle="modal" data-target="#sellModal<%= player_stock.stock.code %>">Sell</a>
+                                <a href="#" class="btn market-sell-button" data-toggle="modal" data-target="#sellModal<%= player_stock.stock.code %>">Sell</a>
                             </div>
                         </div>
                     </div>
+                        <!--<p class="card-text stock-info">Invested : $<%= player_stock.invested %></p>-->
                 </div>
             </div>
 
@@ -158,7 +180,7 @@
 
         <% }); %>
     </div>
-    <a href="/market" class="buy-stocks-btn btn btn-lg btn-info">Buy Stocks</a>
+    <a href="/market" class="buy-stocks-btn btn btn-lg">Buy Stocks</a>
 </div>
 
 <script src="/js/validation.js"></script>

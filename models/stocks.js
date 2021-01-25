@@ -24,6 +24,14 @@ const stockSchema= new Schema({
     diff:{
         type:Currency,
         required:true,
+    },
+    diffPerc:{
+        type:Number,
+        required:true
+    },
+    latestUpdate:{
+        type:Date,
+        required:true
     }
 },
 {
@@ -42,12 +50,16 @@ if (count===0){
             "code": "GOOG",
             "name": "Alphabet Inc Class C",
             "diff": 0,
+            "diffPerc":0,
+            "latestUpdate":0
         },
         {
             "price": 0,
             "code": "AAPL",
             "name": "Apple Inc.",
             "diff": 0,
+            "diffPerc":0,
+            "latestUpdate":0
         },
 
         {
@@ -55,6 +67,8 @@ if (count===0){
             "code": "FB",
             "name": "Facebook, Inc.",
             "diff": 0,
+            "diffPerc":0,
+            "latestUpdate":0
         },
 
         {
@@ -62,24 +76,32 @@ if (count===0){
             "code": "ORCL",
             "name": "Oracle Corporation",
             "diff": 0,
+            "diffPerc":0,
+            "latestUpdate":0
         },
         {
             "price": 0,
             "code": "BIDU",
             "name": "Baidu, Inc.",
             "diff": 0,
+            "diffPerc":0,
+            "latestUpdate":0
         },
         {
             "price": 0,
             "code": "QCOM",
             "name": "QUALCOMM Incorporated",
             "diff": 0,
+            "diffPerc":0,
+            "latestUpdate":0
         },
         {
             "price": 0,
             "code": "ADBE",
             "name": "Adobe Systems Incorporated",
             "diff": 0,
+            "diffPerc":0,
+            "latestUpdate":0
         },
 
         {
@@ -87,6 +109,8 @@ if (count===0){
             "code": "INFY",
             "name": "Infosys Limited",
             "diff": 0,
+            "diffPerc":0,
+            "latestUpdate":0
         },
 
         {
@@ -94,14 +118,8 @@ if (count===0){
             "code": "CTSH",
             "name": "Cognizant Technology Solutions Corporation",
             "diff": 0,
-        },
-
-        {
-            "price": 0,
-            "code": "AABA",
-            "name": "Altaba Inc.",
-            "diff": 0,
-
+            "diffPerc":0,
+            "latestUpdate":0
         },
 
         {
@@ -109,6 +127,8 @@ if (count===0){
             "code": "MSFT",
             "name": "Microsoft Corporation",
             "diff": 0,
+            "diffPerc":0,
+            "latestUpdate":0
         },
 
         {
@@ -116,18 +136,24 @@ if (count===0){
             "code": "AMZN",
             "name": "Amazon.com Inc.",
             "diff": 0,
+            "diffPerc":0,
+            "latestUpdate":0
         },
         {
             "price": 0,
             "code": "INTC",
             "name": "Intel Corporation",
             "diff": 0,
+            "diffPerc":0,
+            "latestUpdate":0
         },
         {
             "price": 0,
             "code": "CSCO",
             "name": "Cisco Systems, Inc.",
             "diff": 0,
+            "diffPerc":0,
+            "latestUpdate":0
 
         },
         {
@@ -135,6 +161,8 @@ if (count===0){
             "code": "EBAY",
             "name": "eBay Inc.",
             "diff": 0,
+            "diffPerc":0,
+            "latestUpdate":0
 
         },
         {
@@ -142,12 +170,16 @@ if (count===0){
             "code": "TXN",
             "name": "Texas Instruments Inc.",
             "diff": 0,
+            "diffPerc":0,
+            "latestUpdate":0
         },
         {
             "price": 0,
             "code": "TSLA",
             "name": "Tesla Motors, Inc.",
             "diff": 0,
+            "diffPerc":0,
+            "latestUpdate":0
         },
 
         {
@@ -155,18 +187,24 @@ if (count===0){
             "code": "NFLX",
             "name": "Netflix, Inc.",
             "diff": 0,
+            "diffPerc":0,
+            "latestUpdate":0
         },
         {
             "price": 0,
             "code": "NVDA",
             "name": "NVIDIA Corporation",
             "diff": 0,
+            "diffPerc":0,
+            "latestUpdate":0
         },
         {
             "price": 0,
             "code": "EA",
             "name": "Electronic Arts Inc.",
             "diff": 0,
+            "diffPerc":0,
+            "latestUpdate":0
         }
     ]
     },(err,data)=>{
@@ -175,15 +213,14 @@ if (count===0){
         }
         else{
             console.log("fixtures loaded")
-            // setInterval(()=>{updateStock.update_stock_prices(Stocks)},10000);
-            // setInterval(updateStock.update_player_assets,10000);
+            // setInterval(()=>{updateStock.update_stock_prices(Stocks)},1000);
         }
     })
 }
 else
 {
     console.log(count," fixtures loaded already");
-    // setInterval(()=>{updateStock.update_stock_prices(Stocks)},10000);
+    // setInterval(()=>{updateStock.update_stock_prices(Stocks)},1000);
 }
 })
 .catch((err)=>{

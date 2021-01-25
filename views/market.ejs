@@ -1,17 +1,27 @@
 <%- include("partials/header") %>
 <%- include("partials/navbar") %>
+<!-- <div class="landing-bg"></div> -->
     <div class="container market">
 
         <br>
-        <h1>Market</h1>
+        <h1>MARKET</h1>
         <hr>
         <div class="cash-container">
-            <h5>Cash in your hand: $<span class="cash-in-hand" id="playercash"><%= (player.cash/100).toFixed(2) %></span></h5>
+            <h5>Cash in your hand: $ <span class="cash-in-hand" id="playercash"><%= (player.cash/100).toFixed(2) %></span></h5>
         </div>
-        <br>
-        <input type="search" id="market-search" class="form-control" aria-label="Search" onkeyup="marketSearch()" placeholder="Search for stock names..">
+        <br><br><br>
+        <div class="outer-search-container">
+            <div class="search-container flex-row">
+                <div>
+                    <input type="search" id="market-search" class="form-control stock-search" aria-label="Search" onkeyup="marketSearch()" placeholder="Search for stocks">
+                </div>
+                <div class="search-icon-container">
+                    <i class="fa fa-search search-icon" aria-hidden="true"></i>
+                </div>
+            </div>
+        </div>
         <br><br>
-        <p class="text-right">Page last updated on: <strong id="last-updated"><%= player.updatedAt %></strong></p>
+        <p class="text-center">Page last updated on: <strong id="last-updated"><%= player.updatedAt %></strong></p>
         <div class="stock-cards">
             <% stocks.forEach((stock) => { %> 
 
@@ -19,28 +29,42 @@
                 <% let price = (stock.price * 1)/100 %>
                 <div class="card stock-card red-card" id="stock-card" data-name="<%= stock.name %>">
                     <div class="card-body">
-                        <h4 class="card-title"><div><%= stock.name %></div></h4>
                         <div class="market-info flex-column">
                             <div class="flex-row">
                                 <div class="flex-column">
                                     <div class="card-text stock-info code"><%= stock.code %></div>
-                                    <div class="card-text stock-info"><a class="details" target="_blank" href="https://www.google.com/finance?q=NASDAQ:<%= stock.code %>">Details<i class="fa fa-caret-down"></i></a></div>
+                                    <div class=" card-text stock-info name"><%= stock.name %></div>
+                                    <!-- <div class="card-text stock-info"><a class="details" target="_blank" href="https://www.google.com/finance?q=NASDAQ:<%= stock.code %>">Details<i class="fa fa-caret-down"></i></a></div> -->
                                 </div>
                                 <div class="flex-column">
+                                    <img class="graph" src="/img/graph.png" alt="graph">
+                                </div>
+                            </div>
+                            <div class="flex-row">
+                                <div class="flex-column">
                                     <div class="card-text stock-info price" id="price"><strong>$</strong> <%= price.toFixed(2) %></div>
-                                    <% if(diff >= 0){ %>
-                                
-                                        <div class="card-text stock-info up" id="diff">
-                                            <%= diff.toFixed(2) %> <i class="fa fa-arrow-up" aria-hidden="true"></i>
-                                        </div>
-            
-                                    <% }else{ %>
-            
-                                        <div class="card-text stock-info down" id="diff">
-                                            <%= diff.toFixed(2) %> <i class="fa fa-arrow-down" aria-hidden="true"></i>
-                                        </div>
-            
-                                    <% } %>
+                                    <div class="card-text stock-info closing-time">Last Update: <%= moment(stock.latestUpdate).format('MMM Do, h:mm:ss a') %></div>
+                                </div>
+                                <div class="flex-column">
+                                    <div class="stock-info diff-amnt">
+                                        <% if(diff >= 0){ %>
+                                            <div class="card-text stock-info up" id="diff">
+                                                <i class="fa fa-arrow-up" aria-hidden="true"></i>
+                                                <%= diff.toFixed(2) %> 
+                                            </div>
+                
+                                        <% }else{ %>
+                
+                                            <div class="card-text stock-info down" id="diff">
+                                                <i class="fa fa-arrow-down" aria-hidden="true"></i>
+                                                <%= diff.toFixed(2) %> 
+                                            </div>
+                
+                                        <% } %>
+                                    </div>
+                                    <div class="stock-info diff-percent">
+                                        <div class="card-text stock-info"><%= (stock.diffPerc*100).toFixed(2) %>%</div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="market-buttons">
