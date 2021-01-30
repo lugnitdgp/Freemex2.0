@@ -4,6 +4,7 @@
 html {
     min-height: 100vh;
     max-width: 100%;
+    scroll-behavior: smooth;
 }
 
 body {
@@ -13,7 +14,7 @@ body {
     font-size: 14px;
     overflow-x: hidden;
     background-color: #0b112b;
-}
+}       
 
 .container{
     z-index: 0;
@@ -122,11 +123,23 @@ body {
 }
 
 .landing-page header.landing .content {
-    position: absolute;
     width: 100%;
     text-align: center;
     margin-top: 50vh;
     transform: translateY(-50%);
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    flex-direction: row;
+}
+
+.landing-page .landing .content .login-area{
+    width: 600px;
+    padding: 30px;
+    border-radius: 30px;
+    background-color:transparent;
+    box-shadow: #4966e3 0 0 6px 1px;
+    backdrop-filter: blur(10px);
 }
 
 .landing-page header.landing .content img.freemex-logo {
@@ -137,6 +150,7 @@ body {
     height: auto;
     padding-right: 15%;
     padding-left: 15%;
+    margin-bottom: 20px;
 
     -webkit-filter: drop-shadow(5px 5px 5px #222);
             filter: drop-shadow(5px 5px 5px #222);
@@ -165,48 +179,123 @@ body {
 
 .landing-page header.landing .content .nasdaq-intro {
     padding-top: 25px;
-    padding-bottom: 30px;
-    color: #f0f0f0;
-    font-size: 1.4em;
-    margin-bottom: 0;
-}
+    padding-bottom: 50px;
+    color: white;
+    font-weight: 700;
+    font-size: 2em;
+    height: 1em;
+    overflow: hidden;
+    border-right: 2px solid orange; 
+    white-space: nowrap; 
+    margin: 0 auto; 
+    letter-spacing: .15em;
+    animation: 
+      typing 3.5s steps(40, end),
+      blink-caret .75s step-end infinite;
+  }
+  
+  /* The typing effect */
+  @keyframes typing {
+    from { width: 0 }
+    to { width: 100% }
+  }
+  
+  /* The typewriter cursor effect */
+  @keyframes blink-caret {
+    from, to { border-color: transparent }
+    50% { border-color: orange; }
+  }
 
 .landing-page header.landing .content .login-buttons a.btn {
     padding: 12px 16px;
     margin-right: 10px;
+    margin-top: 40px;
 }
 
 .landing-page header.landing .content .login-buttons a.btn .fa {
-    padding-right: 4px;
+    font-size: 50px;
 }
 
 .landing-page header.landing .content .login-buttons a.btn-fb {
-    background-color: #4C69BA;
-    background-image: linear-gradient(#4C69BA, #3B55A0);
-    text-shadow: 0 -1px 0 #354C8C;
+    border-radius: 100px;
+    border: #005cc5 4px solid;
+    color: white;
+    width: 90px;
+    height: 90px;
+    justify-content: center;
+    text-align: center;
+    background-color:#005cc5;
 }
 
 .landing-page header.landing .content .login-buttons a.btn-fb:hover,
 .landing-page header.landing .content .login-buttons a.btn-fb:focus {
-    background-color: #5B7BD5;
-    background-image: linear-gradient(#5B7BD5, #4864B1);
+    background-color:transparent;
 }
 
 .landing-page header.landing .content .login-buttons a.btn-gplus {
-    background: #DD4B39;
-}
-
-.landing-page header.landing .content .login-buttons a.btn-github {
-    background: #f0f0f0;;
+    border-radius: 100px;
+    border:#9e1c23 4px solid;
+    color: white;
+    width: 90px;
+    height: 90px;
+    justify-content: center;
+    text-align: center;
+    background:  #9e1c23;
 }
 
 .landing-page header.landing .content .login-buttons a.btn-gplus:hover,
 .landing-page header.landing .content .login-buttons a.btn-gplus:focus {
-    background: #E74B37;
+    background:  transparent;
+}
+
+.landing-page header.landing .content .login-buttons a.btn-github {
+    border-radius: 100px;
+    border: #c24e00 4px solid;
+    color: white;
+    width: 90px;
+    height: 90px;
+    justify-content: center;
+    text-align: center;
+    background:#c24e00;
+}
+
+.landing-page header.landing .content .login-buttons a.btn-github:hover,
+.landing-page header.landing .content .login-buttons a.btn-github:focus {
+    background:transparent;
 }
 
 .landing-page .rules {
     padding-top: 5%;
+    margin-bottom: -20px;
+}
+
+.landing-page .text-right .fa-arrow-up{
+    background-color: #4966e3;
+    border-radius: 100px;
+    font-size: 30px;
+    margin-top: -100px;
+    margin-right: 30px;
+    padding: 20px;
+    color: white;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+    transform-origin: bottom;
+}
+
+.bounce-3 {
+    animation-name: bounce-3;
+    animation-timing-function: ease;
+}
+@keyframes bounce-3 {
+    0%   { transform: translateY(0); }
+    30%  { transform: translateY(-50px); }
+    50%  { transform: translateY(0); }
+    100% { transform: translateY(0); }
+}
+
+.landing-page .text-right .fa-arrow-up:hover{
+    background-color: transparent;
+    border: #4966e3 4px solid;
 }
 
 .landing-page .modal .nav-tabs {
@@ -307,7 +396,7 @@ body {
     background-color: #0b112b;
     position: fixed;
     top: 0;
-    width: 90%;
+    width: 100%;
     z-index: 1;
     opacity: 1;
 }
@@ -403,7 +492,7 @@ body {
 .market,.portfolio{
     margin-top: 100px;
 }
-.market h1,.portfolio h1{
+.market h1,.portfolio h1,.transactions h1,.rules h1, .leaderboard h1, .engage h1{
     color: white;
     text-align: center;
     font-size: 100px;
@@ -411,6 +500,10 @@ body {
     font-family: 'Raleway', sans-serif;
     margin-bottom: 60px;
     letter-spacing: 4px;
+}
+
+.rules h1{
+    margin-bottom: 0;
 }
 
 .portfolio h2{
@@ -423,8 +516,7 @@ body {
 }
 
 .transactions .cash-container h5,
-.market h5,
-.portfolio h5{
+.market h5{
     color: white;
     font-size: 40px;
     text-align: center;
@@ -439,24 +531,21 @@ body {
 }
 
 .portfolio h5{
-    border-radius: 0px;
-}
-
-/* .portfolio h5{
-    background:;
-    color: black;
-    box-shadow:2px 2px 16px 4px gray;
-    font-size:30px;
-    text-align:left;
-    font-weight: 600;
+    color: white;
+    font-size: 40px;
+    text-align: center;
+    font-family: 'Staatliches', cursive;
+    background-color: #111839;
+    margin-bottom: 0;
+    padding: 10px;
     padding-left: 30px;
     padding-right: 30px;
-} */
+    border-radius: 0px;
+    background-color: transparent;
+}
 
 .portfolio h4{
-    /* background:; */
     color: white;
-    /* box-shadow:2px 2px 16px 4px gray; */
     font-size:35px;
     text-align:left;
     font-weight: 600;
@@ -486,29 +575,46 @@ body {
 }
 
 .portfolio .player-cash{
- /* box-shadow: 2px 2px 16px 4px gray;    */
- display: flex;
- flex-direction: row;
+    display: flex;
+    flex-direction: row;
+    box-shadow: #5966e3 0px 0px 10px 1px;
+    border-radius: 30px;
+    backdrop-filter: blur(10px);
+    margin-left: 20px;
+    margin-right: 20px;
 }
-
-/* .portfolio hr{
-    height: 2px;
-    background-color: gray;
-} */
 .market .text-right,
 .portfolio .text-right{
     color: white;
     font-weight: 400;
     font-size: large;
+    margin-right: 30px;
 }
 
 .market .text-center,
-.portfolio .text-center{
+.portfolio .text-center,
+.landing-page .text-center{
     color: white;
     font-weight: 400;
     font-size: x-large;
     margin-top: 50px;
     margin-bottom: -10px;
+}
+
+.landing-page .text-center{
+    margin-top: -50px;
+}
+
+.landing-page .text-center .text-center{
+    border: #4966e3 5px solid;
+    border-radius: 100px;
+    padding: 20px;
+    background-color: #0b112b;
+}
+
+.landing-page .text-center .text-center:hover{
+    background-color: #4966e3;
+    text-decoration: none;
 }
 
 .portfolio .text-center{
@@ -528,6 +634,8 @@ body {
     padding-bottom: 10px;
     padding-left: 0;
     padding-right: 0;
+    box-shadow: #5966e3 8px 7px .2px .1px;
+    border-radius: 20px;
 }
 
 .market .card, .portfolio .card {
@@ -600,25 +708,39 @@ body {
     border-top: #4966e3 solid 5px;
 }
 
-.market .outer-search-container{
+.market .outer-search-container,
+.transactions .outer-search-container,
+.leaderboard .outer-search-container{
     justify-content: center;
     text-align: center;
     display: flex;
     margin-top: -30px;
 }
 
-.market .search-container{
+.transactions .outer-search-container,
+.leaderboard .outer-search-container{
+    margin-top: 0px;
+}
+
+.market .search-container,
+.transactions .search-container,
+.leaderboard .search-container{
     justify-content: center;
     display: flex;
     color: white;
-    background-color: #262948;
-    padding: 10px;
-    width: 500px;
+    background-color: transparent;
+    padding-left: 50px;
+    padding-right: 50px;
+    width: 530px;
     border-radius: 40px;
+    border: #4966e3 solid 5px;
+    backdrop-filter: blur(8px);
 }
 
-.market .stock-search{
-    background-color: #262948;
+.market .stock-search,
+.transactions .stock-search,
+.leaderboard .names-search{
+    background-color: transparent;
     width: 450px;
     height: 50px;
     border-radius: 0px;
@@ -627,32 +749,42 @@ body {
     padding: 0px;
     justify-content: center;
     text-align: left;
-    border-bottom: #4966e3 solid 5px;
     font-size: 2rem;
 }
 
-.market .stock-search::placeholder{
+.market .stock-search::placeholder,
+.transactions .stock-search::placeholder,
+.leaderboard .names-search::placeholder{
     color: white;
     font-family: 'Coda', cursive;
     opacity: .2;
 }
 
-.market .stock-search:focus::placeholder{
+.market .stock-search:focus::placeholder,
+.transactions .stock-search:focus::placeholder,
+.leaderboard .names-search:focus::placeholder{
     color: transparent;
 }
 
-.market .stock-search:focus{
+.market .stock-search:focus,
+.transactions .stock-search:focus,
+.leaderboard .names-search:focus{
     box-shadow: none;
 }
 
-.market .search-container .search-icon-container{
+.market .search-container .search-icon-container,
+.transactions .search-container .search-icon-container,
+.leaderboard .search-container .search-icon-container{
     justify-content: center;
     display: flex;
 }
 
-.market .search-container .search-icon{
+.market .search-container .search-icon,
+.transactions .search-container .search-icon,
+.leaderboard .search-container .search-icon{
     font-size: 25px;
     margin-top: 10px;
+    position: relative;
 }
 
 .portfolio .card .market-info .stock-info,
@@ -700,6 +832,7 @@ body {
     display: flex;
     flex-direction: column;
     margin-left: 10px;
+    line-height: 20px;
 }
 
 .portfolio .card .market-info .market-buttons .market-sell-button
@@ -775,12 +908,30 @@ body {
     color: white
 }
 
+.landing-page .white-text h1{
+    color: #9e1c23;
+    font-weight: 700;
+}
+
+.buy-stocks{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
 .buy-stocks-btn{
-    margin-top: 3%;
     height: 50px;
-    background-color: #4966e3;
+    border: #4966e3 2px solid;
+    border-radius: 30px;
+    background-color: transparent;
     font-weight: 600;
     color: white;
+    margin-left: 10px;
+    backdrop-filter: blur(8px);
+}
+
+.buy-stocks-btn:hover{
+    background-color: #4966e3;
 }
 
 /* --------------------------------- Transactions ------------------------------- */
@@ -788,19 +939,44 @@ body {
 .transactions{
     text-align: center;
     margin-top: 100px;
+}
 
+.transactions .table{
+    backdrop-filter: blur(10px);
+}
+
+.transactions .table thead{
+    background-color: #111839;
+    border: none;
+    margin-bottom: 30px;
+    font-size: 25px;
 }
 
 .transactions .transactions-sheet{
     text-align: left;
     overflow-x: visible;
+    color: white;
 }
 
-.transactions .table td, .transactions .table th{
+.transactions .table tbody{
+    background-color: transparent;
+    backdrop-filter: blur(10px);
+    font-size: 20px;
+}
+
+.transactions .table td{
     padding-left: 5px;
     padding-right: 5px;
 }
-
+.transactions .table tbody tr{
+}
+.transactions .table th{
+    padding-left: 5px;
+    padding-right: 5px;
+    font-weight: 600;
+    font-weight: 600;
+    border: none;
+}
 
 
 /* ------------------------------- Footer ------------------------------- */
@@ -834,15 +1010,48 @@ body {
 
 }
 
-.leaderboard .table {
-    margin-top: 2rem;
+.leaderboard .table{
+    margin-top: 30px;
+    backdrop-filter: blur(10px);
+}
+
+.leaderboard .table thead{
+    background-color: #111839;
+    border: none;
+    margin-bottom: 30px;
+    font-size: 25px;
+}
+
+.leaderboard .leaderboard-table{
     text-align: left;
+    overflow-x: visible;
+    color: white;
+}
+
+.leaderboard .table tbody{
+    background-color: transparent;
+    backdrop-filter: blur(10px);
+    font-size: 20px;
+}
+
+.transactions .table td{
+    padding-left: 5px;
+    padding-right: 5px;
+}
+.leaderboard .table tbody tr{
+}
+.leaderboard .table th{
+    padding-left: 5px;
+    padding-right: 5px;
+    font-weight: 600;
+    font-weight: 600;
+    border: none;
 }
 
 /* ------------------------------- Rules ------------------------------- */
 
 .rules{
-
+    color: white;
     margin-top: 100px;
 
 }
@@ -852,18 +1061,34 @@ body {
     margin-bottom: 0.5em;
 }
 
-.rules h1 {
-    font-size: 3em;
-}
-
 .rules h5 {
-    font-size: 1.4em;
+    font-size: 20px;
     line-height: 1.75em;
+    backdrop-filter: blur(10px);
 }
 
-.rules ol {
-    font-size: 1.2em;
+.rules .rules-list{
+    padding: 30px;
+    font-size: 20px;
     padding-left: 2em;
+    justify-content: center;
+    text-align: center;
+    backdrop-filter: blur(8px);
+    border: #4966e3 4px solid;
+    border-radius: 30px;
+    box-shadow: #4966e3 0 0 8px 1px;
+}
+
+.rules .notes{
+    padding: 30px;
+    font-size: 15px;
+    padding-left: 2em;
+    justify-content: center;
+    text-align: center;
+    backdrop-filter: blur(8px);
+    border: #4966e3 4px solid;
+    border-radius: 30px;
+    box-shadow: #4966e3 0 0 8px 1px;
 }
 
 .rules ol li {
@@ -876,17 +1101,17 @@ body {
 .engage{
     text-align: center;
     margin-top: 100px;
+}
 
+.engage #disqus_thread{
+    backdrop-filter: blur(10px);
+    padding: 30px;
 }
 
 /* ------------------------------- Media Queries ------------------------------- */
 
 
 @media only screen and (max-width: 768px) {
-
-  .btn {
-    padding: 0.85rem 1.5rem;
-  }
 
     .landing-page header.landing .content img.freemex-logo {
         padding-right: 10%;
@@ -915,8 +1140,8 @@ body {
         text-align: center;
     }
     .market .card, .portfolio .card{
-        margin-left: 0;
-        margin-right: 0;
+        margin-left: 10px;
+        margin-right: 10px;
     }
     .market h5{
         padding-left:10px ;
@@ -947,5 +1172,101 @@ body {
         display: block;
         margin: 0 auto;
         margin-top: 0.5em;
+    }
+
+    .market h5,
+    .portfolio h5,
+    .transactions h5{
+    font-size: 30px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+ .transactions h1,
+ .leaderboard h1{
+     letter-spacing: 1px;
+ }
+
+    .market h1,
+    .portfolio h1,
+    .transactions h1,
+    .rules h1,
+    .leaderboard h1,
+    .engage h1{
+        font-size: 40px;
+    }
+
+    .portfolio h2{
+        font-size: 35px;
+    }
+
+    .market .search-container,
+    .transactions .search-container,
+    .leaderboard .search-container{
+        padding-left: 10px;
+        padding-right: 10px;
+        justify-content:space-between;
+        margin-right: 10px;
+        margin-left: 10px;
+    }
+
+    .market .stock-search,
+    .transactions .stock-search,
+    .leaderboard .names-search{
+        font-size: 20px;
+        width: 100%;
+    }
+
+    .transactions .table thead,
+    .leaderboard .table thead{
+        font-size: 17px;
+    }
+
+    .transactions .table tbody,
+    .leaderboard .table tbody{
+        font-size: 15px;
+    }
+
+    .landing-page header.landing .content .nasdaq-intro {
+        font-size: 15px;
+        height: 10px;
+        letter-spacing: .10em;
+    }
+
+    .landing-page .landing .content .login-area{
+        width: 330px;
+        padding: 10px;
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+
+    .landing-page header.landing .content .login-buttons a.btn {
+        padding: 12px 16px;
+        margin-right: 5px;
+        margin-top: 40px;
+    }
+
+
+    .landing-page header.landing .content .login-buttons a.btn .fa {
+        font-size: 40px;
+    }
+
+    .landing-page header.landing .content .login-buttons a.btn-fb {
+        color: white;
+        width: 80px;
+        height: 80px;
+    }
+
+    .landing-page header.landing .content .login-buttons a.btn-gplus {
+        width: 80px;
+        height: 80px;
+        justify-content: center;
+    }
+
+    .landing-page header.landing .content .login-buttons a.btn-github {
+        width: 80px;
+        height: 80px;
+    }
+    .landing-page .text-right .fa-arrow-up{
+       display: none;
     }
 }

@@ -9,10 +9,19 @@
 		<h5>Cash in your hand: $<span class="cash-in-hand" id="playercash"><%= (player.cash/100).toFixed(2) %></span></h5>
 	</div>
     <br>
-    <input type="search" id="market-search" class="form-control" aria-label="Search" onkeyup="marketSearch()" placeholder="Search for stock names..">
+	<div class="outer-search-container">
+		<div class="search-container flex-row">
+			<div>
+				<input type="search" id="market-search" class="form-control stock-search" aria-label="Search" onkeyup="marketSearch()" placeholder="Search for stocks">
+			</div>
+			<div class="search-icon-container">
+				<i class="fa fa-search search-icon" aria-hidden="true"></i>
+			</div>
+		</div>
+	</div>
     <br><br>
     
-    <table class="table transactions-sheet" >
+    <table class="table table-borderless transactions-sheet" >
     	<thead>
     		<tr>
     			<th scope="col"> Stock name</th>

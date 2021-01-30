@@ -3,72 +3,67 @@
 <div class="container-fluid landing-page">
 
     <header class="landing">
-        <div class="landing-bg"></div>
-        <div class="glug-logo">
-            <a href="https://freemex.nitdgplug.org">
-                <img src="img/glug_logo_transparent.png">
-            </a>
-        </div>
-        <div class="fest-logo">
-            <a href="https://avskr.in">
-                <img src="img/aavishkar-logo.png">
-            </a>
-        </div>
-        <div class="sponsor-logo">
-            <!-- Insert the sponsor logos here -->
+        <!-- <div class="landing-bg"></div> -->
+        <div class="flex-column">
+            <div class="glug-logo">
+                <a href="https://freemex.nitdgplug.org">
+                    <img src="img/glug_logo_transparent.png">
+                </a>
+            </div>
+            <div class="fest-logo">
+                <a href="https://avskr.in">
+                    <img src="img/aavishkar-logo.png">
+                </a>
+            </div>
+            <div class="sponsor-logo">
+                <!-- Insert the sponsor logos here -->
+            </div>
         </div>
         <div class="content">
-            <img class="freemex-logo" src="img/logo.png"/>
-            <p class="nasdaq-intro">NASDAQ Timings: 8PM - 2:30AM IST</p>
-            <% if (event_started){ %>
-              <div class="login-buttons">
-                  <!-- <p><a class="btn cyan darken-2" href="#" data-toggle="modal" data-target="#modalLRForm" role="button"><i class="fa fa-sign-in"></i> Login/Register</a></p> -->
-                  <a class="btn btn-fb" href="/auth/facebook" role="button">
-                      <i class="fa fa-facebook left"></i> Facebook
-                  </a>
-                  <a class="btn btn-gplus" href="/auth/google" role="button">
-                      <i class="fa fa-google-plus left"></i> Google+
-                  </a>
-                  <a class="btn btn-github" href="/auth/github" role="button">
-                    <i class="fa fa-github left"></i> Github
-                </a>
-              </div>
-            <%} else {%>
-              <div class="white-text">
-                <h1>Freemex has not started yet. Stay tuned!</h1>
-                <!-- <input id="startTime" type="hidden" value=<%=startTime%>>
-                <input id="endTime" type="hidden" value=<%=endTime%>> -->
-                
-                <table>
-                    <tr>
-                        <td><h5>DAYS</h5></td>
-                        <td><h5>:</h5></td>
-                        <td><h5>HOURS</h5></td>
-                        <td><h5>:</h5></td>
-                        <td><h5>MINS</h5></td>
-                        <td><h5>:</h5></td>
-                        <td><h5>SECS</h5></td>
-                    </tr>
-                    <tr>
-                        <td id="days" class="huge-text">00</td>
-                        <td class="huge-text">:</td>
-                        <td id="hours" class="huge-text">00</td>
-                        <td class="huge-text">:</td>
-                        <td id="minutes" class="huge-text">00</td>
-                        <td class="huge-text">:</td>
-                        <td id="seconds" class="huge-text">00</td>
-                    </tr>
-                </table>
-                <!-- <span id="days">Days</span>
-                <span id="hours">Hours</span>
-                <span id="minutes">Minutes</span>
-                <span id="seconds">Seconds</span>
-                <span> left</span> -->
-              </div>
-            <% } %>
+            <div class="login-area">
+                <img class="freemex-logo" src="img/logo.png"/>
+                <p class="nasdaq-intro">NASDAQ Timings: 8PM - 2:30AM IST</p>
+                <% if (event_started){ %>
+                    <div class="login-buttons flex-row">
+                        <div class="fb">
+                            <a class="btn btn-fb" href="/auth/facebook" role="button">
+                                <i class="fa fa-facebook left"></i>
+                            </a>
+                        </div>
+                        <div class="google">
+                            <a class="btn btn-gplus" href="/auth/google" role="button">
+                                <i class="fa fa-google-plus left"></i>
+                            </a>
+                        </div>
+                        <div class="github">
+                            <a class="btn btn-github" href="/auth/github" role="button">
+                                <i class="fa fa-github left"></i>
+                            </a>
+                        </div>
+                    </div>
+                <%} else {%>
+                    <div class="white-text">
+                        <h1>Freemex has not started yet. Stay tuned!</h1>
+                                <span id="days" class="huge-text">00</span>
+                                <span class="huge-text">:</span>
+                                <span id="hours" class="huge-text">00</span>
+                                <span class="huge-text">:</span>
+                                <span id="minutes" class="huge-text">00</span>
+                                <span class="huge-text">:</span>
+                                <span id="seconds" class="huge-text">00</span>
+                        </table>
+                    </div>
+                <% } %>
+            </div>
+        </div>
+        <div class="text-center">
+            <a href="#rules" class="text-center">Rules</a>
         </div>
     </header>
-    <%- include ("partials/rules") %>
+    <div id="rules">
+        <%- include ("partials/rules") %>
+    </div>
+    <div class="text-right"><a href="#"><i class="fa fa-arrow-up bounce-3" aria-hidden="true"></i></a></div>
 
 </div>
 

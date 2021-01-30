@@ -33,9 +33,18 @@
     <hr>
     <br>
 
-    <input type="search" id="leaderboard-search" class="form-control" aria-label="Search" onkeyup="leaderboardSearch()" placeholder="Search for names..">
+    <div class="outer-search-container">
+      <div class="search-container flex-row">
+          <div>
+            <input type="search" id="leaderboard-search" class="form-control names-search" aria-label="Search" onkeyup="leaderboardSearch()" placeholder="Search for names..">
+          </div>
+          <div class="search-icon-container">
+              <i class="fa fa-search search-icon" aria-hidden="true"></i>
+          </div>
+      </div>
+    </div>
 
-    <table class="table table-striped leaderboard-table">
+    <table class="table table-borderless leaderboard-table">
         <thead>
             <tr>
                 <th>#</th>
