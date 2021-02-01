@@ -431,6 +431,12 @@ body {
 
 /* ----------------------------- Portfolio and Market ----------------------------- */
 
+.btn:focus,
+btn:focus,
+a:focus{
+    outline: none;
+    text-decoration: none;
+}
 
 .portfolio .card {
     margin-bottom: 2rem;
@@ -515,6 +521,17 @@ body {
     letter-spacing: 4px;
 }
 
+.portfolio .modal-content,
+.market .modal-content{
+    background-color: transparent;
+    backdrop-filter: blur(10px);
+    border: #4966e3 4px solid;
+    color: white;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
 .transactions .cash-container h5,
 .market h5{
     color: white;
@@ -591,14 +608,45 @@ body {
     margin-right: 30px;
 }
 
+.portfolio .modal .modal-footer,
+.market .modal .modal-footer{
+    justify-content: center;
+}
+
+.portfolio .modal-header .close,
+.market .modal-header .close{
+    color: white;
+}
+
+.portfolio .modal-body .md-form input,
+.market .modal-body .md-form input{
+    border-radius: 20px;
+    height: 40px;
+    padding: 10px;
+    width: 100%;
+}
+
+.portfolio .modal-body .md-form input:focus,
+.market .modal-body .md-form input:focus{
+    outline: none;
+}
+
 .market .text-center,
 .portfolio .text-center,
-.landing-page .text-center{
+.landing-page .text-center,
+.portfolio .modal h6,
+.market .modal h6{
     color: white;
     font-weight: 400;
     font-size: x-large;
     margin-top: 50px;
     margin-bottom: -10px;
+}
+
+.portfolio .modal h6,
+.market .modal h6{
+    margin-top: 0;
+    margin-bottom: 10px;
 }
 
 .landing-page .text-center{
@@ -679,6 +727,17 @@ body {
     font-size:25px;
     text-align:left;
     font-weight:600;
+}
+
+.portfolio .card .market-info .stock-qty{
+    color: #4966e3;
+    font-weight: 800;
+    font-size: 20px;
+}
+
+.portfolio .card .card-body:hover{
+   
+    
 }
 
 .market .card .market-info .name, 
@@ -762,7 +821,9 @@ body {
 
 .market .stock-search:focus::placeholder,
 .transactions .stock-search:focus::placeholder,
-.leaderboard .names-search:focus::placeholder{
+.leaderboard .names-search:focus::placeholder,
+.portfolio .modal-body .md-form input:focus::placeholder,
+.market .modal-body .md-form input:focus::placeholder{
     color: transparent;
 }
 
@@ -790,7 +851,6 @@ body {
 .portfolio .card .market-info .stock-info,
 .market .card .market-info .stock-info
 {
-	display: block;
     float: right;
 }
 
@@ -815,9 +875,14 @@ body {
     text-align: center;
     display: flex;
     flex-direction: column;
+    border: #4966e3 4px solid;
 }
 
-.portfolio .card .market-info .market-buttons .market-buy-button
+
+
+.portfolio .card .market-info .market-buttons .market-buy-button,
+.portfolio .modal .market-buy-button,
+.market .modal .market-buy-button
 {
     text-decoration: none;
     font-size: 20px;
@@ -833,9 +898,13 @@ body {
     flex-direction: column;
     margin-left: 10px;
     line-height: 20px;
+    border: #4966e3 4px solid;
 }
 
-.portfolio .card .market-info .market-buttons .market-sell-button
+.portfolio .card .market-info .market-buttons .market-sell-button,
+.portfolio .modal .cancel-button,
+.portfolio .modal .market-sell-button,
+.market .modal .cancel-button
 {
     text-decoration:none;
     font-size:20px;
@@ -850,6 +919,24 @@ body {
     display: flex;
     flex-direction: column;
     margin-right: 10px;
+    border: #ff4757 4px solid;
+}
+
+
+.market .card .market-info .market-buttons .market-buy-button:hover,
+.portfolio .card .market-info .market-buttons .market-buy-button:hover,
+.portfolio .modal .market-buy-button:hover,
+.market .modal .market-buy-button:hover,
+.portfolio .card .market-info .market-buttons .market-sell-button:hover,
+.portfolio .modal .cancel-button:hover,
+.market .modal .cancel-button:hover,
+.portfolio .modal .market-sell-button:hover{
+    background: transparent;
+}
+
+.portfolio .modal .market-sell-button{
+    background: #4966e3;
+    border: #4966e3 4px solid;
 }
 
 .flex-row{

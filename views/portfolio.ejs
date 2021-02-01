@@ -77,9 +77,9 @@
                     <div class="market-info flex-column">
                         <div class="flex-row">
                             <div class="flex-column">
-                                <div class="card-text stock-info code"><%= player_stock.stock.code %></div>
+                                <div class="card-text stock-info code"><%= player_stock.stock.code %> </div>
                                 <div class=" card-text stock-info name"><%= player_stock.stock.name %></div>
-                                <!-- <div class="card-text stock-info quantity">x<%= player_stock.quantity %></div> -->
+                                <div class="card-text stock-qty stock-info">x<%= player_stock.quantity %></div>
                             </div>
                             <div class="flex-column">
                                 <img class="graph" src="/img/graph.png" alt="graph">
@@ -113,10 +113,10 @@
                         </div>
                         <div class="market-buttons flex-row">
                             <div>
-                                <a href="#" class="btn market-buy-button" data-toggle="modal" data-target="#buyModal<%= player_stock.stock.code %>" data-price="<%= player_stock.stock.price %>">Buy More</a>
+                                <a href="#" class="market-buy-button" data-toggle="modal" data-target="#buyModal<%= player_stock.stock.code %>" data-price="<%= player_stock.stock.price %>">Buy More</a>
                             </div>
                             <div>
-                                <a href="#" class="btn market-sell-button" data-toggle="modal" data-target="#sellModal<%= player_stock.stock.code %>">Sell</a>
+                                <a href="#" class="market-sell-button" data-toggle="modal" data-target="#sellModal<%= player_stock.stock.code %>">Sell</a>
                             </div>
                         </div>
                     </div>
@@ -143,8 +143,8 @@
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="submit" id="buyButton" class="btn btn-success">Buy</button>
-                                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                                <button type="submit" id="buyButton" class="btn market-buy-button">Buy</button>
+                                <button type="button" class="btn cancel-button" data-dismiss="modal">Cancel</button>
                             </div>
                         </form>
                     </div>
@@ -169,8 +169,8 @@
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="submit" id="buyButton" class="btn btn-success">Sell</button>
-                                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                                <button type="submit" id="buyButton" class="btn market-sell-button">Sell</button>
+                                <button type="button" class="btn cancel-button" data-dismiss="modal">Cancel</button>
                             </div>
                         </form>
                     </div>
