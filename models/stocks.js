@@ -219,7 +219,7 @@ if (count===0){
 }
 else
 {
-    console.log(count," fixtures loaded already", process.env.UpdateInterval);
+    console.log(count," fixtures loaded already");
     setInterval(()=>{updateStock.update_stock_prices(Stocks)},process.env.UpdateIntervalSecond*1000);
 }
 })

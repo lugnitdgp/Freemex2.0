@@ -86,7 +86,7 @@ body {
 }
 
 .landing-page header.landing .glug-logo img {
-    width: 7em;
+    width: 5em;
     max-width: 30vw;
     -webkit-filter: drop-shadow(1px 1px 2px #000);
             filter: drop-shadow(1px 1px 2px #000);
@@ -100,7 +100,7 @@ body {
 }
 
 .landing-page header.landing .fest-logo img {
-    width: 9.25em;
+    width: 7.25em;
     max-width: 30vw;
     -webkit-filter: drop-shadow(1px 1px 2px #000);
             filter: drop-shadow(1px 1px 2px #000);
@@ -125,7 +125,7 @@ body {
 .landing-page header.landing .content {
     width: 100%;
     text-align: center;
-    margin-top: 50vh;
+    margin-top: 40vh;
     transform: translateY(-50%);
     display: flex;
     justify-content: center;
@@ -265,8 +265,10 @@ body {
 }
 
 .landing-page .rules {
-    padding-top: 5%;
+    margin-top: 5%;
     margin-bottom: -20px;
+    padding-left: 15px;
+    padding-right: 15px;
 }
 
 .landing-page .text-right .fa-arrow-up{
@@ -384,51 +386,173 @@ body {
 
 /* ------------------------------- Navbar -------------------------------------- */
 
-.nav-container{
-    padding-left: 10px;
-    padding-right: 10px;
-    justify-content: center;
-    text-align: center;
+.navbar {
+    overflow: hidden;
     display: flex;
-}
-
-.navbar{
-    background-color: #0b112b;
     position: fixed;
-    top: 0;
+    top:0;
+    width:100%;
+    padding-top: 40px;
+    background-color: transparent;
+    backdrop-filter: blur(10px);
+    z-index: 999;
+  }
+
+  .nav-logo{
+      width: 30%;
+  }
+  .navbar__brand {
+    float: left;
+    display: inline;
+    margin-left: 15px;
+    margin-right: 15px;
+  }
+  .navbar__menu {
+    display: flex;
     width: 100%;
-    z-index: 1;
-    opacity: 1;
-}
-.navbar .navbar-brand img {
-    height: 60px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-}
-
-.navbar ul li a {
-    font-size: 1.25em;
-    font-weight: 600;
-}
-.navbar-light .navbar-nav .nav-link{
+    justify-content: center;
     color: white;
-}
-
-.navbar-light .navbar-nav .nav-link:hover{
+    margin-top: -50px;
+  }
+  .navbar__menu:hover .navbar__item {
     color: #4966e3;
-}
-
-.navbar-light .navbar-toggler{
+  }
+  .navbar__menu:hover .navbar__item.active::before {
+    left: 50%;
+    width: 0;
+  }
+  .navbar__menu:hover .navbar__item:hover, .navbar__menu:hover .navbar__item.active:hover {
+    color: #4966e3;
+  }
+  .navbar__menu:hover .navbar__item:hover::before, .navbar__menu:hover .navbar__item.active:hover::before {
+    width: 100%;
+    left: 0;
+  }
+  .navbar__item {
+    list-style-type: none;
+    float: right;
+    display: block;
     color: white;
-    font-size: 50px;
-}
-
-.timer-form{
-
-    margin-top: 100px;
-
-}
-
+    padding: 14px 16px;
+    font-size: 1.1em;
+    line-height: 32px;
+    transition: 0.2s ease-in-out;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: 500;
+    font-family:'Raleway', sans-serif
+  }
+  
+  .navbar__item:not(:last-child) {
+    margin-right: 0.5em;
+  }
+  .navbar__item::before {
+    content: "";
+    position: absolute;
+    bottom: 10%;
+    height: 2px;
+    width: 0;
+    background-color: #4966e3;
+    transition: 0.2s ease-in-out;
+    transition-delay: 0.6s;
+    left: 50%;
+  }
+  a:hover{
+      text-decoration: none;
+  }
+  .navbar__item::after {
+    content: "";
+    position: absolute;
+    bottom: 10%;
+    left: 0;
+    right: 0;
+    height: 0;
+    border-left: 2px solid #4966e3;
+    border-right: 2px solid #4966e3;
+    transition: 0.2s;
+    transition-delay: 0.4s;
+  }
+  .navbar__item:hover, .navbar__item.active {
+    color: white;
+  }
+  .navbar__item:hover::before, .navbar__item.active::before {
+    transition-delay: 0s;
+    width: 100%;
+    left: 0;
+  }
+  .navbar__item:hover::after, .navbar__item.active::after {
+    transition-delay: 0.2s;
+    height: 80%;
+  }
+  .navbar__item__hovered {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    z-index: 1;
+  }
+  .navbar__item__hovered::before, .navbar__item__hovered::after {
+    content: "";
+    position: absolute;
+    height: 2px;
+    background-color: #4966e3;
+    left: 0;
+    top: 10%;
+    width: 0;
+    transition: 0.2s;
+    transition-delay: 0.2s;
+  }
+  .navbar__item__hovered::after {
+    left: 100%;
+    right: 0;
+  }
+  .navbar__item__hovered:hover::before {
+    width: 50%;
+    transition-delay: 0.4s;
+  }
+  .navbar__item__hovered:hover::after {
+    left: 50%;
+    right: 0;
+    width: 50%;
+    transition-delay: 0.4s;
+  }
+  .navbar__item__content {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 10%;
+    bottom: 10%;
+    overflow: hidden;
+  }
+  .navbar__item__content::before {
+    position: absolute;
+    content: attr(data-content);
+    background-color: #4966e3;
+    color: white;
+    top: -1em;
+    left: 0;
+    right: 0;
+    height: 0;
+    overflow: hidden;
+    font-size: 1.1em;
+    padding-top: 0.5em;
+    font-weight: bold;
+    transition: 0.2s ease-in-out;
+    transition-delay: 0s;
+  }
+  .navbar__item:hover .navbar__item__content::before {
+    top: 0;
+    height: 100%;
+    transition-delay: 0.6s;
+  }
+  .navbar__item__icon {
+    display: none;
+    width: 60px;
+  }
+  
 /* ----------------------------- Portfolio and Market ----------------------------- */
 
 .btn:focus,
@@ -495,16 +619,19 @@ a:focus{
     transition: max-height 1s ease-in;
 }
 
-.market,.portfolio{
+.market,
+.portfolio{
     margin-top: 100px;
 }
+
 .market h1,.portfolio h1,.transactions h1,.rules h1, .leaderboard h1, .engage h1{
     color: white;
     text-align: center;
     font-size: 100px;
     line-height: .8;
     font-family: 'Raleway', sans-serif;
-    margin-bottom: 60px;
+    margin-top: 30px;
+    margin-bottom: 30px;
     letter-spacing: 4px;
 }
 
@@ -968,10 +1095,6 @@ a:focus{
     font-weight:bold;
 }
 
-.portfolio .card .market-info .market-buttons{
-    /* margin-top: 2em; */
-}
-
 .portfolio .card .market-info .up,
 .market .card .market-info .up {
     color: #00F69B;
@@ -1055,8 +1178,7 @@ a:focus{
     padding-left: 5px;
     padding-right: 5px;
 }
-.transactions .table tbody tr{
-}
+
 .transactions .table th{
     padding-left: 5px;
     padding-right: 5px;
@@ -1083,7 +1205,7 @@ a:focus{
 
 .footer img {
     margin-left: 0.5em;
-    max-height: 5em;
+    max-height: 3em;
     max-width: 80%;
 }
 
@@ -1125,8 +1247,7 @@ a:focus{
     padding-left: 5px;
     padding-right: 5px;
 }
-.leaderboard .table tbody tr{
-}
+
 .leaderboard .table th{
     padding-left: 5px;
     padding-right: 5px;
@@ -1197,8 +1318,63 @@ a:focus{
 
 /* ------------------------------- Media Queries ------------------------------- */
 
+@media only screen and (max-width: 1250px){
+    .navbar__item {
+        display: none;
+        right: 0;
+    }
 
+    .navbar__item__icon {
+        display: block;
+    }
+    .navbar__item__icon::after {
+        content: "";
+        position: absolute;
+        width: 2px;
+        left: 0;
+        bottom: 10%;
+        height: 0;
+        background-color: #4966e3;
+        transition: 0.2s ease-in-out;
+        transition-delay: 0s;
+        border: none;
+    }
+    .navbar__item__icon:hover::after {
+        height: 100%;
+        transition-delay: 0.2s;
+    }
+    .responsive.navbar {
+        position: relative;
+        height: auto;
+        display: block;
+    }
+    .responsive .navbar__brand {
+        display: block;
+        width: 100%;
+    }
+    .responsive .navbar__menu {
+        flex-direction: column;
+        width: 100%;
+    }
+    .responsive .navbar__item {
+        display: block;
+        margin-left: 0.5em;
+        margin-right: 0.5em;
+    }
+    .responsive .navbar__item__icon {
+        position: absolute;
+        top: 0;
+    }  
+    .navbar__menu{
+        justify-content: flex-end;
+    } 
+}
 @media only screen and (max-width: 768px) {
+    .container {
+        padding-right: 5px;
+        padding-left: 5px;
+        margin: 0;
+    }
 
     .landing-page header.landing .content img.freemex-logo {
         padding-right: 10%;
@@ -1234,25 +1410,9 @@ a:focus{
         padding-left:10px ;
         padding-right: 10px;
     }
-    .portfolio .card .market-info,
-    .market .card .market-info {
-        /* padding: 1em 0; */
-    }
 
     .market .card .card-title{
         font-size: 25px;
-    }
-
-    .market .card .market-info .stock-info:nth-child(2),
-    .market .card .market-info .stock-info:nth-child(3) {
-        /* float: left; */
-    }
-
-    .portfolio .card .market-info .stock-info,
-    .market .card .market-info .stock-info {
-        /* font-size: 0.85rem;
-        text-align: center;
-        padding: 0 0.35em; */
     }
 
     .footer img {
@@ -1263,15 +1423,27 @@ a:focus{
 
     .market h5,
     .portfolio h5,
-    .transactions h5{
-    font-size: 30px;
+    .transactions .cash-container h5{
+    font-size: 25px;
     margin-left: 10px;
     margin-right: 10px;
-}
- .transactions h1,
- .leaderboard h1{
-     letter-spacing: 1px;
- }
+    }
+
+    .market .stock-search, .transactions .stock-search, .leaderboard .names-search{
+        height: 40px;
+    }
+
+    
+    .market .search-container .search-icon,
+    .transactions .search-container .search-icon, 
+    .leaderboard .search-container .search-icon{
+        margin-top: 5px;
+    }
+
+    .transactions h1,
+    .leaderboard h1{
+        letter-spacing: 1px;
+    }
 
     .market h1,
     .portfolio h1,
@@ -1280,6 +1452,7 @@ a:focus{
     .leaderboard h1,
     .engage h1{
         font-size: 40px;
+        margin-bottom: 30px;
     }
 
     .portfolio h2{
@@ -1303,25 +1476,60 @@ a:focus{
         width: 100%;
     }
 
+    .market .card .market-info .code, 
+    .portfolio .card .market-info .code, 
+    .market .card .market-info .price, 
+    .portfolio .card .market-info .price {
+        font-size: 20px;
+    }
+
+    .portfolio .card .market-info .down, 
+    .market .card .market-info .down {
+        font-size: 15px;
+    }
+
+    .market .text-right, .portfolio .text-right {
+        font-size:small;
+        margin-bottom: 10px;
+    }
+
+    .portfolio .change-username {
+        font-size: 13px;
+    }
+
+    .market .card .market-info .name, 
+    .portfolio .card .market-info .name, 
+    .market .card .market-info .closing-time, 
+    .portfolio .card .market-info .closing-time, 
+    .market .card .market-info .diff-percent, 
+    .portfolio .card .market-info .diff-percent {
+        font-size: 12px;
+    }
+    
+
     .transactions .table thead,
     .leaderboard .table thead{
-        font-size: 17px;
+        font-size: 15px;
+    }
+
+    .leaderboard,.portfolio,.transactions,.engage,.market{
+        margin-top: 100px;
     }
 
     .transactions .table tbody,
     .leaderboard .table tbody{
-        font-size: 15px;
+        font-size: 13px;
     }
 
     .landing-page header.landing .content .nasdaq-intro {
-        font-size: 15px;
+        font-size: 16px;
         height: 10px;
         letter-spacing: .10em;
     }
 
     .landing-page .landing .content .login-area{
         width: 330px;
-        padding: 10px;
+        padding: 15px;
         margin-left: 10px;
         margin-right: 10px;
     }
@@ -1330,6 +1538,10 @@ a:focus{
         padding: 12px 16px;
         margin-right: 5px;
         margin-top: 40px;
+    }
+
+    .landing-page header.landing .content .login-buttons{
+        margin-top: -30px;
     }
 
 
@@ -1355,5 +1567,37 @@ a:focus{
     }
     .landing-page .text-right .fa-arrow-up{
        display: none;
+    }
+
+    .market .text-center,
+    .portfolio .text-center,
+    .landing-page .text-center,
+    .portfolio .modal h6,
+    .market .modal h6{
+        font-size: large;
+        margin-top: 0px;
+    }
+
+    .portfolio .card .market-info .market-buttons .market-buy-button, 
+    .portfolio .modal .market-buy-button, .market .modal .market-buy-button {
+        font-size: 17px;
+        height: 50px;
+        width: 100px;
+    }
+
+    .portfolio .card .market-info .market-buttons .market-sell-button, 
+    .portfolio .modal .cancel-button, .portfolio .modal .market-sell-button, .market .modal .cancel-button {
+        font-size: 17px;
+        height: 50px;
+        width: 100px;
+    }
+
+    .portfolio{
+        margin-top: 100px;
+    }
+
+    .rules .rules-list {
+        justify-content: left;
+        text-align: left;
     }
 }

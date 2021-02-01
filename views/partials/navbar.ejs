@@ -1,46 +1,14 @@
-<div class="nav-container">
-
-    <nav class="mb-1 navbar navbar-expand-lg navbar-light">
-
-        <div class="flex-row">
-
-            <!-- Navbar Brand -->
-            <a class="navbar-brand" href="/"><img class="img-responsive" src="/img/logo.png"></a>
-
-            <!-- Collapse button -->
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-                =
-            </button>
-
-            <!-- Collapse content -->
-            <div class="collapse navbar-collapse justify-content-end" id="navbarCollapse">
-                <!--Links-->
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/">Portfolio</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/market">Market</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/transactions">Transactions</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/leaderboard">Leaderboard</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/rules">Rules</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/engage">Engage</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/auth/logout">Logout</a>
-                    </li>
-
-                </ul>
-            </div>
-
-        </div>
-    </nav>
+<div class="navbar">
+    <div class="navbar__brand">
+      <a class="navbar-brand" href="/"><img class="img-responsive nav-logo" src="/img/logo.png"></a>
+    </div>
+    <div class="navbar__menu">
+        <a class="navbar__item" href="/">Portfolio<span class="navbar__item__hovered"></span><span class="navbar__item__content" data-content="Portfolio"></span></a>
+        <a class="navbar__item" href="/market">Market<span class="navbar__item__hovered"></span><span class="navbar__item__content" data-content="Market"></span></a>
+        <a class="navbar__item" href="/transactions">Transactions<span class="navbar__item__hovered"></span><span class="navbar__item__content" data-content="Transactions"></span></a>
+        <a class="navbar__item" href="/leaderboard">Leaderboard<span class="navbar__item__hovered"></span><span class="navbar__item__content" data-content="Leaderboard"></span></a>
+        <a class="navbar__item" href="/engage">Engage<span class="navbar__item__hovered"></span><span class="navbar__item__content" data-content="Engage"></span></a>
+        <a class="navbar__item" href="/auth/logout">Logout<span class="navbar__item__hovered"></span><span class="navbar__item__content" data-content="Logout"></span></a>
+        <a class="navbar__item navbar__item__icon" href="javascript:void(0);" onclick="navResponsive()"><i class="fa fa-bars"></i></a>
+  </div>
 </div>
