@@ -213,14 +213,14 @@ if (count===0){
         }
         else{
             console.log("fixtures loaded")
-            // setInterval(()=>{updateStock.update_stock_prices(Stocks)},1000);
+            setInterval(()=>{updateStock.update_stock_prices(Stocks)},process.env.UpdateInterval);
         }
     })
 }
 else
 {
     console.log(count," fixtures loaded already");
-    // setInterval(()=>{updateStock.update_stock_prices(Stocks)},1000);
+    setInterval(()=>{updateStock.update_stock_prices(Stocks)},process.env.UpdateInterval);
 }
 })
 .catch((err)=>{
