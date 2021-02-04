@@ -9,7 +9,7 @@ const get_stock_prices=(Stocks)=>{
     Stocks.find({})
     .then((stocks)=>{
         symbols=stocks.map((stock)=>stock.code)
-        axios.get(`https://cloud.iexapis.com/stable/stock/market/batch?symbols=${symbols.join()}&types=quote&token=${process.env.API_TOKEN}`)
+        axios.get(`${process.env.API_URI}${symbols.join()}&types=quote&token=${process.env.API_TOKEN}`)
         .then((res)=>{
             // console.log("returning")
             // return(res.data)

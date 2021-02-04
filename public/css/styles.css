@@ -214,6 +214,8 @@ body {
 
 .landing-page header.landing .content .login-buttons a.btn .fa {
     font-size: 50px;
+    justify-content: center;
+    display: flex;
 }
 
 .landing-page header.landing .content .login-buttons a.btn-fb {
@@ -1402,9 +1404,14 @@ a:focus{
     .market .card .card-title, .market .card .market-info .market-buttons {
         text-align: center;
     }
+
+    .portfolio .card .market-info .stock-qty{
+        font-size: 15px;
+    }
+
     .market .card, .portfolio .card{
-        margin-left: 10px;
-        margin-right: 10px;
+        margin-left: 30px;
+        margin-right: 30px;
     }
     .market h5{
         padding-left:10px ;
@@ -1549,22 +1556,13 @@ a:focus{
         font-size: 40px;
     }
 
-    .landing-page header.landing .content .login-buttons a.btn-fb {
-        color: white;
-        width: 80px;
-        height: 80px;
-    }
-
-    .landing-page header.landing .content .login-buttons a.btn-gplus {
-        width: 80px;
-        height: 80px;
-        justify-content: center;
-    }
-
+    .landing-page header.landing .content .login-buttons a.btn-fb,
+    .landing-page header.landing .content .login-buttons a.btn-gplus,
     .landing-page header.landing .content .login-buttons a.btn-github {
-        width: 80px;
-        height: 80px;
+        width: 70px;
+        height: 70px;
     }
+
     .landing-page .text-right .fa-arrow-up{
        display: none;
     }
@@ -1581,14 +1579,14 @@ a:focus{
     .portfolio .card .market-info .market-buttons .market-buy-button, 
     .portfolio .modal .market-buy-button, .market .modal .market-buy-button {
         font-size: 17px;
-        height: 50px;
+        height: 40px;
         width: 100px;
     }
 
     .portfolio .card .market-info .market-buttons .market-sell-button, 
     .portfolio .modal .cancel-button, .portfolio .modal .market-sell-button, .market .modal .cancel-button {
         font-size: 17px;
-        height: 50px;
+        height: 40px;
         width: 100px;
     }
 
@@ -1599,5 +1597,8 @@ a:focus{
     .rules .rules-list {
         justify-content: left;
         text-align: left;
+    }
+    .footer {
+        font-size: 1em;
     }
 }

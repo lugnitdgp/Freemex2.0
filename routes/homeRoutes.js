@@ -6,6 +6,7 @@ const Log= require('../models/logs');
 const Timer=require('../models/timer');
 const updatePlayer=require('../utilities/utilities').update_player_assets;
 const moment=require('moment');
+const User=require('../models/users')
 
 const homeRouter= express.Router();
 
@@ -46,15 +47,13 @@ homeRouter.get('/',async (req,res,next)=>{
                     'second':"Congratulations to the winners and here is the leaderboard..."
                 }
                 context.players=players
-                console.log("context",context)
                 res.render("leaderboard",context)
             }) 
             .catch(err=>next(err))
         }
 
         else if(getTime.EVENT_STARTED && req.user)
-        {
-            // setInterval(()=>{updatePlayer(Player,playerStocks)}, 1000) 
+        { 
             playerStocks.find({player:req.user.id})
             .populate('player')
             .populate('stock')
@@ -67,6 +66,9 @@ homeRouter.get('/',async (req,res,next)=>{
             .catch(err=>console.log(err))
         }
         else{
+            context.player=-1
+            if(req.user)
+            context.player=req.user;
             context.event_started=getTime.EVENT_STARTED
             res.render("landing",context)
         }
