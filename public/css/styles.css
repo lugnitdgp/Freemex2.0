@@ -1,5 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Concert+One&family=Karla:wght@800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Concert+One&family=Karla&:wght@800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Coda&family=Raleway:wght@900&family=Staatliches&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Itim&display=swap');
 
 html {
     min-height: 100vh;
@@ -391,7 +392,7 @@ body {
 .navbar {
     overflow: hidden;
     display: flex;
-    position: fixed;
+    position: sticky;
     top:0;
     width:100%;
     padding-top: 40px;
@@ -621,20 +622,16 @@ a:focus{
     transition: max-height 1s ease-in;
 }
 
-.market,
-.portfolio{
-    margin-top: 100px;
-}
-
 .market h1,.portfolio h1,.transactions h1,.rules h1, .leaderboard h1, .engage h1{
     color: white;
     text-align: center;
     font-size: 100px;
     line-height: .8;
-    font-family: 'Raleway', sans-serif;
+    font-family: 'Itim', cursive;
     margin-top: 30px;
     margin-bottom: 30px;
     letter-spacing: 4px;
+    font-weight: 800;
 }
 
 .rules h1{
@@ -646,7 +643,7 @@ a:focus{
     text-align: center;
     font-size: 70px;
     line-height: .8;
-    font-family: 'Raleway', sans-serif;
+    font-family: 'Itim', cursive;
     letter-spacing: 4px;
 }
 
@@ -664,9 +661,9 @@ a:focus{
 .transactions .cash-container h5,
 .market h5{
     color: white;
-    font-size: 40px;
+    font-size: 34px;
     text-align: center;
-    font-family: 'Staatliches', cursive;
+    font-family: 'Itim', cursive;
     background-color: #111839;
     margin-bottom: 0;
     padding: 10px;
@@ -678,9 +675,9 @@ a:focus{
 
 .portfolio h5{
     color: white;
-    font-size: 40px;
+    font-size: 35px;
     text-align: center;
-    font-family: 'Staatliches', cursive;
+    font-family: 'Itim', cursive;
     background-color: #111839;
     margin-bottom: 0;
     padding: 10px;
@@ -735,6 +732,7 @@ a:focus{
     font-weight: 400;
     font-size: large;
     margin-right: 30px;
+    font-family: 'Itim', cursive;
 }
 
 .portfolio .modal .modal-footer,
@@ -770,6 +768,7 @@ a:focus{
     font-size: x-large;
     margin-top: 50px;
     margin-bottom: -10px;
+    font-family: 'Itim', cursivey;
 }
 
 .portfolio .modal h6,
@@ -937,7 +936,7 @@ a:focus{
     padding: 0px;
     justify-content: center;
     text-align: left;
-    font-size: 2rem;
+    font-size: 1.25rem;
 }
 
 .market .stock-search::placeholder,
@@ -1121,7 +1120,7 @@ a:focus{
 }
 
 .landing-page .white-text h1{
-    color: #9e1c23;
+    color: #4966e3;
     font-weight: 700;
 }
 
@@ -1150,7 +1149,6 @@ a:focus{
 
 .transactions{
     text-align: center;
-    margin-top: 100px;
 }
 
 .transactions .table{
@@ -1215,8 +1213,6 @@ a:focus{
 /* ----------------------------- Leaderboard ------------------------------------ */
 
 .leaderboard{
-
-    margin-top: 100px;
     text-align: center;
 
 }
@@ -1262,8 +1258,6 @@ a:focus{
 
 .rules{
     color: white;
-    margin-top: 100px;
-
 }
 
 .rules #intro-logo {
@@ -1310,7 +1304,6 @@ a:focus{
 
 .engage{
     text-align: center;
-    margin-top: 100px;
 }
 
 .engage #disqus_thread{
@@ -1458,7 +1451,7 @@ a:focus{
     .rules h1,
     .leaderboard h1,
     .engage h1{
-        font-size: 40px;
+        font-size: 50px;
         margin-bottom: 30px;
     }
 
@@ -1479,7 +1472,7 @@ a:focus{
     .market .stock-search,
     .transactions .stock-search,
     .leaderboard .names-search{
-        font-size: 20px;
+        font-size: 1rem;
         width: 100%;
     }
 
@@ -1520,7 +1513,7 @@ a:focus{
     }
 
     .leaderboard,.portfolio,.transactions,.engage,.market{
-        margin-top: 100px;
+        margin-top: 0px;
     }
 
     .transactions .table tbody,
@@ -1588,10 +1581,6 @@ a:focus{
         font-size: 17px;
         height: 40px;
         width: 100px;
-    }
-
-    .portfolio{
-        margin-top: 100px;
     }
 
     .rules .rules-list {
