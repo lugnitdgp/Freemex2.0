@@ -2,15 +2,15 @@ function updateStockPrices(data) {
     // console.log("updatedStockPrice:",data);
     let index = 0;
     $('.stock-card').each(function(i) {
-        // console.log(i," code",$(this).attr("data-name"));
-        var stock = $(this).attr('data-name');
+        var stock = $(this).attr('data-name')
         index=data.findIndex(x=>x.name===stock)
-        var price = data[index]['price'];
-        var diff = data[index]['diff'];
+        var price = data[index]['price']
+        var diff = data[index]['diff']
+        var diffPerc = data[index]['diffPerc']
+        var latestUpdate = data[index]['latestUpdate']
         diff = (diff * 1)/100;
         price = (price * 1)/100;
-        // console.log(price);
-        // console.log(diff);
+        diffPerc*=100;
         var elem = $(this).find('#diff');
         var border= $(this).find('#stock-card');
         // console.log(border)
@@ -42,6 +42,8 @@ function updateStockPrices(data) {
             }
         }
         $(this).find('#price').html("<strong>$</strong> " + price.toFixed(2));
+        $(this).find('#latestUpdate').html(`Last Update: ${moment(latestUpdate).format('MMM Do, h:mm:ss a')}`);
+        $(this).find('#diffPerc').html(`${diffPerc.toFixed(2)}%`);
         index++;
     });
     var last_updated = new Date(data['last_updated']);

@@ -43,7 +43,7 @@ const update_stock_prices=(Stocks)=>{
                 .then((updatedStock)=>{
                     ++count;
                     // console.log("updated",count)
-                    if(count===20)
+                    if(count===19)
                     {
                         Stocks.find({})
                         .then((stocks)=>{
