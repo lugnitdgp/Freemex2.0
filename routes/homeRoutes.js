@@ -54,6 +54,7 @@ homeRouter.get('/',async (req,res,next)=>{
 
         else if(getTime.EVENT_STARTED && req.user)
         { 
+            setInterval(()=>{updatePlayer(Player,playerStocks)}, 1000)
             playerStocks.find({player:req.user.id})
             .populate('player')
             .populate('stock')

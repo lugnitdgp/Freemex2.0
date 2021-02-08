@@ -95,14 +95,14 @@
                                     <% if(diff >= 0){ %>
                                         <div class="card-text stock-info up" id="diff">
                                             <i class="fa fa-arrow-up" aria-hidden="true"></i>
-                                            <%= player_stock.stock.diff.toFixed(2) %> 
+                                            <%= diff.toFixed(2) %> 
                                         </div>
             
                                     <% }else{ %>
             
                                         <div class="card-text stock-info down" id="diff">
                                             <i class="fa fa-arrow-down" aria-hidden="true"></i>
-                                            <%= player_stock.stock.diff.toFixed(2) %> 
+                                            <%= diff.toFixed(2) %> 
                                         </div>
                                     <% } %>
                                 </div>
