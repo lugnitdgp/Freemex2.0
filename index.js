@@ -16,6 +16,8 @@ const errorHandler = require('./errorHandles/errorHandlers');
 const passportSetup=require('./authenticate');
 const passport=require('passport');
 
+const updateStock= require('./utilities/utilities')
+
 let clients=[]
 require('dotenv').config();
 
@@ -88,6 +90,11 @@ app.get('/status', (req, res) => res.json({clients:clients.length}));
 
 app.use(errorHandler.notFound);
 app.use(errorHandler.errorHandler);
+
+var playerStock=require("./models/playerStock")
+var Player=require("./models/users")
+
+setInterval(()=>updateStock.update_player_assets(Player,playerStock),10000);
 
 app.listen(port, ()=>{
     console.log(`server running at port ${process.env.PORT}`)

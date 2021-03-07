@@ -4,7 +4,7 @@ var index=require('../index')
 var stock_prices=[];
 
 const get_stock_prices=(Stocks)=>{
-    console.log("inside updating function");
+    // console.log("inside updating function");
     var symbols=[];
     Stocks.find({})
     .then((stocks)=>{
@@ -16,7 +16,7 @@ const get_stock_prices=(Stocks)=>{
             stock_prices=res.data
         })
         .catch((err)=>{
-            console.log(err);
+            console.log(err.response.data);
         })
     })
     .catch((err)=>{
@@ -69,25 +69,20 @@ const update_stock_prices=(Stocks)=>{
 const update_player_assets=(Player,PlayerStock)=>{
     Player.find({})
     .then((all_players)=>{
-        all_players.map((player)=>{
-            Player.findById(player._id)
-            .then((playerObj)=>{
+        all_players.map((playerObj)=>{
                 playerObj.value_in_stocks=0
                 PlayerStock.find({player:playerObj._id})
                 .populate('player')
                 .populate('stock')
                 .then((playerstocks)=>{
-                    playerstocks.map((playerstock)=>{
+                    playerstocks.forEach((playerstock)=>{
                         playerObj.value_in_stocks += playerstock.stock.price * playerstock.quantity
                     })
-                    playerObj.save()
-                    .then((resp)=>{
-                        console.log("updated player stocks")
+                    Player.findByIdAndUpdate(playerObj._id, playerObj)
+                    .then((updatedPlayer)=>{
+                        console.log("updated", updatedPlayer.name)
                     })
-                    .catch(err=>console.log(err))
                 })
-                .catch((err)=>console.log(err))
-            })
             .catch(err=>console.log(err))
         })
     })

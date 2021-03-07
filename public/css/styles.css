@@ -659,7 +659,8 @@ a:focus{
 }
 
 .transactions .cash-container h5,
-.market h5{
+.market h5,
+.error h5{
     color: white;
     font-size: 34px;
     text-align: center;
@@ -671,6 +672,10 @@ a:focus{
     width: 530px;
     padding-left: 30px;
     padding-right: 30px;
+}
+
+.error h5{
+    margin-top: 0;
 }
 
 .portfolio h5{
@@ -696,7 +701,7 @@ a:focus{
     padding-right: 30px;
 }
 
-.portfolio .player-cash-container{
+.portfolio .player-cash-container, .error .player-cash-container{
     justify-content: center;
     display: flex;
 }
@@ -717,7 +722,7 @@ a:focus{
     color:#00F69B;
 }
 
-.portfolio .player-cash{
+.portfolio .player-cash, .error .player-cash{
     display: flex;
     flex-direction: row;
     box-shadow: #5966e3 0px 0px 10px 1px;
@@ -891,7 +896,7 @@ a:focus{
     /* font-weight: 400; */
 }
 
-.portfolio .player-cash-container .total-cash-container{
+.portfolio .player-cash-container .total-cash-container, .error .player-cash-container .total-cash-container{
     border-top: #4966e3 solid 5px;
 }
 

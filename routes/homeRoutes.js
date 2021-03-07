@@ -54,7 +54,7 @@ homeRouter.get('/',async (req,res,next)=>{
 
         else if(getTime.EVENT_STARTED && req.user)
         { 
-            setInterval(()=>{updatePlayer(Player,playerStocks)}, 10000)
+            // setInterval(()=>{updatePlayer(Player,playerStocks)}, 10000)
             playerStocks.find({player:req.user.id})
             .populate('player')
             .populate('stock')
@@ -154,8 +154,8 @@ homeRouter.post('/buystock/',async (req,res,next)=>{
                                             })
                                             log.save()
                                             .then((resp)=>{
-                                                console.log("Stocks bought. Response: ")
-                                                console.log(resp);
+                                                // console.log("Stocks bought. Response: ")
+                                                // console.log(resp);
                                                 response_data.code=0
                                                 response_data.message='Transaction Successful'
                                                
