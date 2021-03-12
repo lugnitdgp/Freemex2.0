@@ -7,63 +7,66 @@
 
 <!--Main layout-->
 <div class="container leaderboard">
-    <br>
-    <% if (message){ %>
-    <div id="event-ended">
-      <input id="startTime" type="hidden" value=<%=startTime%>>
-      <input id="endTime" type="hidden" value=<%=endTime%>>
-      <h2 class="text-center"><%=message.first%></h2>
-        <h3 class="text-center"><%=message.second%></h3>
-          <div class="black-text text-center">
-            <span>Event ended </span>
-            <span id="days">00</span> Days
-            <span id="hours">00</span> Hours
-            <span id="minutes">00</span> Minutes
-            <span id="seconds">00</span> Seconds
-            <span> ago</span>
-          </div>
+  <div class="landing-bg"></div>
+  <br>
+  <% if (message){ %>
+  <div id="event-ended white-text">
+    <input id="startTime" type="hidden" value=<%=startTime%>>
+    <input id="endTime" type="hidden" value=<%=endTime%>>
+    <h2 class="white-text text-center"><%=message.first%></h2>
+      <h3 class="white-text text-center"><%=message.second%></h3>
+        <div class="timer text-center">
+          <span>Event ended </span>
+          <span id="days">00</span> Days
+          <span id="hours">00</span> Hours
+          <span id="minutes">00</span> Minutes
+          <span id="seconds">00</span> Seconds
+          <span> ago</span>
+        </div>
+  </div>
+  <br>
+  <hr>
+  <div id="app">
+		<h1 class="glitch" data-text="Leaderboard">Leaderboard</h1>
+	</div>
+
+  <% }else{ %>
+    <h1>Leaderboard</h1>
+  <% } %>
+  <hr>
+  <br>
+
+  <div class="outer-search-container">
+    <div class="search-container flex-row">
+        <div>
+          <input type="search" id="leaderboard-search" class="form-control names-search" aria-label="Search" onkeyup="leaderboardSearch()" placeholder="Search for names..">
+        </div>
+        <div class="search-icon-container">
+            <i class="fa fa-search search-icon" aria-hidden="true"></i>
+        </div>
     </div>
-    <br>
-    <hr>
-    <h1 class="text-center glitch">Leaderboard</h1>
+  </div>
 
-    <% }else{ %>
-      <h1>Leaderboard</h1>
-    <% } %>
-    <hr>
-    <br>
-
-    <div class="outer-search-container">
-      <div class="search-container flex-row">
-          <div>
-            <input type="search" id="leaderboard-search" class="form-control names-search" aria-label="Search" onkeyup="leaderboardSearch()" placeholder="Search for names..">
-          </div>
-          <div class="search-icon-container">
-              <i class="fa fa-search search-icon" aria-hidden="true"></i>
-          </div>
-      </div>
-    </div>
-
-    <table class="table table-borderless leaderboard-table">
-        <thead>
-            <tr>
-                <th>#</th>
-                <th>Name</th>
-                <th>Username</th>
-                <th>Total Asset</th>
-            </tr>
-        </thead>
-        <tbody>
-            <% players.forEach((player,i) => { %>
-            <tr>
-                <td><%= i + 1 %></td>
-                <td><%= player.name %></td>
-                <td><%= player.username %></td>
-                <td><%= ((player.cash+player.value_in_stocks)/100).toFixed(2) %></td>
-            </tr>
-            <% }); %>
-        </tbody>
-    </table>
+  <table class="table table-borderless leaderboard-table">
+      <thead>
+          <tr>
+              <th>#</th>
+              <th>Name</th>
+              <th>Username</th>
+              <th>Total Asset</th>
+          </tr>
+      </thead>
+      <tbody>
+          <% players.forEach((player,i) => { %>
+          <tr>
+              <td><%= i + 1 %></td>
+              <td><%= player.name %></td>
+              <td><%= player.username %></td>
+              <td><%= ((player.cash+player.value_in_stocks)/100).toFixed(2) %></td>
+          </tr>
+          <% }); %>
+      </tbody>
+  </table>
 
 </div>
 <!--/Main layout-->

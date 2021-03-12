@@ -63,20 +63,19 @@ body {
     height: 100vh;
 }
 
-.landing-page header.landing .landing-bg {
-    position: absolute;
+.landing-bg {
+    height: 100vh;
+    position: fixed;
     z-index: -999999;
 
     width: 100%;
     height: 100vh;
 
-    background-image: url('../img/bg.jpg');
+    background-image: url('../img/bg.png');
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center;
     background-size: cover;
-
-    filter: blur(5px);
 }
 
 .landing-page header.landing .glug-logo {
@@ -127,11 +126,12 @@ body {
     width: 100%;
     text-align: center;
     margin-top: 40vh;
-    transform: translateY(-50%);
+    transform: translateY(-40%);
     display: flex;
     justify-content: center;
     text-align: center;
     flex-direction: row;
+    margin-bottom: -80px;
 }
 
 .landing-page .landing .content .login-area{
@@ -141,6 +141,7 @@ body {
     background-color:transparent;
     box-shadow: #4966e3 0 0 6px 1px;
     backdrop-filter: blur(10px);
+    margin-bottom: 30px;
 }
 
 .landing-page header.landing .content img.freemex-logo {
@@ -214,9 +215,9 @@ body {
 }
 
 .landing-page header.landing .content .login-buttons a.btn .fa {
-    font-size: 50px;
-    justify-content: center;
-    display: flex;
+    font-size: 35px;
+    position: relative;
+    top: 15%;
 }
 
 .landing-page header.landing .content .login-buttons a.btn-fb {
@@ -767,7 +768,8 @@ a:focus{
 .portfolio .text-center,
 .landing-page .text-center,
 .portfolio .modal h6,
-.market .modal h6{
+.market .modal h6
+.leaderboard .text-center{
     color: white;
     font-weight: 400;
     font-size: x-large;
@@ -780,10 +782,6 @@ a:focus{
 .market .modal h6{
     margin-top: 0;
     margin-bottom: 10px;
-}
-
-.landing-page .text-center{
-    margin-top: -50px;
 }
 
 .landing-page .text-center .text-center{
@@ -1075,7 +1073,7 @@ a:focus{
 .flex-row{
     display:flex;
     flex-direction:row;
-    justify-content:space-between;
+    justify-content:space-around;
     text-align:left;
     width: 100%;
 }
@@ -1124,9 +1122,19 @@ a:focus{
     color: white
 }
 
+.leaderboard .timer{
+    font-size: xx-large;
+    color: #4966e3;
+}
+
 .landing-page .white-text h1{
     color: #4966e3;
     font-weight: 700;
+}
+
+.landing-page .white-text span{
+    font-weight: 700;
+    font-size: 40px;
 }
 
 .buy-stocks{
@@ -1551,14 +1559,16 @@ a:focus{
 
 
     .landing-page header.landing .content .login-buttons a.btn .fa {
-        font-size: 40px;
+        font-size: 35px;
+        position: relative;
+        top: 15%;
     }
 
     .landing-page header.landing .content .login-buttons a.btn-fb,
     .landing-page header.landing .content .login-buttons a.btn-gplus,
     .landing-page header.landing .content .login-buttons a.btn-github {
-        width: 70px;
-        height: 70px;
+        width: 80px;
+        height: 80px;
     }
 
     .landing-page .text-right .fa-arrow-up{
@@ -1569,7 +1579,8 @@ a:focus{
     .portfolio .text-center,
     .landing-page .text-center,
     .portfolio .modal h6,
-    .market .modal h6{
+    .market .modal h6
+    .leaderboard .text-center{
         font-size: large;
         margin-top: 0px;
     }

@@ -1,5 +1,5 @@
 <%- include("partials/header") %>
-
+<%- include("partials/background.ejs")%>
 <div class="container-fluid landing-page">
 
     <header class="landing">
@@ -25,25 +25,20 @@
                 <p class="nasdaq-intro">NASDAQ Timings: 8PM - 2:30AM</p>
                 <% if (event_started||player==-1){ %>
                     <div class="login-buttons flex-row">
-                        <div class="fb">
-                            <a class="btn btn-fb" href="/auth/facebook" role="button">
-                                <i class="fa fa-facebook left"></i>
-                            </a>
-                        </div>
                         <div class="google">
                             <a class="btn btn-gplus" href="/auth/google" role="button">
-                                <i class="fa fa-google-plus left"></i>
+                                <span><i class="fa fa-google-plus left"></i></span>
                             </a>
                         </div>
                         <div class="github">
                             <a class="btn btn-github" href="/auth/github" role="button">
-                                <i class="fa fa-github left"></i>
+                                <span><i class="fa fa-github left"></i></span>
                             </a>
                         </div>
                     </div>
                 <%} else {%>
                     <div class="white-text">
-                        <h1 class="glitch">Freemex has not started yet. Stay tuned!</h1>
+                        <h1>Freemex has not started yet. Stay tuned!</h1>
                                 <span id="days" class="huge-text">00</span>
                                 <span class="huge-text">:</span>
                                 <span id="hours" class="huge-text">00</span>
@@ -68,6 +63,7 @@
 </div>
 
 <script type="text/javascript" src="/js/timer.js"></script>
+<script type="text/javascript" src="/js/bg.js"></script>
 
 
 <%- include("partials/footer") %>

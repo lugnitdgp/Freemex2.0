@@ -1,10 +1,13 @@
 <%- include("partials/header") %>
 <%- include("partials/navbar") %>
-<!-- <div class="landing-bg"></div> -->
+    <div class="landing-bg"></div>
+
     <div class="market">
 
         <br>
-        <h1 class="glitch">Market</h1>
+        <div id="app">
+            <h1 class="glitch" data-text="Market">Market</h1>
+        </div>
         <hr>
         <div class="cash-container">
             <h5>Cash in your hand: $ <span class="cash-in-hand" id="playercash"><%= (player.cash/100).toFixed(2) %></span></h5>

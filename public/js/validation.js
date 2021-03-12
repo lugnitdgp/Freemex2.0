@@ -1,17 +1,6 @@
 // Initialise the empty users array
 users = [];
 
-// Ajax call to get the usernames of all the players
-function get_usernames() {
-    $.ajax({
-        url: "/get_users/",
-        dataType: 'json',
-        success: function(data) {
-            users = data.users;
-        }
-    });
-}
-
 // Custom validation for registration form
 function CustomValidation(input) {
 	this.invalidities = [];
@@ -75,33 +64,6 @@ CustomValidation.prototype = {
 	}
 };
 
-
-// Validity checks for different input fields on the landing page
-firstnameValidityChecks = [
-    {
-        is_invalid: function(input) {
-            return (input.val() == "");
-        },
-        invalidityMessage: "Please fill out this field",
-        element: $('.registration-form input[name=first_name]').siblings('.input-requirements').children('li').eq(0)
-    },
-    {
-        is_invalid: function(input) {
-            return !(/^[a-zA-Z]*$/.test(input.val()));
-        },
-        invalidityMessage: "This field cannot contain any number or special characters",
-        element: $('.registration-form input[name=first_name]').siblings('.input-requirements').children('li').eq(1)
-    },
-];
-var lastnameValidityChecks = [
-    {
-        is_invalid: function(input) {
-            return !(/^[a-zA-Z]*$/.test(input.val()));
-        },
-        invalidityMessage: "This field cannot contain any number or special characters",
-        element: $('.registration-form input[name=last_name]').siblings('.input-requirements').children('li').eq(0)
-    },
-];
 var usernameValidityChecks = [
     {
         is_invalid: function(input) {
@@ -123,68 +85,6 @@ var usernameValidityChecks = [
         element: $('.registration-form input[name=username]').siblings('.input-requirements').children('li').eq(1)
     },
 ];
-var passwordValidityChecks = [
-	{
-		is_invalid: function(input) {
-			return (input.val().length < 8 | input.val().length > 100);
-		},
-		invalidityMessage: 'This input needs to be between 8 and 100 characters',
-		element: $('.registration-form input[name=password1]').siblings('.input-requirements').children('li').eq(0)
-	},
-	{
-		is_invalid: function(input) {
-			return !(/[a-zA-Z]+/.test(input.val()));
-		},
-		invalidityMessage: 'At least 1 alphabet is required',
-		element: $('.registration-form input[name=password1]').siblings('.input-requirements').children('li').eq(1)
-	},
-	{
-		is_invalid: function(input) {
-			return !(/[0-9]+/.test(input.val()));
-		},
-		invalidityMessage: 'At least 1 numeric digit is required',
-		element: $('.registration-form input[name=password1]').siblings('.input-requirements').children('li').eq(2)
-	},
-	{
-		is_invalid: function(input) {
-			return !(/[^a-zA-Z0-9]+/.test(input.val()));
-		},
-		invalidityMessage: 'At least 1 special character is required',
-		element: $('.registration-form input[name=password1]').siblings('.input-requirements').children('li').eq(3)
-	},
-];
-var passwordRepeatValidityChecks = [
-    {
-        is_invalid: function(input) {
-            return input.val() != $('.registration-form input[name=password1]').val()
-        },
-        invalidityMessage: "Both the passwords don't match",
-        element: $('.registration-form input[name=password2]').siblings('.input-requirements').children('li').eq(0)
-    }
-];
-
-var firstnameInput = $('.registration-form input[name=first_name]');
-var lastnameInput = $('.registration-form input[name=last_name]');
-var usernameInput = $('.registration-form input[name=username]');
-var passwordInput = $('.registration-form input[name=password1]');
-var passwordRepeatInput = $('.registration-form input[name=password2]');
-
-firstnameInput.CustomValidation = new CustomValidation(firstnameInput);
-firstnameInput.CustomValidation.validityChecks = firstnameValidityChecks;
-
-lastnameInput.CustomValidation = new CustomValidation(lastnameInput);
-lastnameInput.CustomValidation.validityChecks = lastnameValidityChecks;
-
-usernameInput.CustomValidation = new CustomValidation(usernameInput);
-usernameInput.CustomValidation.validityChecks = usernameValidityChecks;
-
-passwordInput.CustomValidation = new CustomValidation(passwordInput);
-passwordInput.CustomValidation.validityChecks = passwordValidityChecks;
-
-passwordRepeatInput.CustomValidation = new CustomValidation(passwordRepeatInput);
-passwordRepeatInput.CustomValidation.validityChecks = passwordRepeatValidityChecks;
-
-var inputs = [firstnameInput, lastnameInput, usernameInput, passwordInput, passwordRepeatInput];
 
 function validate() {
     var is_valid = true;

@@ -2,8 +2,11 @@
 <%- include("partials/navbar") %>
 
 <div class="container transactions">
-    <br>
-    <h1 class="glitch">Transactions</h1>
+	<div class="landing-bg"></div>
+	<br>
+	<div id="app">
+		<h1 class="glitch" data-text="Transactions">Transactions</h1>
+	</div>
     <hr>
 	<div class="cash-container">
 		<h5>Cash in your hand: $<span class="cash-in-hand" id="playercash"><%= (player.cash/100).toFixed(2) %></span></h5>
