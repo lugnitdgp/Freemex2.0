@@ -411,6 +411,30 @@ homeRouter.get('/leaderboard',async (req,res,next)=>{
     }
 })
 
+homeRouter.get('/api/leaderboard', async (req,res,next)=>{
+    response_data=[]
+    try {
+        players=await Player.find({})
+        players.sort((a,b)=>((a.cash+a.value_in_stocks)<(b.cash+b.value_in_stocks))? 1 : -1)
+        let scoreboard=players.map((player,i)=>{
+            console.log(i)
+            return({
+                rank:i,
+                name:player.name,
+                email:player.email,
+                score:((player.cash+player.value_in_stocks)/100).toFixed(2)
+            })
+        })
+        console.log(scoreboard)
+        res.statusCode=200
+        res.setHeader('Content-Type','application/json')
+        res.json(scoreboard)
+    } catch (error) {
+        console.log(error)   
+        next(error)
+    }
+})
+
 homeRouter.get('/engage',async (req,res,next)=>{
     var getTime= await checkTime()
     if(!req.user || !getTime.EVENT_STARTED || getTime.EVENT_ENDED){

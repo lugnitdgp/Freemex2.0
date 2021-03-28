@@ -26,7 +26,7 @@ const stockSchema= new Schema({
         required:true,
     },
     diffPerc:{
-        type:Number,
+        type:String,
         required:true
     },
     latestUpdate:{
@@ -213,14 +213,14 @@ if (count===0){
         }
         else{
             console.log("fixtures loaded")
-  //          setInterval(()=>{updateStock.update_stock_prices(Stocks)},process.env.UpdateIntervalSecond*1000);
+           setInterval(()=>{updateStock.update_stock_prices(Stocks)},process.env.UpdateIntervalSecond*1000);
         }
     })
 }
 else
 {
     console.log(count," fixtures loaded already");
-//    setInterval(()=>{updateStock.update_stock_prices(Stocks)},process.env.UpdateIntervalSecond*1000);
+   setInterval(()=>{updateStock.update_stock_prices(Stocks)},process.env.UpdateIntervalSecond*1000);
 }
 })
 .catch((err)=>{

@@ -28,6 +28,7 @@ var UserSchema= new Schema({
         type:Currency,
         default:000
     },
+    email: String
 });
 
 module.exports=mongoose.model('User',UserSchema);

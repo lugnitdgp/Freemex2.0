@@ -95,12 +95,12 @@ body {
 .landing-page header.landing .fest-logo {
     position: absolute;
     left: 1em;
-    top: 0.2em;
+    top: 1em;
     z-index: 999;
 }
 
 .landing-page header.landing .fest-logo img {
-    width: 7.25em;
+    width: 5em;
     max-width: 30vw;
     -webkit-filter: drop-shadow(1px 1px 2px #000);
             filter: drop-shadow(1px 1px 2px #000);
@@ -1078,6 +1078,11 @@ a:focus{
     width: 100%;
 }
 
+.market .card .flex-row,
+.portfolio .card .flex-row{
+    justify-content: space-between;
+}
+
 .flex-column{
     display:flex;
     flex-direction:column;
@@ -1087,10 +1092,11 @@ a:focus{
 }
 
 .details, .quantity{
-    color: #01021E;
     text-decoration:none;
-    font-size:20px;
-    font-weight: 600;
+    color: #9ea1ae;
+    font-size: 15px;
+    text-align: left;
+    font-weight: 400;
 }
 
 .price{
@@ -1498,6 +1504,11 @@ a:focus{
 
     .portfolio .card .market-info .down, 
     .market .card .market-info .down {
+        font-size: 15px;
+    }
+
+    .portfolio .card .market-info .up, 
+    .market .card .market-info .up {
         font-size: 15px;
     }
 

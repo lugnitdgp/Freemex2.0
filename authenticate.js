@@ -18,11 +18,11 @@ passport.deserializeUser((id,done)=>{
 
 passport.use(
     new GoogleStrategy({
-        callbackURL:'/auth/google/redirect',
+        callbackURL:`${process.env.DOMAIN_NAME}/auth/google/redirect`,
         clientID:process.env.google_client_id,
         clientSecret:process.env.google_client_secret
 },(accessToken,refreshToken,profile,done)=>{
-    // console.log("profile:",profile)
+    console.log("profile:",profile._json.email)
     User.findOne({googleId:profile.id})
     .then((user)=>{
         if(user===null)
@@ -30,7 +30,8 @@ passport.use(
             new User({
                 username:profile.displayName,
                 name:`${profile.name.givenName} ${profile.name.familyName}`,
-                googleId:profile.id
+                googleId:profile.id,
+                email:profile._json.email,
             }).save()
             .then((user)=>{
                 // console.log("new user created",user)
@@ -87,10 +88,11 @@ passport.use(new FacebookStrategy({
 passport.use(new GitHubStrategy({
     clientID: process.env.github_client_id,
     clientSecret: process.env.github_client_secret,
-    callbackURL: "/auth/github/callback"
+    callbackURL: `${process.env.DOMAIN_NAME}/auth/github/callback`,
+    scope: ['user:email']
   },
   (accessToken,refreshToken,profile,done)=>{
-    console.log("github profile", profile);
+    console.log("github profile", profile.emails[0].value);
     User.findOne({githubId:profile.id})
     .then((user)=>{
         if(user===null)
@@ -99,6 +101,7 @@ passport.use(new GitHubStrategy({
                 username:profile.username,
                 githubId:profile.id,
                 name:`${profile.username}`,
+                email:profile.emails[0].value,
             }).save()
             .then((user)=>{
                 console.log("new user created",user);
