@@ -26,7 +26,7 @@ const stockSchema= new Schema({
         required:true,
     },
     diffPerc:{
-        type:String,
+        type:Number,
         required:true
     },
     latestUpdate:{

@@ -27,7 +27,6 @@
         <p class="text-center">Page last updated on: <strong id="last-updated"><%= player.updatedAt %></strong></p>
         <div class="stock-cards">
             <% stocks.forEach((stock) => { %> 
-
                 <% let diff = (stock.diff * 1)/100; %>
                 <% let price = (stock.price * 1)/100 %>
                 <div class="card stock-card red-card" id="stock-card" data-name="<%= stock.name %>">
@@ -37,6 +36,7 @@
                                 <div class="flex-column">
                                     <div class="card-text stock-info code"><%= stock.code %></div>
                                     <div class=" card-text stock-info name"><%= stock.name %></div>
+                                    <!-- <div class="card-text stock-info"><a class="details" target="_blank" href="https://www.google.com/finance?q=NASDAQ:<%= stock.code %>">Details<i class="fa fa-caret-down"></i></a></div> -->
                                 </div>
                                 <div class="flex-column">
                                     <img class="graph" src="/img/graph.png" alt="graph">
@@ -45,7 +45,7 @@
                             <div class="flex-row">
                                 <div class="flex-column">
                                     <div class="card-text stock-info price" id="price"><strong>$</strong> <%= price.toFixed(2) %></div>
-                                    <div class="card-text stock-info closing-time" id="latestUpdate"> <a class="details" target="_blank" href="https://www.google.com/finance?q=NASDAQ:<%= stock.code %>">Details<i class="fa fa-caret-down"></i></a></div>
+                                    <div class="card-text stock-info closing-time" id="latestUpdate">Last Update: <%= moment(stock.latestUpdate).format('MMM Do, h:mm:ss a') %></div>
                                 </div>
                                 <div class="flex-column">
                                     <div class="stock-info diff-amnt">
@@ -65,7 +65,7 @@
                                         <% } %>
                                     </div>
                                     <div class="stock-info diff-percent">
-                                        <div class="card-text stock-info" id="diffPerc"><%= (stock.diffPerc) %></div>
+                                        <div class="card-text stock-info" id="diffPerc"><%= (stock.diffPerc*100).toFixed(2) %>%</div>
                                     </div>
                                 </div>
                             </div>
@@ -75,9 +75,7 @@
                         </div>
                     </div>
                 </div>
-
                 <!-- Modal -->
-
                 <div class="modal fade" id="buyModal<%= stock.code %>" tabindex="-1" role="dialog" aria-labelledby="buyModalLabel" aria-hidden="true">
                     <div class="modal-dialog cascading-modal" role="document">
                         <div class="modal-content">

@@ -7,10 +7,10 @@ function updateStockPrices(data) {
         var price = data[index]['price']
         var diff = data[index]['diff']
         var diffPerc = data[index]['diffPerc']
-        console.log("diff ",diffPerc)
-        // var latestUpdate = data[index]['latestUpdate']
+        var latestUpdate = data[index]['latestUpdate']
         diff = (diff * 1)/100;
         price = (price * 1)/100;
+        diffPerc*=100;
         var elem = $(this).find('#diff');
         var border= $(this).find('#stock-card');
         // console.log(border)
@@ -42,7 +42,8 @@ function updateStockPrices(data) {
             }
         }
         $(this).find('#price').html("<strong>$</strong> " + price.toFixed(2));
-        $(this).find('#diffPerc').html(`${diffPerc}`);
+        $(this).find('#latestUpdate').html(`Last Update: ${moment(latestUpdate).format('MMM Do, h:mm:ss a')}`);
+        $(this).find('#diffPerc').html(`${diffPerc.toFixed(2)}%`);
         index++;
     });
     var last_updated = new Date(data['last_updated']);
@@ -70,7 +71,7 @@ $(document).ready(function() {
     var source = new EventSource('/events');
     source.onmessage = function(event) {
         const stocks=JSON.parse(event.data)
-        console.log(stocks)
+        // console.log(stocks)
         updateStockPrices(stocks);
     };
 

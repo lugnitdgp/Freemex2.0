@@ -69,7 +69,6 @@
     <br>
     <div class="stock-cards">
         <% player_stocks.forEach((player_stock) => { %>
-
             <!--Card-->
             <% if (player_stock.quantity) {%>
                 <% let diff = (player_stock.stock.diff * 1)/100; %>
@@ -91,7 +90,7 @@
                         <div class="flex-row">
                             <div class="flex-column">
                                 <div class="card-text stock-info price" id="price"><strong>$</strong> <%= price.toFixed(2) %></div>
-                                    <div class="card-text stock-info closing-time" id="latestUpdate"><a class="details" target="_blank" href="https://www.google.com/finance?q=NASDAQ:<%= player_stock.stock.code %>">Details<i class="fa fa-caret-down"></i></a></div>
+                                    <div class="card-text stock-info closing-time" id="latestUpdate">Last Update: <%= moment(player_stock.stock.latestUpdate).format('MMM Do, h:mm:ss a') %></div>
                             </div>
                             <div class="flex-column">
                                 <div class="stock-info diff-amnt">
@@ -110,7 +109,7 @@
                                     <% } %>
                                 </div>
                                 <div class="stock-info diff-percent">
-                                    <div class="card-text stock-info" id="diffPerc"><%= (player_stock.stock.diffPerc) %></div>
+                                    <div class="card-text stock-info" id="diffPerc"><%= (player_stock.stock.diffPerc*100).toFixed(2) %>%</div>
                                 </div>
                             </div>
                         </div>
@@ -126,7 +125,6 @@
                         <!--<p class="card-text stock-info">Invested : $<%= player_stock.invested %></p>-->
                 </div>
             </div>
-
             <!-- Buy Modal -->
             <div class="modal fade" id="buyModal<%= player_stock.stock.code %>" tabindex="-1" role="dialog" aria-labelledby="buyModalTitle" aria-hidden="true">
                 <div class="modal-dialog cascading-modal" role="document">
@@ -153,7 +151,6 @@
                     </div>
                 </div>
             </div>
-
             <!-- Sell Modal -->
             <div class="modal fade" id="sellModal<%= player_stock.stock.code %>" tabindex="-1" role="dialog" aria-labelledby="sellModalTitle" aria-hidden="true">
                 <div class="modal-dialog cascading-modal" role="document">
@@ -180,7 +177,6 @@
                 </div>
             </div>
             <% } %>
-
         <% }); %>
     </div>
     <div class="buy-stocks">

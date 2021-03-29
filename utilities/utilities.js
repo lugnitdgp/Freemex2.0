@@ -1,113 +1,50 @@
 var axios= require('axios');
 require('dotenv').config()
 var index=require('../index')
-
-var stock_prices={};
-var symbols=['GOOG','AAPL','TXN','EBAY','NFLX']
+var stock_prices=[];
 
 const get_stock_prices=(Stocks)=>{
-    //for premium
-    if(process.env.testing==='false')
-    {
-        console.log("premium")
-        Stocks.find({})
-        .then((stocks)=>{
-            // symbols=stocks.map((stock)=>stock.code)
-            stocks.forEach((stock)=>{
-                axios.get(`${process.env.API_URI}${stock.code}&apikey=${process.env.API_TOKEN}`)
-                .then((res)=>{
-                // console.log("api ",res.data)
-                stock_prices[`${stock.code}`]=res.data['Global Quote']
-                console.log(stock_prices)
-                })
-                .catch((err)=>{
-                    console.log(err);
-                })
-            })
+    console.log("inside updating function");
+    var symbols=[];
+    Stocks.find({})
+    .then((stocks)=>{
+        symbols=stocks.map((stock)=>stock.code)
+        axios.get(`${process.env.API_URI}${symbols.join()}&types=quote&token=${process.env.API_TOKEN}`)
+        .then((res)=>{
+            console.log(res.data)
+            // console.log("returning")
+            // return("data", res.data)
+            stock_prices=res.data
         })
         .catch((err)=>{
-            console.log(err)
+            console.log(err.response.data);
         })
-    }
-
-    //for testing
-    else
-    {
-        symbols.forEach((symbol)=>{
-            axios.get(`${process.env.API_URI}${symbol}&apikey=${process.env.API_TOKEN}`).then((res)=>{
-                console.log("api ",res.data)
-                stock_prices[`${symbol}`]=res.data['Global Quote']
-        
-                console.log(stock_prices)
-            })
-        })
-    }
+    })
+    .catch((err)=>{
+        console.log(err)
+    })
 }
 
-const update_stock_prices=async (Stocks)=>{
+const update_stock_prices=(Stocks)=>{
     get_stock_prices(Stocks)
-    len=Object.keys(stock_prices).length
-    console.log(len)
-    //premium
-
-    if(process.env.testing=="false")
+    if (stock_prices.length!==0)
     {
-        if (len!==0)
-        {
-            Stocks.find({})
-            .then((stocks)=>{
-                var count=0;
-                stocks.map((stock)=>{
-                    var code=stock.code;
-                    var latestPrice=stock_prices[`${code}`]['05. price'];
-                    var change=stock_prices[`${code}`]['09. change'];
-                    var changePerc=stock_prices[`${code}`]['10. change percent'];
-                    // var latestUpdate=stock_prices[`${code}`].quote.latestUpdate;
-                    Stocks.findOneAndUpdate({code:code},{price:latestPrice.toString(),diff:change.toString(),diffPerc:changePerc,latestUpdate:new Date()})
-                    .then((updatedStock)=>{
-                        ++count;
-                        // console.log("updated",count)
-                        if(count===19)
-                        {
-                            Stocks.find({})
-                            .then((stocks)=>{
-                                index.sendEventsToAll(stocks);
-                            })
-                            .catch((err)=>{
-                                console.log(err);
-                            })
-                        }
-                    })
-                    .catch((err)=>{
-                        console.log(err);
-                    })
-                })
-
-            })
-            .catch((err)=>{
-                console.log(err);
-            })
-        }    
-    }
-
-    //testing
-    else
-    {
-        console.log("testing")
-        if(len!=0)
-        {
-            var count=0
-            symbols.forEach((symbol)=>{
-                var code=symbol;
-                var latestPrice=stock_prices[`${code}`]['05. price'];
-                var change=stock_prices[`${code}`]['09. change'];
-                var changePerc=stock_prices[`${code}`]['10. change percent'];
-                // var latestUpdate=stock_prices[`${code}`].quote.latestUpdate;
-                Stocks.findOneAndUpdate({code:code},{price:latestPrice.toString(),diff:change.toString(),diffPerc:changePerc,latestUpdate:new Date()})
+        Stocks.find({})
+        .then((stocks)=>{
+            var count=0;
+            stocks.map((stock)=>{
+                // console.log(stock)
+                var code=stock.code;
+                var latestPrice=stock_prices[`${code}`].quote.latestPrice;
+                // console.log(code," ",stock_prices[`${code}`].quote.change)
+                var change=stock_prices[`${code}`].quote.change;
+                var changePerc=stock_prices[`${code}`].quote.changePercent;
+                var latestUpdate=stock_prices[`${code}`].quote.latestUpdate;
+                Stocks.findOneAndUpdate({code:code},{price:latestPrice.toString(),diff:change.toString(),diffPerc:changePerc,latestUpdate:new Date(latestUpdate)})
                 .then((updatedStock)=>{
                     ++count;
                     // console.log("updated",count)
-                    if(count===symbols.length)
+                    if(count===19)
                     {
                         Stocks.find({})
                         .then((stocks)=>{
@@ -122,8 +59,12 @@ const update_stock_prices=async (Stocks)=>{
                     console.log(err);
                 })
             })
-        }
-    }
+
+        })
+        .catch((err)=>{
+            console.log(err);
+        })
+    }    
 }
 
 const update_player_assets=(Player,PlayerStock)=>{
