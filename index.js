@@ -94,7 +94,7 @@ app.use(errorHandler.errorHandler);
 var playerStock=require("./models/playerStock")
 var Player=require("./models/users")
 
-// setInterval(()=>updateStock.update_player_assets(Player,playerStock),10000);
+setInterval(()=>updateStock.update_player_assets(Player,playerStock),10000);
 
 app.listen(port, ()=>{
     console.log(`server running at port ${process.env.PORT}`)
