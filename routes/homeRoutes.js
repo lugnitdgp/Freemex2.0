@@ -422,7 +422,7 @@ homeRouter.get('/api/scoreboard', async (req,res,next)=>{
                 rank:i,
                 name:player.name,
                 email:player.email,
-                score:((player.cash+player.value_in_stocks)/100).toFixed(2)
+                score:parseInt((player.cash+player.value_in_stocks)/100)
             })
         })
         console.log(scoreboard)
