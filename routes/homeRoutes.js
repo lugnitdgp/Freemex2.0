@@ -411,7 +411,7 @@ homeRouter.get('/leaderboard',async (req,res,next)=>{
     }
 })
 
-homeRouter.get('/api/leaderboard', async (req,res,next)=>{
+homeRouter.get('/api/scoreboard', async (req,res,next)=>{
     response_data=[]
     try {
         players=await Player.find({})
