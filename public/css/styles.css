@@ -26,6 +26,13 @@ body {
     padding: 0;
 }
 
+.sponsor-logo svg{
+    background-color: white;
+    border-radius: 5px;
+    margin-top: 5px;
+}
+
+
 
 /* ------------------------------- Loader ------------------------------- */
 
