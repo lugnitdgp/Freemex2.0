@@ -32,6 +32,18 @@ body {
     margin-top: 5px;
 }
 
+.sponsor-logo img{
+    border-radius: 5px;
+    margin-top: 5px;
+    height: 70px;
+    width: 70px;
+}
+
+.sponsor-logo{
+    justify-content: left;
+    display: flex;
+}
+
 
 
 /* ------------------------------- Loader ------------------------------- */
