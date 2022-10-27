@@ -20,7 +20,7 @@
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
     "moment": "^2.29.1",
-    "mongoose": "^5.9.25",
+    "mongoose": "^5.13.15",
     "mongoose-currency": "^0.2.0",
     "morgan": "^1.10.0",
     "node-mongoose-fixtures": "^0.3.0",
