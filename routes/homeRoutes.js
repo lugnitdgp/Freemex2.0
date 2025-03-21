@@ -85,6 +85,7 @@ homeRouter.get('/market', async (req,res,next)=>{
         Stocks.find({})
         .then((stocks)=>{
             res.statusCode=200;
+            console.log("Last updated at" + req.user.updatedAt)
             res.render("market",{stocks:stocks,player:req.user,startTime:getTime.startTime,endTime:getTime.endTime,moment});
         })
         .catch((err)=>{

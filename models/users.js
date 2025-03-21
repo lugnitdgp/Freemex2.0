@@ -26,7 +26,7 @@ var UserSchema= new Schema({
     },
     value_in_stocks:{
         type:Currency,
-        default:000
+        default:0o0
     },
     email: String
 });
