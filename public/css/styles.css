@@ -14,7 +14,10 @@ body {
     min-height: 100vh;
     font-size: 14px;
     overflow-x: hidden;
-    background-color: #0b112b;
+    /* background-color: #0b112b; */
+
+    /*For 2025 Theme*/
+    background-color: #090900;
 }       
 
 .container{
@@ -89,8 +92,8 @@ body {
 
     width: 100%;
     height: 100vh;
-
-    background-image: url('../img/bg.png');
+    /* margin: 0 !important; */
+    background-image: url('../img/bg-2025.png');
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center;

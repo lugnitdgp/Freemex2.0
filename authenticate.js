@@ -51,39 +51,39 @@ passport.use(
     })
 }))
 
-passport.use(new FacebookStrategy({
-    callbackURL:'/auth/facebook/redirect',
-    clientID:process.env.facebook_client_id,
-    clientSecret:process.env.facebook_client_secret,
-    profileFields: ['id', 'email', 'name','displayName'] 
-},(accessToken,refreshToken,profile,done)=>{
-    console.log("facebook profile", profile);
-    User.findOne({facebookId:profile.id})
-    .then((user)=>{
-        if(user===null)
-        {
-            new User({
-                username:profile.displayName,
-                facebookId:profile.id,
-                name:`${profile.name.givenName} ${profile.name.familyName}`,
-            }).save()
-            .then((user)=>{
-                console.log("new user created",user);
-                done(null,user);
-            })
-            .catch((err)=>{
-                console.log(err)
-            })
-        }
-        else{
-            console.log("already present");
-            done(null,user)
-        }
-    })
-    .catch((err)=>{
-        console.log(err)
-    })
-}))
+// passport.use(new FacebookStrategy({
+//     callbackURL:'/auth/facebook/redirect',
+//     clientID:process.env.facebook_client_id,
+//     clientSecret:process.env.facebook_client_secret,
+//     profileFields: ['id', 'email', 'name','displayName'] 
+// },(accessToken,refreshToken,profile,done)=>{
+//     console.log("facebook profile", profile);
+//     User.findOne({facebookId:profile.id})
+//     .then((user)=>{
+//         if(user===null)
+//         {
+//             new User({
+//                 username:profile.displayName,
+//                 facebookId:profile.id,
+//                 name:`${profile.name.givenName} ${profile.name.familyName}`,
+//             }).save()
+//             .then((user)=>{
+//                 console.log("new user created",user);
+//                 done(null,user);
+//             })
+//             .catch((err)=>{
+//                 console.log(err)
+//             })
+//         }
+//         else{
+//             console.log("already present");
+//             done(null,user)
+//         }
+//     })
+//     .catch((err)=>{
+//         console.log(err)
+//     })
+// }))
 
 passport.use(new GitHubStrategy({
     clientID: process.env.github_client_id,

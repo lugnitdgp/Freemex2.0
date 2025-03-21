@@ -21,6 +21,8 @@ timerRouter.route('/')
     console.log(end_time)
     var startTime=Date.parse(start_date+'T'+start_time)+ 330 * 60000
     var endTime=Date.parse(end_date+'T'+end_time)+ 330 * 60000
+    console.log(startTime)
+    console.log(endTime)
     Timer.create({startTime,endTime})
     .then((resp)=>{
         console.log(resp," added");

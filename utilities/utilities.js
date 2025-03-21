@@ -1,93 +1,90 @@
-var axios= require('axios');
-require('dotenv').config()
-var index=require('../index')
-var stock_prices=[];
+var axios = require('axios');
+require('dotenv').config();
+var index = require('../index');
+var stock_prices = [];
 
-const get_stock_prices=(Stocks)=>{
-    console.log("inside updating function");
-    var symbols=[];
-    Stocks.find({})
-    .then((stocks)=>{
-        symbols=stocks.map((stock)=>stock.code)
-        axios.get(`${process.env.API_URI}${symbols.join()}&types=quote&token=${process.env.API_TOKEN}`)
-        .then((res)=>{
-            console.log(res.data)
-            // console.log("returning")
-            // return("data", res.data)
-            stock_prices=res.data
-        })
-        .catch((err)=>{
-            console.log(err.response.data);
-        })
-    })
-    .catch((err)=>{
-        console.log(err)
-    })
-}
+const symbols = "GOOG,AAPL,META,ORCL,BIDU,QCOM,ADBE,INFY,CTSH,MSFT,AMZN,INTC,CSCO,EBAY,TXN,TSLA,NFLX,NVDA,EA";
 
-const update_stock_prices=(Stocks)=>{
-    get_stock_prices(Stocks)
-    if (stock_prices.length!==0)
-    {
-        Stocks.find({})
-        .then((stocks)=>{
-            var count=0;
-            stocks.map((stock)=>{
-                // console.log(stock)
-                var code=stock.code;
-                var latestPrice=stock_prices[`${code}`].quote.latestPrice;
-                // console.log(code," ",stock_prices[`${code}`].quote.change)
-                var change=stock_prices[`${code}`].quote.change;
-                var changePerc=stock_prices[`${code}`].quote.changePercent;
-                var latestUpdate=stock_prices[`${code}`].quote.latestUpdate;
-                Stocks.findOneAndUpdate({code:code},{price:latestPrice.toString(),diff:change.toString(),diffPerc:changePerc,latestUpdate:new Date(latestUpdate)})
-                .then((updatedStock)=>{
+const get_stock_prices = async (Stocks) => {
+    try {
+        const stocks = await Stocks.find({});
+        const tickers = symbols.toLowerCase();
+        console.log('API Token : ', process.env.APIToken);
+        console.log('API URI : ', process.env.API_URI);
+        const res = await axios.get(`${process.env.API_URI}?tickers=${tickers}&token=${process.env.APIToken}`);
+        console.log(res.data);
+        stock_prices = res.data;
+    } catch (err) {
+        console.log(err.response ? err.response.data : err);
+    }
+};
+
+const update_stock_prices = async (Stocks) => {
+    await get_stock_prices(Stocks);
+    if (stock_prices.length !== 0) {
+        try {
+            const stocks = await Stocks.find({});
+            var count = 0;
+            stock_prices.map(async (stock) => {
+                var code = stock.ticker;
+                var latestPrice = stock.tngoLast;
+                var change = stock.tngoLast - stock.prevClose;
+                var changePerc = (stock.tngoLast === 0 ? 0 : ((change / stock.tngoLast) * 100).toFixed(2));
+                var latestUpdate = stock.timestamp;
+
+                if (isNaN(Date.parse(latestUpdate))) {
+                    console.error(`Invalid date for stock ${code}: ${latestUpdate}`);
+                    return;
+                }
+
+                var updatedStock = {
+                    price: latestPrice,
+                    diff: change,
+                    diffPerc: changePerc,
+                    latestUpdate: new Date(latestUpdate)
+                };
+
+                console.log("updating", code);
+                console.log(updatedStock);
+
+                try {
+                    await Stocks.findOneAndUpdate({ code: code }, updatedStock);
                     ++count;
-                    // console.log("updated",count)
-                    if(count===19)
-                    {
-                        Stocks.find({})
-                        .then((stocks)=>{
-                            index.sendEventsToAll(stocks);
-                        })
-                        .catch((err)=>{
-                            console.log(err);
-                        })
+                    if (count === 19) {
+                        const updatedStocks = await Stocks.find({});
+                        index.sendEventsToAll(updatedStocks);
                     }
-                })
-                .catch((err)=>{
+                } catch (err) {
                     console.log(err);
-                })
-            })
-
-        })
-        .catch((err)=>{
+                }
+            });
+        } catch (err) {
             console.log(err);
-        })
-    }    
-}
+        }
+    }
+};
 
-const update_player_assets=(Player,PlayerStock)=>{
+const update_player_assets = (Player, PlayerStock) => {
     Player.find({})
-    .then((all_players)=>{
-        all_players.map((playerObj)=>{
-                playerObj.value_in_stocks=0
-                PlayerStock.find({player:playerObj._id})
-                .populate('player')
-                .populate('stock')
-                .then((playerstocks)=>{
-                    playerstocks.forEach((playerstock)=>{
-                        playerObj.value_in_stocks += playerstock.stock.price * playerstock.quantity
+        .then((all_players) => {
+            all_players.map((playerObj) => {
+                playerObj.value_in_stocks = 0;
+                PlayerStock.find({ player: playerObj._id })
+                    .populate('player')
+                    .populate('stock')
+                    .then((playerstocks) => {
+                        playerstocks.forEach((playerstock) => {
+                            playerObj.value_in_stocks += playerstock.stock.price * playerstock.quantity;
+                        });
+                        Player.findByIdAndUpdate(playerObj._id, playerObj)
+                            .then((updatedPlayer) => {
+                                console.log("updated", updatedPlayer.name);
+                            });
                     })
-                    Player.findByIdAndUpdate(playerObj._id, playerObj)
-                    .then((updatedPlayer)=>{
-                        console.log("updated", updatedPlayer.name)
-                    })
-                })
-            .catch(err=>console.log(err))
+                    .catch(err => console.log(err));
+            });
         })
-    })
-    .catch(err=>console.log(err))
-}
+        .catch(err => console.log(err));
+};
 
-module.exports={update_stock_prices, update_player_assets}
+module.exports = { update_stock_prices, update_player_assets };

@@ -23,13 +23,22 @@ require('dotenv').config();
 
 const port = process.env.PORT || 8000;
 
-mongoose.connect(process.env.DATABASE_URL, {useNewUrlParser:true, useUnifiedTopology:true, useFindAndModify:false})
-.then((db)=>{
-    console.log("connected to db")
-})
-. catch((err)=>{
-    console.log(err)
-})
+async function connectDB() {
+    try {
+        await mongoose.connect(process.env.DATABASE_URL, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+            useCreateIndex: true,
+            useFindAndModify: false
+        });
+        console.log("Connected to database successfully!");
+    } catch (err) {
+        console.error("Database connection failed:", err);
+    }
+}
+
+connectDB();
+
 
 const app=express();
 app.use(morgan('common'));
